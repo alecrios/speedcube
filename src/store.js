@@ -4,13 +4,17 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
+	state: {
+		solves: [],
+	},
+	getters: {
+		solves(state) {
+			return state.solves;
+		},
+	},
+	mutations: {
+		addSolve(state, solve) {
+			state.solves.push(solve);
+		},
+	},
 });
