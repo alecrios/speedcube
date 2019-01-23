@@ -13,7 +13,6 @@
 
 <script>
 import * as cubeScrambler from 'cube-scrambler';
-import eventBus from '../eventBus';
 
 const scrambler = cubeScrambler();
 
@@ -22,7 +21,7 @@ export default {
 	props: ['scramble'],
 	methods: {
 		updateScramble() {
-			eventBus.emit('new-scramble', scrambler.scramble());
+			this.$root.$emit('new-scramble', scrambler.scramble());
 		},
 		getColor(move) {
 			const face = move.charAt(0);
@@ -45,10 +44,12 @@ export default {
 			}
 		},
 	},
-	created() {
+	mounted() {
 		this.updateScramble();
-
-		eventBus.listen('reset', this.updateScramble);
+		this.$root.$on('reset', this.updateScramble);
+	},
+	beforeDestroy() {
+		this.$root.$off('reset', this.updateScramble);
 	},
 };
 </script>

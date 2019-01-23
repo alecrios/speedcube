@@ -1,48 +1,16 @@
 <template>
 	<div id="app">
-		<Scramble :scramble="currentSolve.scramble"/>
-		<Time :time="currentSolve.time"/>
-		<Stats/>
+		<router-link to="/">Home</router-link>
+		<router-link to="/solves">Solves</router-link>
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import eventBus from './eventBus';
-import Scramble from './components/Scramble.vue';
-import Time from './components/Time.vue';
-import Stats from './components/Stats.vue';
 import 'focus-visible';
 
 export default {
 	name: 'app',
-	components: {
-		Scramble,
-		Time,
-		Stats,
-	},
-	data() {
-		return {
-			currentSolve: {
-				scramble: [],
-				time: null,
-			},
-		};
-	},
-	created() {
-		eventBus.listen('new-scramble', (scramble) => {
-			this.currentSolve.scramble = scramble;
-		});
-
-		eventBus.listen('timer-ended', (time) => {
-			this.currentSolve.time = time;
-
-			this.$store.commit('addSolve', Object.assign({
-				timestamp: Date.now(),
-			}, this.currentSolve));
-
-			eventBus.emit('reset');
-		});
-	},
 };
 </script>
 
@@ -51,7 +19,7 @@ export default {
 
 html {
 	box-sizing: border-box;
-	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	font-size: 100%;
 	line-height: 1;
 	-ms-text-size-adjust: 100%;

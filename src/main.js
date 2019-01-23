@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
 import './registerServiceWorker';
+import router from './router';
 
 Vue.config.productionTip = false;
 
@@ -23,5 +24,6 @@ Vue.filter('formatTime', (time) => {
 
 new Vue({
 	store,
+	router,
 	render: (h) => h(App),
 }).$mount('#app');

@@ -12,11 +12,8 @@
 </template>
 
 <script>
-import eventBus from '../eventBus';
-
 export default {
 	name: 'Time',
-	props: ['time'],
 	data() {
 		return {
 			status: 'idle',
@@ -57,7 +54,7 @@ export default {
 		stopTimer() {
 			clearInterval(this.timerInterval);
 			this.status = 'complete';
-			eventBus.emit('timer-ended', this.duration);
+			this.$root.$emit('timer-ended', this.duration);
 		},
 		resetTimer() {
 			this.previousTime = this.duration;
@@ -106,14 +103,13 @@ export default {
 			this.releaseTimer();
 		},
 	},
-	created() {
-		eventBus.listen('reset', this.resetTimer);
-	},
 	mounted() {
+		this.$root.$on('reset', this.resetTimer);
 		document.addEventListener('keydown', this.keydownHandler);
 		document.addEventListener('keyup', this.keyupHandler);
 	},
 	beforeDestroy() {
+		this.$root.$off('reset', this.resetTimer);
 		document.removeEventListener('keydown', this.keydownHandler);
 		document.removeEventListener('keyup', this.keyupHandler);
 	},
