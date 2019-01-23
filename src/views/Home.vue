@@ -23,6 +23,8 @@ export default {
 			currentSolve: {
 				scramble: [],
 				time: null,
+				plusTwo: false,
+				dnf: false,
 			},
 		};
 	},

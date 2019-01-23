@@ -20,7 +20,9 @@ export default {
 	name: 'Stats',
 	computed: {
 		times() {
-			return this.$store.getters.solves.map((solve) => solve.time);
+			return this.$store.getters.solves
+				.filter((solve) => !solve.dnf)
+				.map((solve) => solve.time);
 		},
 		best() {
 			return this.times.length ? Math.min(...this.times) : null;

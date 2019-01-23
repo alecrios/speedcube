@@ -23,6 +23,10 @@ module.exports = {
 			'ImportDeclaration': {'multiline': true, 'consistent': true},
 			'ExportDeclaration': {'multiline': true, 'consistent': true}
 		}],
+		'no-param-reassign': ['error', {
+			props: true,
+			ignorePropertyModificationsFor: ['state'],
+		}],
 	},
 	parserOptions: {
 		parser: 'babel-eslint',
