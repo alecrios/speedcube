@@ -1,13 +1,26 @@
 <template>
 	<div class="scramble">
-		<span
-			v-for="(move, index) in scramble"
-			:key="index"
-			:data-color="getColor(move)"
-			class="scramble__move"
-		>
-			{{ move }}
-		</span>
+		<div class="scramble__first-half">
+			<span
+				v-for="(move, index) in scrambleFirstHalf"
+				:key="index"
+				:data-color="getColor(move)"
+				class="scramble__move"
+			>
+				{{ move }}
+			</span>
+		</div>
+
+		<div class="scramble__second-half">
+			<span
+				v-for="(move, index) in scrambleSecondHalf"
+				:key="index"
+				:data-color="getColor(move)"
+				class="scramble__move"
+			>
+				{{ move }}
+			</span>
+		</div>
 	</div>
 </template>
 
@@ -19,9 +32,20 @@ const scrambler = cubeScrambler();
 export default {
 	name: 'Scramble',
 	props: ['scramble'],
+	computed: {
+		scrambleFirstHalf() {
+			return this.scramble.slice(0, 10);
+		},
+		scrambleSecondHalf() {
+			return this.scramble.slice(10, 20);
+		},
+	},
 	methods: {
+		getScramble() {
+			return scrambler.scramble().slice(0, 20);
+		},
 		updateScramble() {
-			this.$root.$emit('new-scramble', scrambler.scramble());
+			this.$root.$emit('new-scramble', this.getScramble());
 		},
 		getColor(move) {
 			const face = move.charAt(0);
@@ -57,8 +81,8 @@ export default {
 <style scoped>
 .scramble {
 	padding: 1.5rem;
-	font-size: 1.25rem;
-	line-height: 1.5rem;
+	font-size: 1.5rem;
+	line-height: 2.25rem;
 	text-align: center;
 }
 
