@@ -1,29 +1,29 @@
 <template>
 	<div>
-		<Scramble :scramble="currentSolve.scramble"/>
-		<Time :time="currentSolve.time"/>
-		<Stats/>
+		<ScrambleDisplay :scramble="currentSolve.scramble"/>
+		<TimeDisplay :time="currentSolve.time"/>
+		<StatsDisplay/>
 	</div>
 </template>
 
 <script>
-import Scramble from '@/components/Scramble.vue';
-import Time from '@/components/Time.vue';
-import Stats from '@/components/Stats.vue';
+import ScrambleDisplay from '@/components/ScrambleDisplay.vue';
+import TimeDisplay from '@/components/TimeDisplay.vue';
+import StatsDisplay from '@/components/StatsDisplay.vue';
 
 export default {
 	name: 'home',
 	components: {
-		Scramble,
-		Time,
-		Stats,
+		ScrambleDisplay,
+		TimeDisplay,
+		StatsDisplay,
 	},
 	data() {
 		return {
 			currentSolve: {
 				scramble: [],
 				time: null,
-				plusTwo: false,
+				p2: false,
 				dnf: false,
 			},
 		};

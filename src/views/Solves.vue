@@ -1,16 +1,16 @@
 <template>
 	<div>
-		<Solves/>
+		<SolvesDisplay/>
 	</div>
 </template>
 
 <script>
-import Solves from '@/components/Solves.vue';
+import SolvesDisplay from '@/components/SolvesDisplay.vue';
 
 export default {
 	name: 'solves',
 	components: {
-		Solves,
+		SolvesDisplay,
 	},
 };
 </script>

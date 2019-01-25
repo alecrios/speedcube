@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
-		<router-link to="/">Home</router-link>
-		<router-link to="/solves">Solves</router-link>
-		<router-view></router-view>
+		<RouterLink to="/">Home</RouterLink>
+		<RouterLink to="/solves">Solves</RouterLink>
+		<RouterView/>
 	</div>
 </template>
 
@@ -19,6 +19,15 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
 :root {
+	--color-gray-1: rgba(31, 31, 31, 1);
+	--color-gray-2: rgba(38, 39, 39, 1);
+	--color-gray-3: rgba(45, 47, 47, 1);
+	--color-gray-4: rgba(52, 55, 55, 1);
+	--color-gray-5: rgba(59, 63, 63, 1);
+	--color-gray-6: rgba(66, 71, 71, 1);
+	--color-gray-7: rgba(73, 79, 79, 1);
+	--color-gray-8: rgba(80, 87, 87, 1);
+	--color-gray-9: rgba(86, 95, 95, 1);
 	--color-white: hsl(0, 0%, 90%);
 	--color-green: hsl(127, 80%, 70%);
 	--color-red: hsl(0, 80%, 70%);
@@ -28,7 +37,7 @@ export default {
 }
 
 html {
-	background-color: rgba(31, 31, 31, 1);
+	background-color: var(--color-gray-1);
 	font-family: 'Roboto';
 	color: var(--color-white);
 }

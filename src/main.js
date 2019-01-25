@@ -9,15 +9,15 @@ Vue.config.productionTip = false;
 Vue.filter('formatScramble', (scramble) => scramble.join(' '));
 
 Vue.filter('formatTime', (time) => {
-	const milliseconds = Math.floor((time / 10) % 100);
-	const seconds = Math.floor((time / 1000) % 60);
-	const minutes = Math.floor((time / 1000 / 60) % 60);
-	const hours = Math.floor((time / 1000 / 60 / 60) % 60);
+	let SS = Math.floor((time / 10) % 100);
+	let ss = Math.floor((time / 1000) % 60);
+	let mm = Math.floor((time / 1000 / 60) % 60);
+	let HH = Math.floor((time / 1000 / 60 / 60) % 60);
 
-	const SS = String(milliseconds).padStart(2, '0');
-	const ss = `${String(seconds).padStart(2, '0')}.`;
-	const mm = minutes ? `${String(minutes).padStart(2, '0')}:` : '';
-	const HH = hours ? `${String(hours).padStart(2, '0')}:` : '';
+	SS = String(SS).padStart(2, '0');
+	ss = `${mm ? String(ss).padStart(2, '0') : String(ss)}.`;
+	mm = mm ? `${HH ? String(mm).padStart(2, '0') : String(mm)}:` : '';
+	HH = HH ? `${String(HH)}:` : '';
 
 	return `${HH}${mm}${ss}${SS}`;
 });

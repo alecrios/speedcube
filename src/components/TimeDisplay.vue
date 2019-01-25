@@ -5,7 +5,7 @@
 		@touchstart.prevent="touchstartHandler()"
 		@touchend.prevent="touchendHandler()"
 	>
-		<div class="time__display" :data-status="status">
+		<div class="display" :data-status="status">
 			{{ status === 'complete' ? previousTime : duration | formatTime }}
 		</div>
 	</div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-	name: 'Time',
+	name: 'TimeDisplay',
 	data() {
 		return {
 			status: 'idle',
@@ -127,16 +127,16 @@ export default {
 	user-select: none;
 }
 
-.time__display {
+.display {
 	color: var(--color-white);
 	font-size: 4rem;
 	line-height: 4.5rem;
 	font-weight: 300;
 }
 
-.time__display[data-status="idle"] {color: var(--color-white)}
-.time__display[data-status="pending"] {color: var(--color-red)}
-.time__display[data-status="ready"] {color: var(--color-green)}
-.time__display[data-status="running"] {color: var(--color-white)}
-.time__display[data-status="complete"] {color: var(--color-white)}
+.display[data-status="idle"] {color: var(--color-white)}
+.display[data-status="pending"] {color: var(--color-red)}
+.display[data-status="ready"] {color: var(--color-green)}
+.display[data-status="running"] {color: var(--color-white)}
+.display[data-status="complete"] {color: var(--color-white)}
 </style>

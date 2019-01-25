@@ -1,23 +1,23 @@
 <template>
 	<div class="stats">
-		<div class="stats__stat">
-			<div class="stats__label">Best</div>
-			<div class="stats__value">{{ best | formatTime }}</div>
+		<div class="stat">
+			<div class="label">Best</div>
+			<div class="value">{{ best | formatTime }}</div>
 		</div>
-		<div class="stats__stat">
-			<div class="stats__label">Worst</div>
-			<div class="stats__value">{{ worst | formatTime }}</div>
+		<div class="stat">
+			<div class="label">Worst</div>
+			<div class="value">{{ worst | formatTime }}</div>
 		</div>
-		<div class="stats__stat">
-			<div class="stats__label">Mean</div>
-			<div class="stats__value">{{ mean | formatTime }}</div>
+		<div class="stat">
+			<div class="label">Mean</div>
+			<div class="value">{{ mean | formatTime }}</div>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'Stats',
+	name: 'StatsDisplay',
 	computed: {
 		times() {
 			return this.$store.getters.solves
@@ -45,13 +45,13 @@ export default {
 	padding: 1.5rem;
 }
 
-.stats__stat {
+.stat {
 	flex: none;
 	width: 33.3333%;
 	text-align: center;
 }
 
-.stats__label {
+.label {
 	font-size: .75rem;
 	line-height: 1.5rem;
 	font-weight: 500;
@@ -59,7 +59,7 @@ export default {
 	letter-spacing: .0625rem;
 }
 
-.stats__value {
+.value {
 	font-size: 1.25rem;
 	line-height: 1.5rem;
 }
