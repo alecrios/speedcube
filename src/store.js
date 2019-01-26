@@ -18,7 +18,7 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		addSolve(state, solve) {
-			state.solves.push(solve);
+			state.solves.unshift(solve);
 		},
 		removeSolve(state, index) {
 			state.solves.splice(index, 1);
