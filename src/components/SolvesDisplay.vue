@@ -57,12 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.table {
-	width: 100%;
-	max-width: 40rem;
-	margin: 0 auto;
-}
-
 .row + .row {
 	border-top: .125rem solid var(--color-gray-3);
 }

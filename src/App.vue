@@ -1,18 +1,30 @@
 <template>
 	<div id="app">
-		<RouterLink to="/">Timer</RouterLink>
-		<RouterLink to="/solves">Solves</RouterLink>
-		<RouterLink to="/stats">Stats</RouterLink>
-		<RouterView/>
+		<HeaderBar id="header-bar"/>
+		<NavBar id="nav-bar"/>
+		<Wrapper id="content">
+			<RouterView/>
+		</Wrapper>
+		<FooterBar id="footer-bar"/>
 	</div>
 </template>
 
 <script>
 import 'core-reset/core-reset.css';
 import 'focus-visible';
+import HeaderBar from '@/components/HeaderBar.vue';
+import NavBar from '@/components/NavBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
+import Wrapper from '@/components/Wrapper.vue';
 
 export default {
 	name: 'app',
+	components: {
+		HeaderBar,
+		NavBar,
+		FooterBar,
+		Wrapper,
+	},
 };
 </script>
 
@@ -38,9 +50,13 @@ export default {
 }
 
 html {
-	background-color: var(--color-gray-1);
+	background-color: var(--color-gray-5);
 	font-family: 'Roboto';
 	color: var(--color-white);
+}
+
+body {
+	background-color: var(--color-gray-1);
 }
 
 ::-moz-focus-inner {
@@ -49,5 +65,27 @@ html {
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
 	outline: none;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#header-bar {
+	flex: none;
+}
+
+#nav-bar {
+	flex: none;
+}
+
+#content {
+	flex: 1 0 auto;
+}
+
+#footer-bar {
+	flex: none;
 }
 </style>

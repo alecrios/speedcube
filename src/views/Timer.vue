@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<ScrambleDisplay :scramble="currentSolve.scramble"/>
 		<TimeDisplay :time="currentSolve.time"/>
+		<ScrambleDisplay :scramble="currentSolve.scramble"/>
 	</div>
 </template>
 
