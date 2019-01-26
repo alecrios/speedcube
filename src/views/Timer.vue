@@ -2,21 +2,18 @@
 	<div>
 		<ScrambleDisplay :scramble="currentSolve.scramble"/>
 		<TimeDisplay :time="currentSolve.time"/>
-		<StatsDisplay/>
 	</div>
 </template>
 
 <script>
 import ScrambleDisplay from '@/components/ScrambleDisplay.vue';
 import TimeDisplay from '@/components/TimeDisplay.vue';
-import StatsDisplay from '@/components/StatsDisplay.vue';
 
 export default {
-	name: 'home',
+	name: 'timer',
 	components: {
 		ScrambleDisplay,
 		TimeDisplay,
-		StatsDisplay,
 	},
 	data() {
 		return {
