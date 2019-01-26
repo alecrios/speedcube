@@ -72,8 +72,6 @@ export default {
 			this.isActive ? this.closeMenu() : this.openMenu();
 		},
 		keydownHandler(event) {
-			if (!this.isActive) return;
-
 			if (event.key !== 'Escape') return;
 
 			this.isActive = false;

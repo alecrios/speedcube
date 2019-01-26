@@ -1,6 +1,8 @@
 <template>
 	<button
 		:class="['icon-button', {'is-active': isActive}, icon]"
+		:aria-label="name"
+		:title="name"
 		@click="$emit('click')"
 	/>
 </template>
