@@ -3,7 +3,7 @@
 		<HeaderBar id="header-bar"/>
 		<NavBar id="nav-bar"/>
 		<Wrapper id="content">
-			<RouterView/>
+			<RouterView id="view"/>
 		</Wrapper>
 		<FooterBar id="footer-bar"/>
 	</div>
@@ -83,6 +83,12 @@ body {
 
 #content {
 	flex: 1 0 auto;
+	display: flex;
+	padding: 1.5rem 0;
+}
+
+#view {
+	width: 100%;
 }
 
 #footer-bar {

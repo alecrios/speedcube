@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<TimeDisplay :time="currentSolve.time"/>
-		<ScrambleDisplay :scramble="currentSolve.scramble"/>
+	<div class="timer">
+		<TimeDisplay class="time-display" :time="currentSolve.time"/>
+		<ScrambleDisplay class="scramble-display" :scramble="currentSolve.scramble"/>
 	</div>
 </template>
 
@@ -49,3 +49,18 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.timer {
+	display: flex;
+	flex-direction: column;
+}
+
+.time-display {
+	flex: 1 0 auto;
+}
+
+.scramble-display {
+	flex: none;
+}
+</style>

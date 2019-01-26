@@ -1,11 +1,13 @@
 <template>
-	<div class="time"
-		@mousedown="mousedownHandler()"
-		@mouseup="mouseupHandler()"
-		@touchstart.prevent="touchstartHandler()"
-		@touchend.prevent="touchendHandler()"
-	>
-		<div class="display" :data-status="status">
+	<div class="time">
+		<div
+			class="display"
+			:data-status="status"
+			@mousedown="mousedownHandler()"
+			@mouseup="mouseupHandler()"
+			@touchstart.prevent="touchstartHandler()"
+			@touchend.prevent="touchendHandler()"
+		>
 			{{ status === 'complete' ? previousTime : duration | formatTime }}
 		</div>
 	</div>
@@ -118,20 +120,20 @@ export default {
 
 <style scoped>
 .time {
-	padding: 1.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	-webkit-tap-highlight-color: transparent;
-	cursor: pointer;
-	user-select: none;
 }
 
 .display {
+	padding: 1.5rem;
 	color: var(--color-white);
 	font-size: 4rem;
 	line-height: 4.5rem;
 	font-weight: 300;
+	-webkit-tap-highlight-color: transparent;
+	cursor: pointer;
+	user-select: none;
 }
 
 .display[data-status="idle"] {color: var(--color-white)}
