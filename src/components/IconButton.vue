@@ -1,6 +1,6 @@
 <template>
 	<button
-		:class="['icon-button', icon]"
+		:class="['icon-button', {'is-active': isActive}, icon]"
 		@click="$emit('click')"
 	/>
 </template>
@@ -8,7 +8,7 @@
 <script>
 export default {
 	name: 'IconButton',
-	props: ['name', 'icon'],
+	props: ['name', 'icon', 'is-active'],
 };
 </script>
 
@@ -33,6 +33,10 @@ export default {
 }
 
 .icon-button:hover {
+	opacity: 1;
+}
+
+.icon-button.is-active {
 	opacity: 1;
 }
 </style>

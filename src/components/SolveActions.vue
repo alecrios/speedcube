@@ -4,10 +4,11 @@
 			<IconButton
 				icon="penalty"
 				name="Penalty"
+				:is-active="isActive"
 				@click="toggleMenu"
 			/>
 
-			<div class="menu" v-if="isActive">
+			<div class="menu" v-if="isActive" v-on-clickaway="closeMenu">
 				<button
 					:class="['option', {'is-active': solve.p2}]"
 					@click="$emit('click-p2')"
@@ -37,12 +38,16 @@
 </template>
 
 <script>
+import {directive as onClickaway} from 'vue-clickaway';
 import IconButton from '@/components/IconButton.vue';
 
 export default {
 	name: 'SolveActions',
 	components: {
 		IconButton,
+	},
+	directives: {
+		onClickaway,
 	},
 	data() {
 		return {
@@ -51,25 +56,31 @@ export default {
 	},
 	props: ['solve'],
 	methods: {
-		toggleMenu() {
-			this.isActive = !this.isActive;
-		},
-		keydownHandler(event) {
-			if (event.key !== 27) return;
+		openMenu() {
+			if (this.isActive) return;
 
+			this.isActive = true;
+			document.addEventListener('keydown', this.keydownHandler);
+		},
+		closeMenu() {
 			if (!this.isActive) return;
 
 			this.isActive = false;
+			document.removeEventListener('keydown', this.keydownHandler);
+		},
+		toggleMenu() {
+			this.isActive ? this.closeMenu() : this.openMenu();
+		},
+		keydownHandler(event) {
+			if (!this.isActive) return;
 
-			// what about closing other menus when one opens?
-			// listeners at higher level?
+			if (event.key !== 'Escape') return;
+
+			this.isActive = false;
 		},
 	},
-	mounted() {
-		// document.addEventListener('keydown', keydownHandler);
-	},
 	beforeDestroy() {
-		// document.removeEventListener('keydown', keydownHandler);
+		this.closeMenu();
 	},
 };
 </script>
@@ -91,17 +102,29 @@ export default {
 
 .menu {
 	position: absolute;
-	top: 100%;
-	right: 0;
+	top: calc(100% + .5rem);
+	right: -1.5rem;
 	padding: .25rem 0;
 	background-color: var(--color-gray-5);
 	border-radius: .25rem;
-	overflow: hidden;
-	box-shadow: 0 .25rem 1rem 0 rgba(0, 0, 0, .25);
+	box-shadow: 0 .5rem 1.5rem 0 rgba(0, 0, 0, .25);
 	z-index: 1;
 }
 
+.menu::before {
+	content: '';
+	background-color: red;
+	background-color: var(--color-gray-5);
+	width: .75rem;
+	height: .75rem;
+	transform: rotate(45deg);
+	position: absolute;
+	top: -.25rem;
+	right: 1.875rem;
+}
+
 .option {
+	position: relative;
 	display: flex;
 	align-items: center;
 	width: 100%;
