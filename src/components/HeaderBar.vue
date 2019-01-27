@@ -2,7 +2,7 @@
 	<header class="header">
 		<Wrapper>
 			<div class="bar">
-				<RouterLink to="timer">
+				<RouterLink to="/">
 					<img class="image" src="../assets/logo.svg" alt="Speedcube">
 				</RouterLink>
 			</div>
@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
 	background-color: var(--color-gray-5);
 }

@@ -15,26 +15,23 @@
 export default {
 	name: 'Scramble',
 	props: ['scramble'],
+	data() {
+		return {
+			faceColors: {
+				'U': 'white',
+				'F': 'green',
+				'R': 'red',
+				'B': 'blue',
+				'L': 'orange',
+				'D': 'yellow',
+			},
+		};
+	},
 	methods: {
 		getColor(move) {
-			const face = move.charAt(0);
+			const faceColor = move.charAt(0);
 
-			switch (face) {
-			case 'U':
-				return 'white';
-			case 'F':
-				return 'green';
-			case 'R':
-				return 'red';
-			case 'B':
-				return 'blue';
-			case 'L':
-				return 'orange';
-			case 'D':
-				return 'yellow';
-			default:
-				return '';
-			}
+			return this.faceColors[faceColor];
 		},
 	},
 };
@@ -47,10 +44,10 @@ export default {
 	line-height: inherit;
 }
 
-.move[data-color="white"]  {color: var(--color-white)}
-.move[data-color="green"]  {color: var(--color-green)}
-.move[data-color="red"]    {color: var(--color-red)}
-.move[data-color="blue"]   {color: var(--color-blue)}
-.move[data-color="orange"] {color: var(--color-orange)}
-.move[data-color="yellow"] {color: var(--color-yellow)}
+.move[data-color='white']  {color: var(--color-white)}
+.move[data-color='green']  {color: var(--color-green)}
+.move[data-color='red']    {color: var(--color-red)}
+.move[data-color='blue']   {color: var(--color-blue)}
+.move[data-color='orange'] {color: var(--color-orange)}
+.move[data-color='yellow'] {color: var(--color-yellow)}
 </style>

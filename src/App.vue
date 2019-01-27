@@ -1,10 +1,13 @@
 <template>
 	<div id="app">
 		<HeaderBar id="header-bar"/>
+
 		<NavBar id="nav-bar"/>
+
 		<Wrapper id="content">
 			<RouterView id="view"/>
 		</Wrapper>
+
 		<FooterBar id="footer-bar"/>
 	</div>
 </template>

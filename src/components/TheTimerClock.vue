@@ -15,7 +15,7 @@
 
 <script>
 export default {
-	name: 'TimeDisplay',
+	name: 'TheTimerClock',
 	data() {
 		return {
 			status: 'idle',
@@ -56,7 +56,8 @@ export default {
 		stopTimer() {
 			clearInterval(this.timerInterval);
 			this.status = 'complete';
-			this.$root.$emit('timer-ended', this.duration);
+			this.$store.commit('updateCurrentSolveTime', this.duration);
+			this.$root.$emit('timer-ended');
 		},
 		resetTimer() {
 			this.previousTime = this.duration;
@@ -128,8 +129,8 @@ export default {
 .display {
 	padding: 1.5rem;
 	color: var(--color-white);
-	font-size: 4rem;
-	line-height: 4.5rem;
+	font-size: 4.5rem;
+	line-height: 4rem;
 	font-weight: 300;
 	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;

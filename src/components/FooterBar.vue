@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .footer {
 	background-color: var(--color-gray-5);
 }

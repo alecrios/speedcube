@@ -21,6 +21,7 @@ export default {
 	background-size: 1.5rem 1.5rem;
 	background-position: center center;
 	background-repeat: no-repeat;
+	vertical-align: middle;
 	cursor: pointer;
 	transition: opacity 100ms ease;
 	opacity: .25;

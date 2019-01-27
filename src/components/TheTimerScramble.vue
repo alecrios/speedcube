@@ -11,18 +11,20 @@
 </template>
 
 <script>
-import * as cubeScrambler from 'cube-scrambler';
+import cubeScrambler from 'cube-scrambler';
 import Scramble from '@/components/Scramble.vue';
 
 const scrambler = cubeScrambler();
 
 export default {
-	name: 'ScrambleDisplay',
+	name: 'TheTimerScramble',
 	components: {
 		Scramble,
 	},
-	props: ['scramble'],
 	computed: {
+		scramble() {
+			return this.$store.getters.currentSolveScramble;
+		},
 		scrambleFirstHalf() {
 			return this.scramble.slice(0, 10);
 		},
@@ -35,31 +37,12 @@ export default {
 			return scrambler.scramble().slice(0, 20);
 		},
 		updateScramble() {
-			this.$root.$emit('new-scramble', this.getScramble());
-		},
-		getColor(move) {
-			const face = move.charAt(0);
-
-			switch (face) {
-			case 'U':
-				return 'white';
-			case 'F':
-				return 'green';
-			case 'R':
-				return 'red';
-			case 'B':
-				return 'blue';
-			case 'L':
-				return 'orange';
-			case 'D':
-				return 'yellow';
-			default:
-				return '';
-			}
+			this.$store.commit('updateCurrentSolveScramble', this.getScramble());
 		},
 	},
 	mounted() {
-		this.updateScramble();
+		if (!this.scramble.length) this.updateScramble();
+
 		this.$root.$on('reset', this.updateScramble);
 	},
 	beforeDestroy() {

@@ -86,7 +86,6 @@ export default {
 <style scoped>
 .solve-actions {
 	display: flex;
-	height: 1.5rem;
 }
 
 .penalty-action {

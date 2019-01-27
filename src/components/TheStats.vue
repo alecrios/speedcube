@@ -1,24 +1,29 @@
 <template>
-	<div class="stats">
-		<div class="stat">
-			<div class="label">Best</div>
-			<div class="value">{{ best | formatTime }}</div>
-		</div>
-		<div class="stat">
-			<div class="label">Worst</div>
-			<div class="value">{{ worst | formatTime }}</div>
-		</div>
-		<div class="stat">
-			<div class="label">Mean</div>
-			<div class="value">{{ mean | formatTime }}</div>
+	<div class="stats-display">
+		<div class="stats">
+			<div class="stat">
+				<div class="label">Best</div>
+				<div class="value">{{ best | formatTime }}</div>
+			</div>
+			<div class="stat">
+				<div class="label">Worst</div>
+				<div class="value">{{ worst | formatTime }}</div>
+			</div>
+			<div class="stat">
+				<div class="label">Mean</div>
+				<div class="value">{{ mean | formatTime }}</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'StatsDisplay',
+	name: 'TheStats',
 	computed: {
+		solves() {
+			return this.$store.getters.solves;
+		},
 		times() {
 			return this.$store.getters.solves
 				.filter((solve) => !solve.dnf)
@@ -40,9 +45,13 @@ export default {
 </script>
 
 <style scoped>
+.stats-display {
+	padding: 0 1.5rem;
+}
+
 .stats {
 	display: flex;
-	padding: 1.5rem;
+	padding: 0 1.5rem;
 }
 
 .stat {
