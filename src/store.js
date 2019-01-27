@@ -9,6 +9,8 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		sessions: [],
+		currentSession: null,
 		solves: [],
 		currentSolve: {
 			scramble: [],
@@ -24,10 +26,38 @@ export default new Vuex.Store({
 		currentSolveScramble(state) {
 			return state.currentSolve.scramble;
 		},
+		sessions(state) {
+			return state.sessions;
+		},
+		currentSession(state) {
+			return state.currentSession;
+		},
 	},
 	mutations: {
+		addSession(state, name) {
+			const session = {
+				id: Date.now(),
+				name,
+			};
+
+			state.sessions.unshift(session);
+		},
+		renameSession(state, index, name) {
+			state.sessions[index].name = name;
+		},
+		removeSession(state, index) {
+			state.sessions.splice(index, 1);
+		},
+		updateCurrentSession(state, id) {
+			state.currentSession = id;
+		},
 		addSolve(state) {
-			state.solves.unshift(Object.assign({timestamp: Date.now()}, state.currentSolve));
+			const solve = Object.assign({
+				timestamp: Date.now(),
+				session: state.currentSession,
+			}, state.currentSolve);
+
+			state.solves.unshift(solve);
 		},
 		removeSolve(state, index) {
 			state.solves.splice(index, 1);

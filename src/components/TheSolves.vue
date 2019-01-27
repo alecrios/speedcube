@@ -1,35 +1,46 @@
 <template>
-	<div class="solves">
+	<div>
 		<TheSolvesGlobalActions/>
 
-		<table>
-			<tr
-				v-for="(solve, index) in solves"
-				:key="index"
-				:class="['row', {'is-dnf': solve.dnf}]"
-			>
-				<td class="cell time">
-					{{ solve.time | formatTime }}
-				</td>
+		<BaseTable>
+			<thead>
+				<tr>
+					<th class="align-right">Time</th>
+					<th>Scramble</th>
+					<th class="align-right">Actions</th>
+				</tr>
+			</thead>
 
-				<td class="cell scramble">
-					<ScrambleString :scramble="solve.scramble"/>
-				</td>
+			<tbody>
+				<tr
+					v-for="(solve, index) in solves"
+					:key="index"
+					:class="{'is-dnf': solve.dnf}"
+				>
+					<td class="time align-right">
+						{{ solve.time | formatTime }}
+					</td>
 
-				<td class="cell actions">
-					<TheSolvesSingleActions
-						:solve="solve"
-						@click-dnf="toggleDnf(index)"
-						@click-p2="toggleP2(index)"
-						@click-remove="removeSolve(index)"
-					/>
-				</td>
-			</tr>
-		</table>
+					<td class="scramble overflow-ellipses">
+						<ScrambleString :scramble="solve.scramble"/>
+					</td>
+
+					<td class="actions">
+						<TheSolvesSingleActions
+							:solve="solve"
+							@click-dnf="toggleDnf(index)"
+							@click-p2="toggleP2(index)"
+							@click-remove="removeSolve(index)"
+						/>
+					</td>
+				</tr>
+			</tbody>
+		</BaseTable>
 	</div>
 </template>
 
 <script>
+import BaseTable from '@/components/BaseTable.vue';
 import TheSolvesSingleActions from '@/components/TheSolvesSingleActions.vue';
 import TheSolvesGlobalActions from '@/components/TheSolvesGlobalActions.vue';
 import ScrambleString from '@/components/ScrambleString.vue';
@@ -37,6 +48,7 @@ import ScrambleString from '@/components/ScrambleString.vue';
 export default {
 	name: 'TheSolves',
 	components: {
+		BaseTable,
 		ScrambleString,
 		TheSolvesSingleActions,
 		TheSolvesGlobalActions,
@@ -61,45 +73,16 @@ export default {
 </script>
 
 <style scoped>
-.solves {
-	padding: 1.5rem;
-}
-
-.row + .row {
-	border-top: .125rem solid var(--color-gray-3);
-}
-
-.cell {
-	padding: .75rem;
-	white-space: nowrap;
-	vertical-align: middle;
-}
-
-.cell.time {
-	text-align: right;
-	font-size: 1.25rem;
-	line-height: 1.5rem;
-}
-
-.row.is-dnf .cell.time {
+.is-dnf .time {
 	opacity: .25;
 }
 
-.cell.scramble {
-	text-align: left;
-	width: 100%;
-	max-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-size: 1rem;
-	line-height: 1.5rem;
-}
-
-.row.is-dnf .cell.scramble {
+.is-dnf .scramble {
 	opacity: .25;
 }
 
-.cell.actions {
+.actions {
 	display: flex;
+	justify-content: flex-end;
 }
 </style>

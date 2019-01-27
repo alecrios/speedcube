@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Timer from './views/Timer.vue';
+import Sessions from './views/Sessions.vue';
 import Solves from './views/Solves.vue';
 import Stats from './views/Stats.vue';
 
@@ -15,6 +16,11 @@ export default new Router({
 			path: '/',
 			name: 'timer',
 			component: Timer,
+		},
+		{
+			path: '/sessions',
+			name: 'sessions',
+			component: Sessions,
 		},
 		{
 			path: '/solves',

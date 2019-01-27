@@ -2,9 +2,10 @@
 	<nav class="nav">
 		<BaseWrapper>
 			<div class="links">
-				<RouterLink class="link timer" to="/">Timer</RouterLink>
-				<RouterLink class="link solves" to="/solves">Solves</RouterLink>
-				<RouterLink class="link stats" to="/stats">Stats</RouterLink>
+				<RouterLink class="link" to="/">Timer</RouterLink>
+				<RouterLink class="link" to="/sessions">Sessions</RouterLink>
+				<RouterLink class="link" to="/solves">Solves</RouterLink>
+				<RouterLink class="link" to="/stats">Stats</RouterLink>
 			</div>
 		</BaseWrapper>
 	</nav>
@@ -36,11 +37,12 @@ export default {
 	position: relative;
 	flex: 1 0 auto;
 	text-align: center;
-	font-size: 1rem;
-	line-height: 1.5rem;
-	letter-spacing: .03125rem;
+	font-size: .75rem;
+	line-height: 1rem;
+	letter-spacing: .0625rem;
+	text-transform: uppercase;
 	font-weight: 500;
-	padding: .75rem 1.5rem;
+	padding: .75rem;
 	opacity: .5;
 	color: var(--color-white);
 }

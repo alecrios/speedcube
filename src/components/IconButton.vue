@@ -35,6 +35,10 @@ export default {
 	background-image: url('../assets/icon-remove.svg');
 }
 
+.icon-button.rename {
+	background-image: url('../assets/icon-rename.svg');
+}
+
 .icon-button:hover {
 	opacity: 1;
 }

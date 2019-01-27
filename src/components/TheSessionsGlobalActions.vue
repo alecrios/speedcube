@@ -3,13 +3,13 @@
 		<BaseButton
 			name="New"
 			icon="add"
-			@click="createNewSolve()"
+			@click="createNewSession()"
 		/>
 
 		<BaseButton
 			name="Clear"
 			icon="remove"
-			@click="removeAllSolves()"
+			@click="removeAllSessions()"
 		/>
 	</GlobalActions>
 </template>
@@ -19,17 +19,17 @@ import GlobalActions from '@/components/GlobalActions.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
 export default {
-	name: 'TheSolvesGlobalActions',
+	name: 'TheSessionsGlobalActions',
 	components: {
 		GlobalActions,
 		BaseButton,
 	},
 	methods: {
-		createNewSolve() {
-			this.$router.push('/');
+		createNewSession() {
+			//
 		},
-		removeAllSolves() {
-			this.$store.commit('removeAllSolves');
+		removeAllSessions() {
+			//
 		},
 	},
 };

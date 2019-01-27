@@ -5,6 +5,8 @@
 				<RouterLink to="/">
 					<img class="image" src="../assets/logo.svg" alt="Speedcube">
 				</RouterLink>
+
+				<TheSessionSelect/>
 			</div>
 		</BaseWrapper>
 	</header>
@@ -12,11 +14,13 @@
 
 <script>
 import BaseWrapper from '@/components/BaseWrapper.vue';
+import TheSessionSelect from '@/components/TheSessionSelect.vue';
 
 export default {
 	name: 'TheHeader',
 	components: {
 		BaseWrapper,
+		TheSessionSelect,
 	},
 };
 </script>
@@ -28,7 +32,7 @@ export default {
 
 .bar {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	padding: .25rem;
 }
 
