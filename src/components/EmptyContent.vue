@@ -16,7 +16,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 1.5rem 0;
+	padding: 1.5rem;
 }
 
 .message {

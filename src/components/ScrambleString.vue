@@ -13,7 +13,7 @@
 
 <script>
 export default {
-	name: 'Scramble',
+	name: 'ScrambleString',
 	props: ['scramble'],
 	data() {
 		return {

@@ -1,22 +1,22 @@
 <template>
 	<nav class="nav">
-		<Wrapper>
+		<BaseWrapper>
 			<div class="links">
 				<RouterLink class="link timer" to="/">Timer</RouterLink>
 				<RouterLink class="link solves" to="/solves">Solves</RouterLink>
 				<RouterLink class="link stats" to="/stats">Stats</RouterLink>
 			</div>
-		</Wrapper>
+		</BaseWrapper>
 	</nav>
 </template>
 
 <script>
-import Wrapper from '@/components/Wrapper.vue';
+import BaseWrapper from '@/components/BaseWrapper.vue';
 
 export default {
-	name: 'NavBar',
+	name: 'TheNav',
 	components: {
-		Wrapper,
+		BaseWrapper,
 	},
 };
 </script>

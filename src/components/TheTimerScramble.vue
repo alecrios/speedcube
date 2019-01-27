@@ -1,25 +1,25 @@
 <template>
 	<div class="scramble-display">
-		<div class="first-half">
-			<Scramble :scramble="scrambleFirstHalf"/>
+		<div>
+			<ScrambleString :scramble="scrambleFirstHalf"/>
 		</div>
 
-		<div class="second-half">
-			<Scramble :scramble="scrambleSecondHalf"/>
+		<div>
+			<ScrambleString :scramble="scrambleSecondHalf"/>
 		</div>
 	</div>
 </template>
 
 <script>
 import cubeScrambler from 'cube-scrambler';
-import Scramble from '@/components/Scramble.vue';
+import ScrambleString from '@/components/ScrambleString.vue';
 
 const scrambler = cubeScrambler();
 
 export default {
 	name: 'TheTimerScramble',
 	components: {
-		Scramble,
+		ScrambleString,
 	},
 	computed: {
 		scramble() {

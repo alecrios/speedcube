@@ -1,22 +1,22 @@
 <template>
 	<header class="header">
-		<Wrapper>
+		<BaseWrapper>
 			<div class="bar">
 				<RouterLink to="/">
 					<img class="image" src="../assets/logo.svg" alt="Speedcube">
 				</RouterLink>
 			</div>
-		</Wrapper>
+		</BaseWrapper>
 	</header>
 </template>
 
 <script>
-import Wrapper from '@/components/Wrapper.vue';
+import BaseWrapper from '@/components/BaseWrapper.vue';
 
 export default {
-	name: 'HeaderBar',
+	name: 'TheHeader',
 	components: {
-		Wrapper,
+		BaseWrapper,
 	},
 };
 </script>

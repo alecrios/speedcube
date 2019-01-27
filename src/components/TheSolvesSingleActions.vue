@@ -42,7 +42,7 @@ import {directive as onClickaway} from 'vue-clickaway';
 import IconButton from '@/components/IconButton.vue';
 
 export default {
-	name: 'SolveActions',
+	name: 'TheSolvesSingleActions',
 	components: {
 		IconButton,
 	},

@@ -1,53 +1,45 @@
 <template>
-	<div class="solves-display">
-		<div class="global-actions">
-			<button
-				class="remove-all"
-				@click="removeAllSolves()"
-				v-if="solves.length"
+	<div class="solves">
+		<TheSolvesGlobalActions/>
+
+		<table>
+			<tr
+				v-for="(solve, index) in solves"
+				:key="index"
+				:class="['row', {'is-dnf': solve.dnf}]"
 			>
-				Clear
-			</button>
-		</div>
+				<td class="cell time">
+					{{ solve.time | formatTime }}
+				</td>
 
-		<table v-if="solves.length">
-			<tbody>
-				<tr
-					v-for="(solve, index) in solves"
-					:key="index"
-					:class="['row', {'is-dnf': solve.dnf}]"
-				>
-					<td class="cell time">
-						{{ solve.time | formatTime }}
-					</td>
+				<td class="cell scramble">
+					<ScrambleString :scramble="solve.scramble"/>
+				</td>
 
-					<td class="cell scramble">
-						<Scramble :scramble="solve.scramble"/>
-					</td>
-
-					<td class="cell actions">
-						<SolveActions
-							:solve="solve"
-							@click-dnf="toggleDnf(index)"
-							@click-p2="toggleP2(index)"
-							@click-remove="removeSolve(index)"
-						/>
-					</td>
-				</tr>
-			</tbody>
+				<td class="cell actions">
+					<TheSolvesSingleActions
+						:solve="solve"
+						@click-dnf="toggleDnf(index)"
+						@click-p2="toggleP2(index)"
+						@click-remove="removeSolve(index)"
+					/>
+				</td>
+			</tr>
 		</table>
 	</div>
 </template>
 
 <script>
-import SolveActions from '@/components/SolveActions.vue';
-import Scramble from '@/components/Scramble.vue';
+import TheSolvesSingleActions from '@/components/TheSolvesSingleActions.vue';
+import TheSolvesGlobalActions from '@/components/TheSolvesGlobalActions.vue';
+import ScrambleString from '@/components/ScrambleString.vue';
 
 export default {
 	name: 'TheSolves',
 	components: {
-		Scramble,
-		SolveActions,
+		ScrambleString,
+		TheSolvesSingleActions,
+		TheSolvesGlobalActions,
 	},
 	computed: {
 		solves() {
@@ -64,36 +56,13 @@ export default {
 		toggleDnf(index) {
 			this.$store.commit('toggleDnf', index);
 		},
-		removeAllSolves() {
-			this.$store.commit('removeAllSolves');
-		},
 	},
 };
 </script>
 
 <style scoped>
-.global-actions {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.remove-all {
-	font-size: .75rem;
-	font-weight: 500;
-	line-height: 1.5rem;
-	text-transform: uppercase;
-	letter-spacing: .0625rem;
-	color: var(--color-gray-9);
-	padding: .75rem;
-	cursor: pointer;
-}
-
-.remove-all:hover {
-	color: var(--color-white);
-}
-
-.solves-display {
-	padding: 0 1.5rem;
+.solves {
+	padding: 1.5rem;
 }
 
 .row + .row {

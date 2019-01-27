@@ -1,32 +1,28 @@
 <template>
 	<div id="app">
-		<HeaderBar id="header-bar"/>
+		<TheHeader id="header"/>
 
-		<NavBar id="nav-bar"/>
+		<TheNav id="nav"/>
 
-		<Wrapper id="content">
-			<RouterView id="view"/>
-		</Wrapper>
+		<RouterView id="content"/>
 
-		<FooterBar id="footer-bar"/>
+		<TheFooter id="footer"/>
 	</div>
 </template>
 
 <script>
 import 'core-reset/core-reset.css';
 import 'focus-visible';
-import HeaderBar from '@/components/HeaderBar.vue';
-import NavBar from '@/components/NavBar.vue';
-import FooterBar from '@/components/FooterBar.vue';
-import Wrapper from '@/components/Wrapper.vue';
+import TheHeader from '@/components/TheHeader.vue';
+import TheNav from '@/components/TheNav.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 export default {
 	name: 'app',
 	components: {
-		HeaderBar,
-		NavBar,
-		FooterBar,
-		Wrapper,
+		TheHeader,
+		TheNav,
+		TheFooter,
 	},
 };
 </script>
@@ -76,25 +72,20 @@ body {
 	min-height: 100vh;
 }
 
-#header-bar {
+#header {
 	flex: none;
 }
 
-#nav-bar {
+#nav {
 	flex: none;
 }
 
 #content {
 	flex: 1 0 auto;
-	display: flex;
 	padding: 1.5rem 0;
 }
 
-#view {
-	width: 100%;
-}
-
-#footer-bar {
+#footer {
 	flex: none;
 }
 </style>
