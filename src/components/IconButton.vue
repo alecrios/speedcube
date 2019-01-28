@@ -3,6 +3,7 @@
 		:class="['icon-button', {'is-active': isActive}, icon]"
 		:aria-label="name"
 		:title="name"
+		:disabled="disabled"
 		@click="$emit('click')"
 	/>
 </template>
@@ -10,7 +11,7 @@
 <script>
 export default {
 	name: 'IconButton',
-	props: ['name', 'icon', 'is-active'],
+	props: ['name', 'icon', 'is-active', 'disabled'],
 };
 </script>
 
@@ -45,5 +46,10 @@ export default {
 
 .icon-button.is-active {
 	opacity: 1;
+}
+
+.icon-button:disabled {
+	opacity: .1;
+	cursor: not-allowed;
 }
 </style>

@@ -26,12 +26,7 @@
 					</td>
 
 					<td class="actions">
-						<TheSolvesSingleActions
-							:solve="solve"
-							@click-dnf="toggleDnf(index)"
-							@click-p2="toggleP2(index)"
-							@click-remove="removeSolve(index)"
-						/>
+						<TheSolvesSingleActions :index="index"/>
 					</td>
 				</tr>
 			</tbody>
@@ -56,17 +51,6 @@ export default {
 	computed: {
 		solves() {
 			return this.$store.getters.solves;
-		},
-	},
-	methods: {
-		removeSolve(index) {
-			this.$store.commit('removeSolve', index);
-		},
-		toggleP2(index) {
-			this.$store.commit('toggleP2', index);
-		},
-		toggleDnf(index) {
-			this.$store.commit('toggleDnf', index);
 		},
 	},
 };

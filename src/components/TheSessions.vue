@@ -13,11 +13,11 @@
 
 			<tbody>
 				<tr
-					v-for="session in sessions"
+					v-for="(session, index) in sessions"
 					:key="session.id"
 					:class="{'is-inactive': isInactive(session)}"
 				>
-					<td class="name overflow-ellipses">
+					<td class="name">
 						{{ session.name }}
 					</td>
 
@@ -26,11 +26,7 @@
 					</td>
 
 					<td class="actions">
-						<TheSessionsSingleActions
-							:session="session"
-							@click-rename="renameSolve(index)"
-							@click-remove="removeSolve(index)"
-						/>
+						<TheSessionsSingleActions :index="index"/>
 					</td>
 				</tr>
 			</tbody>
@@ -61,12 +57,6 @@ export default {
 		},
 		getSessionSolvesCount(sessionId) {
 			return this.$store.getters.solves.filter((solve) => solve.session === sessionId).length;
-		},
-		renameSession(index, name) {
-			this.$store.commit('renameSession', index, name);
-		},
-		removeSession(index) {
-			this.$store.commit('removeSession', index);
 		},
 	},
 };

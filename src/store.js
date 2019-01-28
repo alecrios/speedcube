@@ -48,6 +48,9 @@ export default new Vuex.Store({
 		removeSession(state, index) {
 			state.sessions.splice(index, 1);
 		},
+		removeSolvesOfSession(state, sessionId) {
+			state.solves = state.solves.filter((solve) => solve.session !== sessionId);
+		},
 		updateCurrentSession(state, id) {
 			state.currentSession = id;
 		},
