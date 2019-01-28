@@ -10,7 +10,7 @@
 
 			<div class="menu" v-if="isActive" v-on-clickaway="closeMenu">
 				<button
-					:class="['option', {'is-active': hasP2}]"
+					:class="['option', {'is-active': solve.p2}]"
 					@click="toggleP2()"
 					aria-label="+2 Penalty"
 				>
@@ -18,7 +18,7 @@
 				</button>
 
 				<button
-					:class="['option', {'is-active': hasDnf}]"
+					:class="['option', {'is-active': solve.dnf}]"
 					@click="toggleDnf()"
 					aria-label="DNF Penalty"
 				>
@@ -49,19 +49,11 @@ export default {
 	directives: {
 		onClickaway,
 	},
-	props: ['index'],
+	props: ['solve'],
 	data() {
 		return {
 			isActive: false,
 		};
-	},
-	computed: {
-		hasDnf() {
-			return this.$store.getters.solves[this.index].dnf;
-		},
-		hasP2() {
-			return this.$store.getters.solves[this.index].p2;
-		},
 	},
 	methods: {
 		openMenu() {
@@ -85,13 +77,13 @@ export default {
 			this.isActive = false;
 		},
 		removeSolve() {
-			this.$store.commit('removeSolve', this.index);
+			this.$store.commit('removeSolve', this.solve.id);
 		},
 		toggleP2() {
-			this.$store.commit('toggleP2', this.index);
+			this.$store.commit('toggleP2', this.solve.id);
 		},
 		toggleDnf() {
-			this.$store.commit('toggleDnf', this.index);
+			this.$store.commit('toggleDnf', this.solve.id);
 		},
 	},
 	beforeDestroy() {

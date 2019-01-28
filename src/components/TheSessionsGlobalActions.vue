@@ -1,15 +1,9 @@
 <template>
 	<GlobalActions>
 		<BaseButton
-			name="New"
+			name="New Session"
 			icon="add"
 			@click="createNewSession()"
-		/>
-
-		<BaseButton
-			name="Clear"
-			icon="remove"
-			@click="removeAllSessions()"
 		/>
 	</GlobalActions>
 </template>
@@ -26,10 +20,13 @@ export default {
 	},
 	methods: {
 		createNewSession() {
-			//
-		},
-		removeAllSessions() {
-			//
+			// TODO: better system of getting user input
+			const id = String(Date.now());
+			// eslint-disable-next-line
+			const name = window.prompt('Session name:');
+
+			this.$store.commit('addSession', {id, name});
+			this.$store.commit('updateCurrentSession', id);
 		},
 	},
 };

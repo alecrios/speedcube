@@ -17,8 +17,4 @@ export default {
 	display: flex;
 	justify-content: flex-end;
 }
-
-.global-actions > * + * {
-	margin-left: .75rem;
-}
 </style>

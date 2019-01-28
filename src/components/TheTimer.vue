@@ -18,7 +18,9 @@ export default {
 	},
 	methods: {
 		addSolve() {
-			this.$store.commit('addSolve');
+			const id = String(Date.now());
+			const session = this.$store.state.currentSession;
+			this.$store.commit('addSolve', {id, session});
 			this.$root.$emit('reset');
 		},
 	},

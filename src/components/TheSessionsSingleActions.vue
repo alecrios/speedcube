@@ -24,27 +24,26 @@ import IconButton from '@/components/IconButton.vue';
 
 export default {
 	name: 'TheSessionsSingleActions',
-	props: ['index'],
-	computed: {
-		sessionId() {
-			return this.$store.getters.sessions[this.index].id;
-		},
-	},
+	props: ['session'],
 	components: {
 		IconButton,
 	},
 	methods: {
 		isCurrentSession() {
-			return this.$store.getters.currentSession === this.sessionId;
+			return this.session.id === this.$store.state.currentSession;
 		},
 		renameSession() {
-			// TODO: user input
-			// this.$store.commit('renameSession', this.index, name);
+			// eslint-disable-next-line
+			const id = this.session.id;
+			// TODO: better system of getting user input
+			// eslint-disable-next-line
+			const name = window.prompt('Session name:', this.session.name);
+
+			this.$store.commit('renameSession', {id, name});
 		},
 		removeSession() {
-			this.$store.commit('removeSolvesOfSession', this.sessionId);
-
-			this.$store.commit('removeSession', this.index);
+			this.$store.commit('removeSolvesOfSession', this.session.id);
+			this.$store.commit('removeSession', this.session.id);
 		},
 	},
 };

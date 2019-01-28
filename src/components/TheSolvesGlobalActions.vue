@@ -1,15 +1,9 @@
 <template>
 	<GlobalActions>
 		<BaseButton
-			name="New"
+			name="New Solve"
 			icon="add"
 			@click="createNewSolve()"
-		/>
-
-		<BaseButton
-			name="Clear"
-			icon="remove"
-			@click="removeAllSolves()"
 		/>
 	</GlobalActions>
 </template>
@@ -27,9 +21,6 @@ export default {
 	methods: {
 		createNewSolve() {
 			this.$router.push('/');
-		},
-		removeAllSolves() {
-			this.$store.commit('removeAllSolves');
 		},
 	},
 };

@@ -9,7 +9,7 @@
 <script>
 import BaseWrapper from '@/components/BaseWrapper.vue';
 import EmptyContent from '@/components/EmptyContent.vue';
-import TheSessions from '@/components/TheSessions.vue';
+import TheSessions from '@/components/TheSessions.vue'; // TODO: remove this comment
 
 export default {
 	name: 'solves',

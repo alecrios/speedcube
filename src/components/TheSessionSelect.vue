@@ -19,7 +19,7 @@ export default {
 		},
 		currentSession: {
 			get() {
-				return this.$store.getters.currentSession;
+				return this.$store.state.currentSession;
 			},
 			set(id) {
 				this.$store.commit('updateCurrentSession', id);
@@ -27,9 +27,12 @@ export default {
 		},
 	},
 	created() {
-		if (!this.sessions.length) {
-			this.$store.commit('addSession', 'Session 1');
-			this.$store.commit('updateCurrentSession', this.sessions[0].id);
+		if (!this.$store.getters.sessions.length) {
+			const id = String(Date.now());
+			const name = 'Session 1';
+
+			this.$store.commit('addSession', {id, name});
+			this.$store.commit('updateCurrentSession', id);
 		}
 	},
 };

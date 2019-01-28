@@ -1,8 +1,8 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!solves.length" message="No solves to display."/>
+		<EmptyContent v-if="!sessionSolves.length" message="No solves to display."/>
 
-		<TheSolves v-if="solves.length"/>
+		<TheSolves v-if="sessionSolves.length"/>
 	</BaseWrapper>
 </template>
 
@@ -19,8 +19,9 @@ export default {
 		TheSolves,
 	},
 	computed: {
-		solves() {
-			return this.$store.getters.solves;
+		sessionSolves() {
+			return this.$store.getters.solves
+				.filter((solve) => solve.session === this.$store.state.currentSession);
 		},
 	},
 };

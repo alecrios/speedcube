@@ -19,9 +19,6 @@
 export default {
 	name: 'TheStats',
 	computed: {
-		solves() {
-			return this.$store.getters.solves;
-		},
 		times() {
 			return this.$store.getters.solves
 				.filter((solve) => !solve.dnf)

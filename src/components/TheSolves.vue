@@ -13,8 +13,8 @@
 
 			<tbody>
 				<tr
-					v-for="(solve, index) in solves"
-					:key="index"
+					v-for="solve in solves"
+					:key="solve.id"
 					:class="{'is-dnf': solve.dnf}"
 				>
 					<td class="time align-right">
@@ -26,7 +26,7 @@
 					</td>
 
 					<td class="actions">
-						<TheSolvesSingleActions :index="index"/>
+						<TheSolvesSingleActions :solve="solve"/>
 					</td>
 				</tr>
 			</tbody>

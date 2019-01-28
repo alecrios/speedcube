@@ -9,9 +9,9 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
-		sessions: [],
+		sessions: {},
 		currentSession: null,
-		solves: [],
+		solves: {},
 		currentSolve: {
 			scramble: [],
 			time: null,
@@ -20,63 +20,46 @@ export default new Vuex.Store({
 		},
 	},
 	getters: {
-		solves(state) {
-			return state.solves;
-		},
-		currentSolveScramble(state) {
-			return state.currentSolve.scramble;
-		},
 		sessions(state) {
-			return state.sessions;
+			return Object.keys(state.sessions)
+				.map((key) => Object.assign({id: key}, state.sessions[key]));
 		},
-		currentSession(state) {
-			return state.currentSession;
+		solves(state) {
+			return Object.keys(state.solves)
+				.map((key) => Object.assign({id: key}, state.solves[key]));
 		},
 	},
 	mutations: {
-		addSession(state, name) {
-			const session = {
-				id: Date.now(),
-				name,
-			};
+		addSession(state, payload) {
+			Vue.set(state.sessions, payload.id, {name: payload.name});
+		},
+		renameSession(state, payload) {
+			Vue.set(state.sessions[payload.id], 'name', payload.name);
+		},
+		removeSession(state, id) {
+			Vue.delete(state.sessions, id);
+		},
+		// removeSolvesOfSession(state, id) {
 
-			state.sessions.unshift(session);
-		},
-		renameSession(state, index, name) {
-			state.sessions[index].name = name;
-		},
-		removeSession(state, index) {
-			state.sessions.splice(index, 1);
-		},
-		removeSolvesOfSession(state, sessionId) {
-			state.solves = state.solves.filter((solve) => solve.session !== sessionId);
-		},
+		// },
 		updateCurrentSession(state, id) {
 			state.currentSession = id;
 		},
-		addSolve(state) {
-			const solve = Object.assign({
-				timestamp: Date.now(),
-				session: state.currentSession,
-			}, state.currentSolve);
-
-			state.solves.unshift(solve);
+		addSolve(state, payload) {
+			const solve = Object.assign({session: payload.session}, state.currentSolve);
+			Vue.set(state.solves, payload.id, solve);
 		},
-		removeSolve(state, index) {
-			state.solves.splice(index, 1);
+		removeSolve(state, id) {
+			Vue.delete(state.solves, id);
 		},
-		removeAllSolves(state) {
-			state.solves = [];
+		toggleSolveDnf(state, id) {
+			Vue.set(state.solves[id], 'dnf', !state.solves[id].dnf);
 		},
-		toggleDnf(state, index) {
-			state.solves[index].dnf = !state.solves[index].dnf;
-		},
-		toggleP2(state, index) {
-			state.solves[index].time = state.solves[index].p2
-				? state.solves[index].time - 2000
-				: state.solves[index].time + 2000;
-
-			state.solves[index].p2 = !state.solves[index].p2;
+		toggleSolveP2(state, id) {
+			Vue.set(state.solves[id], 'time', state.solves[id].p2
+				? state.solves[id].time - 2000
+				: state.solves[id].time + 2000);
+			Vue.set(state.solves[id], 'p2', !state.solves[id].p2);
 		},
 		updateCurrentSolveScramble(state, scramble) {
 			state.currentSolve.scramble = scramble;

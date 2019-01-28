@@ -13,20 +13,20 @@
 
 			<tbody>
 				<tr
-					v-for="(session, index) in sessions"
+					v-for="session in sessions"
 					:key="session.id"
-					:class="{'is-inactive': isInactive(session)}"
+					:class="{'is-inactive': !isActive(session.id)}"
 				>
 					<td class="name">
 						{{ session.name }}
 					</td>
 
 					<td class="solves align-right">
-						{{ getSessionSolvesCount(session.id) }}
+						{{ getSolvesCount(session.id) }}
 					</td>
 
 					<td class="actions">
-						<TheSessionsSingleActions :index="index"/>
+						<TheSessionsSingleActions :session="session"/>
 					</td>
 				</tr>
 			</tbody>
@@ -52,11 +52,11 @@ export default {
 		},
 	},
 	methods: {
-		isInactive(session) {
-			return session.id !== this.$store.getters.currentSession;
+		isActive(id) {
+			return id === this.$store.state.currentSession;
 		},
-		getSessionSolvesCount(sessionId) {
-			return this.$store.getters.solves.filter((solve) => solve.session === sessionId).length;
+		getSolvesCount(id) {
+			return this.$store.getters.solves.filter((solve) => solve.session === id).length;
 		},
 	},
 };

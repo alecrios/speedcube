@@ -23,7 +23,7 @@ export default {
 	},
 	computed: {
 		scramble() {
-			return this.$store.getters.currentSolveScramble;
+			return this.$store.state.currentSolve.scramble;
 		},
 		scrambleFirstHalf() {
 			return this.scramble.slice(0, 10);
