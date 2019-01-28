@@ -50,7 +50,8 @@ export default {
 	},
 	computed: {
 		solves() {
-			return this.$store.getters.solves;
+			return this.$store.getters.solves
+				.filter((solve) => solve.session === this.$store.state.currentSession);
 		},
 	},
 };
