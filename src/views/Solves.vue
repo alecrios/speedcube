@@ -20,8 +20,9 @@ export default {
 	},
 	computed: {
 		sessionSolves() {
-			return this.$store.getters.solves
-				.filter((solve) => solve.session === this.$store.state.currentSession);
+			return this.$store.state.solveIds
+				.filter((solveId) => this.$store.state.solves[solveId].session
+					=== this.$store.state.currentSession);
 		},
 	},
 };

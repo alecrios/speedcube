@@ -13,20 +13,20 @@
 
 			<tbody>
 				<tr
-					v-for="solve in solves"
-					:key="solve.id"
-					:class="{'is-dnf': solve.dnf}"
+					v-for="solveId in solveIds"
+					:key="solveId"
+					:class="{'is-dnf': getSolve(solveId).dnf}"
 				>
 					<td class="time align-right">
-						{{ solve.time | formatTime }}
+						{{ getSolve(solveId).time | formatTime }}
 					</td>
 
 					<td class="scramble overflow-ellipses">
-						<ScrambleString :scramble="solve.scramble"/>
+						<ScrambleString :scramble="getSolve(solveId).scramble"/>
 					</td>
 
 					<td class="actions">
-						<TheSolvesSingleActions :solve="solve"/>
+						<TheSolvesSingleActions :solve-id="solveId"/>
 					</td>
 				</tr>
 			</tbody>
@@ -48,10 +48,16 @@ export default {
 		TheSolvesSingleActions,
 		TheSolvesGlobalActions,
 	},
+	methods: {
+		getSolve(solveId) {
+			return this.$store.state.solves[solveId];
+		},
+	},
 	computed: {
-		solves() {
-			return this.$store.getters.solves
-				.filter((solve) => solve.session === this.$store.state.currentSession);
+		solveIds() {
+			return this.$store.state.solveIds
+				.filter((solveId) => this.$store.state.solves[solveId].session
+					=== this.$store.state.currentSession);
 		},
 	},
 };

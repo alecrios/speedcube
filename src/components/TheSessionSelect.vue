@@ -1,11 +1,11 @@
 <template>
 	<select class="session-select" v-model="currentSession">
 		<option
-			v-for="session in sessions"
-			:key="session.id"
-			:value="session.id"
+			v-for="sessionId in sessionIds"
+			:key="sessionId"
+			:value="sessionId"
 		>
-			{{ session.name }}
+			{{ getSession(sessionId).name }}
 		</option>
 	</select>
 </template>
@@ -14,8 +14,8 @@
 export default {
 	name: 'TheSessionSelect',
 	computed: {
-		sessions() {
-			return this.$store.getters.sessions;
+		sessionIds() {
+			return this.$store.state.sessionIds;
 		},
 		currentSession: {
 			get() {
@@ -26,8 +26,13 @@ export default {
 			},
 		},
 	},
+	methods: {
+		getSession(sessionId) {
+			return this.$store.state.sessions[sessionId];
+		},
+	},
 	created() {
-		if (!this.$store.getters.sessions.length) {
+		if (!this.$store.state.sessionIds.length) {
 			const id = String(Date.now());
 			const name = 'Session 1';
 

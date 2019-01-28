@@ -13,20 +13,20 @@
 
 			<tbody>
 				<tr
-					v-for="session in sessions"
-					:key="session.id"
-					:class="{'is-inactive': !isActive(session.id)}"
+					v-for="sessionId in sessionIds"
+					:key="sessionId"
+					:class="{'is-inactive': !isActive(sessionId)}"
 				>
 					<td class="name">
-						{{ session.name }}
+						{{ getSession(sessionId).name }}
 					</td>
 
 					<td class="solves align-right">
-						{{ getSolvesCount(session.id) }}
+						{{ getSolvesCount(sessionId) }}
 					</td>
 
 					<td class="actions">
-						<TheSessionsSingleActions :session="session"/>
+						<TheSessionsSingleActions :session-id="sessionId"/>
 					</td>
 				</tr>
 			</tbody>
@@ -47,16 +47,20 @@ export default {
 		TheSessionsGlobalActions,
 	},
 	computed: {
-		sessions() {
-			return this.$store.getters.sessions;
+		sessionIds() {
+			return this.$store.state.sessionIds;
 		},
 	},
 	methods: {
+		getSession(sessionId) {
+			return this.$store.state.sessions[sessionId];
+		},
 		isActive(id) {
 			return id === this.$store.state.currentSession;
 		},
 		getSolvesCount(id) {
-			return this.$store.getters.solves.filter((solve) => solve.session === id).length;
+			return this.$store.state.solveIds
+				.filter((solveId) => this.$store.state.solves[solveId].session === id).length;
 		},
 	},
 };

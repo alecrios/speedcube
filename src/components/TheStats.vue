@@ -20,7 +20,8 @@ export default {
 	name: 'TheStats',
 	computed: {
 		times() {
-			return this.$store.getters.solves
+			return this.$store.state.solveIds
+				.map((solveId) => this.$store.state.solves[solveId])
 				.filter((solve) => !solve.dnf)
 				.map((solve) => solve.time);
 		},

@@ -1,8 +1,8 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!sessions.length" message="No sessions to display."/>
+		<EmptyContent v-if="!sessionIds.length" message="No sessions to display."/>
 
-		<TheSessions v-if="sessions.length"/>
+		<TheSessions v-if="sessionIds.length"/>
 	</BaseWrapper>
 </template>
 
@@ -19,8 +19,8 @@ export default {
 		TheSessions,
 	},
 	computed: {
-		sessions() {
-			return this.$store.getters.sessions;
+		sessionIds() {
+			return this.$store.state.sessionIds;
 		},
 	},
 };

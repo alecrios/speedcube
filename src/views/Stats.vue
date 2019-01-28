@@ -1,8 +1,8 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!solves.length" message="No stats to display."/>
+		<EmptyContent v-if="!solveIds.length" message="No stats to display."/>
 
-		<TheStats v-if="solves.length"/>
+		<TheStats v-if="solveIds.length"/>
 	</BaseWrapper>
 </template>
 
@@ -19,8 +19,8 @@ export default {
 		TheStats,
 	},
 	computed: {
-		solves() {
-			return this.$store.getters.solves;
+		solveIds() {
+			return this.$store.state.solveIds;
 		},
 	},
 };

@@ -9,8 +9,10 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		sessionIds: [],
 		sessions: {},
 		currentSession: null,
+		solveIds: [],
 		solves: {},
 		currentSolve: {
 			scramble: [],
@@ -19,37 +21,38 @@ export default new Vuex.Store({
 			dnf: false,
 		},
 	},
-	getters: {
-		sessions(state) {
-			return Object.keys(state.sessions)
-				.map((key) => Object.assign({id: key}, state.sessions[key]));
-		},
-		solves(state) {
-			return Object.keys(state.solves)
-				.map((key) => Object.assign({id: key}, state.solves[key]));
-		},
-	},
 	mutations: {
 		addSession(state, payload) {
+			state.sessionIds.unshift(payload.id);
 			Vue.set(state.sessions, payload.id, {name: payload.name});
 		},
 		renameSession(state, payload) {
 			Vue.set(state.sessions[payload.id], 'name', payload.name);
 		},
 		removeSession(state, id) {
+			state.sessionIds.splice(state.sessionIds.indexOf(id), 1);
 			Vue.delete(state.sessions, id);
 		},
-		// removeSolvesOfSession(state, id) {
+		removeSolvesOfSession(state, id) {
+			state.solveIds = state.solveIds
+				.filter((solveId) => {
+					if (state.solves[solveId].session !== id) return true;
 
-		// },
+					Vue.delete(state.solves, solveId);
+					return false;
+				});
+		},
 		updateCurrentSession(state, id) {
 			state.currentSession = id;
 		},
 		addSolve(state, payload) {
-			const solve = Object.assign({session: payload.session}, state.currentSolve);
-			Vue.set(state.solves, payload.id, solve);
+			state.solveIds.unshift(payload.id);
+			Vue.set(state.solves, payload.id, Object.assign(
+				{session: payload.session}, state.currentSolve,
+			));
 		},
 		removeSolve(state, id) {
+			state.solveIds.splice(state.solveIds.indexOf(id), 1);
 			Vue.delete(state.solves, id);
 		},
 		toggleSolveDnf(state, id) {
