@@ -3,7 +3,7 @@
 		<BaseWrapper>
 			<div class="bar">
 				<RouterLink to="/">
-					<img class="image" src="../assets/logo.svg" alt="Speedcube">
+					Logo
 				</RouterLink>
 
 				<TheSessionSelect/>
@@ -32,12 +32,8 @@ export default {
 
 .bar {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
-	padding: .25rem;
-}
-
-.image {
-	width: 9.125rem;
-	height: 2.5rem;
+	padding: .75rem 1.5rem;
 }
 </style>

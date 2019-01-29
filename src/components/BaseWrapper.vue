@@ -13,7 +13,7 @@ export default {
 <style scoped>
 .base-wrapper {
 	width: 100%;
-	max-width: 40rem;
+	max-width: 48rem;
 	margin: 0 auto;
 }
 </style>
