@@ -11,11 +11,8 @@
 </template>
 
 <script>
-import addSession from '@/mixins/addSession';
-
 export default {
 	name: 'TheSessionSelect',
-	mixins: [addSession],
 	computed: {
 		sessionIds() {
 			return this.$store.state.sessionIds;
@@ -33,15 +30,6 @@ export default {
 		getSession(sessionId) {
 			return this.$store.state.sessions[sessionId];
 		},
-	},
-	created() {
-		if (this.$store.state.sessionIds.length) return;
-
-		this.addSession({
-			id: String(Date.now()),
-			name: 'Session 1',
-			cubeSize: 3,
-		});
 	},
 };
 </script>

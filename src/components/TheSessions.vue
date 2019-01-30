@@ -6,6 +6,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th class="align-right">Cube</th>
 					<th class="align-right">Solves</th>
 					<th class="align-right">Actions</th>
 				</tr>
@@ -18,7 +19,11 @@
 					:class="{'is-inactive': !isActive(sessionId)}"
 				>
 					<td class="name">
-						{{ getSession(sessionId).name }}
+						{{ getName(sessionId) }}
+					</td>
+
+					<td class="cube align-right">
+						{{ getCubeType(sessionId) }}
 					</td>
 
 					<td class="solves align-right">
@@ -55,12 +60,19 @@ export default {
 		getSession(sessionId) {
 			return this.$store.state.sessions[sessionId];
 		},
-		isActive(id) {
-			return id === this.$store.state.currentSession;
+		getName(sessionId) {
+			return this.getSession(sessionId).name;
+		},
+		getCubeType(sessionId) {
+			const size = this.getSession(sessionId).cubeSize;
+			return `${size}×${size}×${size}`;
 		},
 		getSolvesCount(id) {
 			return this.$store.state.solveIds
 				.filter((solveId) => this.$store.state.solves[solveId].session === id).length;
+		},
+		isActive(id) {
+			return id === this.$store.state.currentSession;
 		},
 	},
 };

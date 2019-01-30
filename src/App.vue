@@ -13,16 +13,29 @@
 <script>
 import 'core-reset/core-reset.css';
 import 'focus-visible';
+
 import TheHeader from '@/components/TheHeader.vue';
 import TheNav from '@/components/TheNav.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
+import addSession from '@/mixins/addSession';
+
 export default {
 	name: 'app',
+	mixins: [addSession],
 	components: {
 		TheHeader,
 		TheNav,
 		TheFooter,
+	},
+	created() {
+		if (this.$store.state.sessionIds.length) return;
+
+		this.addSession({
+			id: String(Date.now()),
+			name: 'Session 1',
+			cubeSize: 3,
+		});
 	},
 };
 </script>
