@@ -3,7 +3,7 @@
 		<BaseButton
 			name="New Solve"
 			icon="add"
-			@click="createNewSolve()"
+			@click="() => { this.$router.push('/'); }"
 		/>
 	</GlobalActions>
 </template>
@@ -17,11 +17,6 @@ export default {
 	components: {
 		GlobalActions,
 		BaseButton,
-	},
-	methods: {
-		createNewSolve() {
-			this.$router.push('/');
-		},
 	},
 };
 </script>

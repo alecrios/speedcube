@@ -3,7 +3,7 @@
 		<BaseButton
 			name="New Session"
 			icon="add"
-			@click="createNewSession()"
+			@click="() => { this.$_addSession(); }"
 		/>
 	</GlobalActions>
 </template>
@@ -20,11 +20,6 @@ export default {
 	components: {
 		GlobalActions,
 		BaseButton,
-	},
-	methods: {
-		createNewSession() {
-			this.addSession();
-		},
 	},
 };
 </script>

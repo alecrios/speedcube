@@ -1,6 +1,6 @@
 export default {
 	methods: {
-		addSession(payload = {}) {
+		$_addSession(payload = {}) {
 			const id = payload.id || String(Date.now());
 			const name = payload.name || String(Date.now());
 			const cubeSize = payload.cubeSize || 3;

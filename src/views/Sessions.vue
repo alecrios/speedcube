@@ -1,6 +1,6 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!sessionIds.length" message="No sessions to display."/>
+		<EmptyContent v-if="!sessionIds.length" message="No sessions to display"/>
 
 		<TheSessions v-if="sessionIds.length"/>
 	</BaseWrapper>
@@ -9,7 +9,7 @@
 <script>
 import BaseWrapper from '@/components/BaseWrapper.vue';
 import EmptyContent from '@/components/EmptyContent.vue';
-import TheSessions from '@/components/TheSessions.vue'; // TODO: remove this comment
+import TheSessions from '@/components/TheSessions.vue';
 
 export default {
 	name: 'solves',

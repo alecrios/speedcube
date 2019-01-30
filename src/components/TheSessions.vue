@@ -44,8 +44,11 @@ import BaseTable from '@/components/BaseTable.vue';
 import TheSessionsSingleActions from '@/components/TheSessionsSingleActions.vue';
 import TheSessionsGlobalActions from '@/components/TheSessionsGlobalActions.vue';
 
+import getSessionById from '@/mixins/getSessionById';
+
 export default {
 	name: 'TheSessions',
+	mixins: [getSessionById],
 	components: {
 		BaseTable,
 		TheSessionsSingleActions,
@@ -57,14 +60,11 @@ export default {
 		},
 	},
 	methods: {
-		getSession(sessionId) {
-			return this.$store.state.sessions[sessionId];
+		getName(id) {
+			return this.$_getSessionById(id).name;
 		},
-		getName(sessionId) {
-			return this.getSession(sessionId).name;
-		},
-		getCubeType(sessionId) {
-			const size = this.getSession(sessionId).cubeSize;
+		getCubeType(id) {
+			const size = this.$_getSessionById(id).cubeSize;
 			return `${size}×${size}×${size}`;
 		},
 		getSolvesCount(id) {

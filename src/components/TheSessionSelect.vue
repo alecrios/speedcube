@@ -5,14 +5,17 @@
 			:key="sessionId"
 			:value="sessionId"
 		>
-			{{ getSession(sessionId).name }}
+			{{ $_getSessionById(sessionId).name }}
 		</option>
 	</select>
 </template>
 
 <script>
+import getSessionById from '@/mixins/getSessionById';
+
 export default {
 	name: 'TheSessionSelect',
+	mixins: [getSessionById],
 	computed: {
 		sessionIds() {
 			return this.$store.state.sessionIds;
@@ -24,11 +27,6 @@ export default {
 			set(id) {
 				this.$store.commit('updateCurrentSession', id);
 			},
-		},
-	},
-	methods: {
-		getSession(sessionId) {
-			return this.$store.state.sessions[sessionId];
 		},
 	},
 };

@@ -1,8 +1,8 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!solveIds.length" message="No stats to display."/>
+		<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No stats to display"/>
 
-		<TheStats v-if="solveIds.length"/>
+		<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
 	</BaseWrapper>
 </template>
 
@@ -11,17 +11,15 @@ import BaseWrapper from '@/components/BaseWrapper.vue';
 import EmptyContent from '@/components/EmptyContent.vue';
 import TheStats from '@/components/TheStats.vue';
 
+import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
+
 export default {
 	name: 'stats',
+	mixins: [solveIdsOfCurrentSession],
 	components: {
 		BaseWrapper,
 		EmptyContent,
 		TheStats,
-	},
-	computed: {
-		solveIds() {
-			return this.$store.state.solveIds;
-		},
 	},
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
 	<BaseWrapper>
-		<EmptyContent v-if="!sessionSolves.length" message="No solves to display."/>
+		<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No solves to display"/>
 
-		<TheSolves v-if="sessionSolves.length"/>
+		<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>
 	</BaseWrapper>
 </template>
 
@@ -11,19 +11,15 @@ import BaseWrapper from '@/components/BaseWrapper.vue';
 import EmptyContent from '@/components/EmptyContent.vue';
 import TheSolves from '@/components/TheSolves.vue';
 
+import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
+
 export default {
 	name: 'solves',
+	mixins: [solveIdsOfCurrentSession],
 	components: {
 		BaseWrapper,
 		EmptyContent,
 		TheSolves,
-	},
-	computed: {
-		sessionSolves() {
-			return this.$store.state.solveIds
-				.filter((solveId) => this.$store.state.solves[solveId].session
-					=== this.$store.state.currentSession);
-		},
 	},
 };
 </script>

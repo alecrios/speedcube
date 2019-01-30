@@ -13,7 +13,7 @@
 
 			<tbody>
 				<tr
-					v-for="solveId in solveIds"
+					v-for="solveId in $_solveIdsOfCurrentSession"
 					:key="solveId"
 					:class="{'is-dnf': getSolve(solveId).dnf}"
 				>
@@ -36,12 +36,15 @@
 
 <script>
 import BaseTable from '@/components/BaseTable.vue';
-import TheSolvesSingleActions from '@/components/TheSolvesSingleActions.vue';
 import TheSolvesGlobalActions from '@/components/TheSolvesGlobalActions.vue';
+import TheSolvesSingleActions from '@/components/TheSolvesSingleActions.vue';
 import ScrambleString from '@/components/ScrambleString.vue';
+
+import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
 
 export default {
 	name: 'TheSolves',
+	mixins: [solveIdsOfCurrentSession],
 	components: {
 		BaseTable,
 		ScrambleString,
@@ -51,13 +54,6 @@ export default {
 	methods: {
 		getSolve(solveId) {
 			return this.$store.state.solves[solveId];
-		},
-	},
-	computed: {
-		solveIds() {
-			return this.$store.state.solveIds
-				.filter((solveId) => this.$store.state.solves[solveId].session
-					=== this.$store.state.currentSession);
 		},
 	},
 };
