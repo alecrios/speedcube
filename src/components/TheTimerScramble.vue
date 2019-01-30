@@ -11,10 +11,8 @@
 </template>
 
 <script>
-import cubeScrambler from 'cube-scrambler';
+import * as scrambler from 'sr-scrambler';
 import ScrambleString from '@/components/ScrambleString.vue';
-
-const scrambler = cubeScrambler();
 
 export default {
 	name: 'TheTimerScramble',
@@ -34,7 +32,7 @@ export default {
 	},
 	methods: {
 		getScramble() {
-			return scrambler.scramble().slice(0, 20);
+			return scrambler.generateScramble(3, 20).map((turn) => `${turn.face}${turn.modifier}`);
 		},
 		updateScramble() {
 			this.$store.commit('updateCurrentSolveScramble', this.getScramble());
