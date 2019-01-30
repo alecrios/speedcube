@@ -1,12 +1,12 @@
 <template>
 	<div class="scramble">
 		<span
-			v-for="(move, index) in scramble"
+			v-for="(turn, index) in scramble"
 			:key="index"
-			:data-color="getColor(move)"
-			class="move"
+			:data-color="getColor(turn)"
+			class="turn"
 		>
-			{{ move }}
+			{{ getText(turn) }}
 		</span>
 	</div>
 </template>
@@ -28,10 +28,13 @@ export default {
 		};
 	},
 	methods: {
-		getColor(move) {
-			const faceColor = move.charAt(0);
-
-			return this.faceColors[faceColor];
+		getText(turn) {
+			return turn.depth > 1
+				? `${turn.face.toLowerCase()}${turn.modifier}`
+				: `${turn.face}${turn.modifier}`;
+		},
+		getColor(turn) {
+			return this.faceColors[turn.face];
 		},
 	},
 };
@@ -44,10 +47,10 @@ export default {
 	line-height: inherit;
 }
 
-.move[data-color='white']  {color: var(--color-white)}
-.move[data-color='green']  {color: var(--color-green)}
-.move[data-color='red']    {color: var(--color-red)}
-.move[data-color='blue']   {color: var(--color-blue)}
-.move[data-color='orange'] {color: var(--color-orange)}
-.move[data-color='yellow'] {color: var(--color-yellow)}
+.turn[data-color='white']  {color: var(--color-white)}
+.turn[data-color='green']  {color: var(--color-green)}
+.turn[data-color='red']    {color: var(--color-red)}
+.turn[data-color='blue']   {color: var(--color-blue)}
+.turn[data-color='orange'] {color: var(--color-orange)}
+.turn[data-color='yellow'] {color: var(--color-yellow)}
 </style>

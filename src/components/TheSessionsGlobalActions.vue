@@ -12,21 +12,18 @@
 import GlobalActions from '@/components/GlobalActions.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
+import addSession from '@/mixins/addSession';
+
 export default {
 	name: 'TheSessionsGlobalActions',
+	mixins: [addSession],
 	components: {
 		GlobalActions,
 		BaseButton,
 	},
 	methods: {
 		createNewSession() {
-			// TODO: better system of getting user input
-			const id = String(Date.now());
-			// eslint-disable-next-line
-			const name = window.prompt('Session name:');
-
-			this.$store.commit('addSession', {id, name});
-			this.$store.commit('updateCurrentSession', id);
+			this.addSession();
 		},
 	},
 };

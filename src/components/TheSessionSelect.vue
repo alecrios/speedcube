@@ -1,20 +1,21 @@
 <template>
-	<!-- <div> -->
-		<select class="session-select" v-model="currentSession">
-			<option
-				v-for="sessionId in sessionIds"
-				:key="sessionId"
-				:value="sessionId"
-			>
-				{{ getSession(sessionId).name }}
-			</option>
-		</select>
-	<!-- </div> -->
+	<select class="session-select" v-model="currentSession">
+		<option
+			v-for="sessionId in sessionIds"
+			:key="sessionId"
+			:value="sessionId"
+		>
+			{{ getSession(sessionId).name }}
+		</option>
+	</select>
 </template>
 
 <script>
+import addSession from '@/mixins/addSession';
+
 export default {
 	name: 'TheSessionSelect',
+	mixins: [addSession],
 	computed: {
 		sessionIds() {
 			return this.$store.state.sessionIds;
@@ -34,13 +35,13 @@ export default {
 		},
 	},
 	created() {
-		if (!this.$store.state.sessionIds.length) {
-			const id = String(Date.now());
-			const name = 'Session 1';
+		if (this.$store.state.sessionIds.length) return;
 
-			this.$store.commit('addSession', {id, name});
-			this.$store.commit('updateCurrentSession', id);
-		}
+		this.addSession({
+			id: String(Date.now()),
+			name: 'Session 1',
+			cubeSize: 3,
+		});
 	},
 };
 </script>

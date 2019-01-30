@@ -19,7 +19,20 @@ export default {
 	components: {
 		ScrambleString,
 	},
+	data() {
+		return {
+			turnsToGenerate: {
+				2: 10,
+				3: 20,
+				4: 30,
+				5: 40,
+			},
+		};
+	},
 	computed: {
+		cubeSize() {
+			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
+		},
 		scramble() {
 			return this.$store.state.currentSolve.scramble;
 		},
@@ -32,7 +45,7 @@ export default {
 	},
 	methods: {
 		getScramble() {
-			return scrambler.generateScramble(3, 20).map((turn) => `${turn.face}${turn.modifier}`);
+			return scrambler.generateScramble(this.cubeSize, this.turnsToGenerate[this.cubeSize]);
 		},
 		updateScramble() {
 			this.$store.commit('updateCurrentSolveScramble', this.getScramble());

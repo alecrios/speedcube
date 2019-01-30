@@ -24,10 +24,16 @@ export default new Vuex.Store({
 	mutations: {
 		addSession(state, payload) {
 			state.sessionIds.unshift(payload.id);
-			Vue.set(state.sessions, payload.id, {name: payload.name});
+			Vue.set(state.sessions, payload.id, {
+				name: payload.name,
+				cubeSize: payload.cubeSize,
+			});
 		},
 		renameSession(state, payload) {
 			Vue.set(state.sessions[payload.id], 'name', payload.name);
+		},
+		changeCubeSizeOfSession(state, payload) {
+			Vue.set(state.sessions[payload.id], 'cubeSize', payload.cubeSize);
 		},
 		removeSession(state, id) {
 			state.sessionIds.splice(state.sessionIds.indexOf(id), 1);
