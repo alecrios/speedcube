@@ -1,0 +1,37 @@
+<template>
+	<select
+		:value="value"
+		@input="$emit('input', $event.target.value)"
+	>
+		<option
+			v-for="(option, index) in options"
+			:key="index"
+			:value="option.value"
+		>
+			{{ option.label }}
+		</option>
+	</select>
+</template>
+
+<script>
+export default {
+	name: 'BaseSelect',
+	props: ['value', 'options'],
+};
+</script>
+
+<style scoped>
+select {
+	font-size: .75rem;
+	line-height: 1.5rem;
+	letter-spacing: .03125rem;
+	background-color: var(--color-gray-6);
+	color: var(--color-white);
+	padding: .25rem 1.5rem .25rem .75rem;
+	background-image: url('../assets/icon-select.svg');
+	background-size: 1rem 1rem;
+	background-position: calc(100% - .25rem) 50%;
+	background-repeat: no-repeat;
+	border-radius: .25rem;
+}
+</style>

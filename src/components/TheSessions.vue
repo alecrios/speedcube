@@ -79,14 +79,6 @@ export default {
 </script>
 
 <style scoped>
-.is-inactive .name {
-	opacity: .25;
-}
-
-.is-inactive .solves {
-	opacity: .25;
-}
-
 .actions {
 	display: flex;
 	justify-content: flex-end;

@@ -31,11 +31,7 @@ export default {
 	created() {
 		if (this.$store.state.sessionIds.length) return;
 
-		this.$_addSession({
-			id: String(Date.now()),
-			name: 'Session 1',
-			cubeSize: 3,
-		});
+		this.$_addSession();
 	},
 };
 </script>

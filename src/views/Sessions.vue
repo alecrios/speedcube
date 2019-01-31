@@ -12,7 +12,7 @@ import EmptyContent from '@/components/EmptyContent.vue';
 import TheSessions from '@/components/TheSessions.vue';
 
 export default {
-	name: 'solves',
+	name: 'sessions',
 	components: {
 		BaseWrapper,
 		EmptyContent,

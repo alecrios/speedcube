@@ -3,23 +3,29 @@
 		<BaseButton
 			name="New Session"
 			icon="add"
-			@click="() => { this.$_addSession(); }"
+			@click="showModal = true"
 		/>
+
+		<ModalNewSession v-if="showModal" @close="showModal = false"/>
 	</GlobalActions>
 </template>
 
 <script>
 import GlobalActions from '@/components/GlobalActions.vue';
 import BaseButton from '@/components/BaseButton.vue';
-
-import addSession from '@/mixins/addSession';
+import ModalNewSession from '@/components/ModalNewSession.vue';
 
 export default {
 	name: 'TheSessionsGlobalActions',
-	mixins: [addSession],
+	data() {
+		return {
+			showModal: false,
+		};
+	},
 	components: {
 		GlobalActions,
 		BaseButton,
+		ModalNewSession,
 	},
 };
 </script>
