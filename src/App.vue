@@ -7,6 +7,8 @@
 		<RouterView id="content"/>
 
 		<TheFooter id="footer"/>
+
+		<PortalTarget name="modals"/>
 	</div>
 </template>
 
@@ -49,18 +51,37 @@ export default {
 	--color-gray-7: rgba(73, 79, 79, 1);
 	--color-gray-8: rgba(80, 87, 87, 1);
 	--color-gray-9: rgba(86, 95, 95, 1);
-	--color-white: hsl(0, 0%, 90%);
-	--color-green: hsl(127, 80%, 70%);
-	--color-red: hsl(0, 80%, 70%);
-	--color-blue: hsl(223, 80%, 70%);
-	--color-orange: hsl(23, 80%, 70%);
-	--color-yellow: hsl(47, 80%, 70%);
+
+	--color-white: hsl(220, 10%, 90%);
+	--color-white-lighter: hsl(220, 10%, 93%);
+	--color-white-darker: hsl(220, 10%, 84%);
+
+	--color-background: hsl(220, 10%, 15%);
+	--color-background-lighter: hsl(220, 10%, 18%);
+	--color-background-darker: hsl(220, 10%, 9%);
+
+	--color-primary: hsl(220, 75%, 50%);
+	--color-primary-lighter: hsl(220, 75%, 53%);
+	--color-primary-darker: hsl(220, 75%, 44%);
+
+	--color-secondary: hsl(220, 15%, 25%);
+	--color-secondary-lighter: hsl(220, 15%, 28%);
+	--color-secondary-darker: hsl(220, 15%, 19%);
+
+	--color-cube-white: hsl(0, 0%, 90%);
+	--color-cube-green: hsl(127, 80%, 70%);
+	--color-cube-red: hsl(0, 80%, 70%);
+	--color-cube-blue: hsl(223, 80%, 70%);
+	--color-cube-orange: hsl(23, 80%, 70%);
+	--color-cube-yellow: hsl(47, 80%, 70%);
+
+	--box-shadow: 0 .125rem .25rem 0 rgba(0, 0, 0, .5);
 }
 
 html {
 	background-color: var(--color-gray-5);
 	font-family: 'Roboto';
-	color: var(--color-white);
+	color: var(--color-cube-white);
 }
 
 body {

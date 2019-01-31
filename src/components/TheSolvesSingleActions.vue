@@ -141,7 +141,7 @@ export default {
 	align-items: center;
 	width: 100%;
 	text-align: left;
-	color: var(--color-white);
+	color: var(--color-cube-white);
 	font-size: .75rem;
 	line-height: 1.5rem;
 	letter-spacing: .0625rem;
@@ -165,7 +165,7 @@ export default {
 }
 
 .option.is-active::before {
-	border: .09375rem solid var(--color-red);
-	background-color: var(--color-red)
+	border: .09375rem solid var(--color-cube-red);
+	background-color: var(--color-cube-red)
 }
 </style>

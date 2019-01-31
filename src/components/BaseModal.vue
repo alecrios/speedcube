@@ -1,16 +1,23 @@
 <template>
 	<transition name="modal">
-		<div class="modal-mask" @click.self="$emit('close')">
-			<div class="modal-container">
-				<slot></slot>
+		<div class="backdrop" @click.self="$emit('close')">
+			<div class="container">
+				<BaseForm>
+					<slot></slot>
+				</BaseForm>
 			</div>
 		</div>
 	</transition>
 </template>
 
 <script>
+import BaseForm from '@/components/BaseForm.vue';
+
 export default {
 	name: 'BaseModal',
+	components: {
+		BaseForm,
+	},
 	methods: {
 		keydownHandler(event) {
 			if (event.key !== 'Escape') return;
@@ -28,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.modal-mask {
+.backdrop {
 	position: fixed;
 	z-index: 1000;
 	top: 0;
@@ -38,17 +45,20 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 1.5rem;
 	background-color: rgba(0, 0, 0, .5);
 	transition: opacity 250ms ease;
 }
 
-.modal-container {
-	width: 20rem;
-	padding: 1.5rem;
-	background-color: var(--color-gray-9);
+.container {
+	width: 100%;
+	max-width: 20rem;
+	background-color: var(--color-background);
+	border-top: .125rem solid var(--color-background-lighter);
+	border-bottom: .125rem solid var(--color-background-darker);
 	border-radius: .25rem;
 	box-shadow: 0 .75rem 1.5rem 0 rgba(0, 0, 0, .5);
-	transition: all .3s ease;
+	transition: transform 250ms ease;
 }
 
 .modal-enter {
@@ -59,8 +69,8 @@ export default {
 	opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
+.modal-enter .container,
+.modal-leave-active .container {
 	transform: translateY(1.5rem);
 }
 </style>

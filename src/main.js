@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import PortalVue from 'portal-vue';
+import kebabCase from 'lodash.kebabcase';
 import App from './App.vue';
 import store from './store';
 import './registerServiceWorker';
@@ -6,7 +8,9 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
-Vue.filter('formatScramble', (scramble) => scramble.join(' '));
+Vue.use(PortalVue);
+
+Vue.filter('toKebabCase', (string) => kebabCase(string));
 
 Vue.filter('formatTime', (time) => {
 	let SS = Math.floor((time / 10) % 100);

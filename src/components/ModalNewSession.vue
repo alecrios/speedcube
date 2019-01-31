@@ -1,19 +1,25 @@
 <template>
 	<BaseModal @close="$emit('close')">
-		<h1>Create New Session</h1>
+		<div class="header">
+			<BaseHeading value="Create New Session" type="h2"/>
+		</div>
 
-		<BaseInput
-			:placeholder="getDateString()"
-			v-model="name"
-		/>
+		<div class="body">
+			<div class="field">
+				<BaseLabel name="Session Name"/>
+				<BaseInput name="Session Name" :placeholder="getDateString()" v-model="name"/>
+			</div>
 
-		<BaseSelect
-			v-model="cubeSize"
-			:options="cubeSizes"
-		/>
+			<div class="field">
+				<BaseLabel name="Cube Type"/>
+				<BaseSelect name="Cube Type" v-model="cubeSize" :options="cubeSizes"/>
+			</div>
+		</div>
 
-		<button @click="$emit('close')">Cancel</button>
-		<button @click="submit()">Submit</button>
+		<div class="footer">
+			<BaseButton name="Submit" type="primary" @click="submit()"/>
+			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+		</div>
 	</BaseModal>
 </template>
 
@@ -21,8 +27,11 @@
 import moment from 'moment';
 
 import BaseModal from '@/components/BaseModal.vue';
+import BaseHeading from '@/components/BaseHeading.vue';
+import BaseLabel from '@/components/BaseLabel.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
+import BaseButton from '@/components/BaseButton.vue';
 
 import addSession from '@/mixins/addSession';
 
@@ -31,8 +40,11 @@ export default {
 	mixins: [addSession],
 	components: {
 		BaseModal,
+		BaseHeading,
+		BaseLabel,
 		BaseInput,
 		BaseSelect,
+		BaseButton,
 	},
 	data() {
 		return {

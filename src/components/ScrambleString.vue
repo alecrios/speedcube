@@ -47,10 +47,10 @@ export default {
 	line-height: inherit;
 }
 
-.turn[data-color='white']  {color: var(--color-white)}
-.turn[data-color='green']  {color: var(--color-green)}
-.turn[data-color='red']    {color: var(--color-red)}
-.turn[data-color='blue']   {color: var(--color-blue)}
-.turn[data-color='orange'] {color: var(--color-orange)}
-.turn[data-color='yellow'] {color: var(--color-yellow)}
+.turn[data-color='white']  {color: var(--color-cube-white)}
+.turn[data-color='green']  {color: var(--color-cube-green)}
+.turn[data-color='red']    {color: var(--color-cube-red)}
+.turn[data-color='blue']   {color: var(--color-cube-blue)}
+.turn[data-color='orange'] {color: var(--color-cube-orange)}
+.turn[data-color='yellow'] {color: var(--color-cube-yellow)}
 </style>

@@ -2,6 +2,7 @@
 	<GlobalActions>
 		<BaseButton
 			name="New Solve"
+			:has-icon="true"
 			icon="add"
 			@click="() => { this.$router.push('/'); }"
 		/>

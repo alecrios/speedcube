@@ -1,31 +1,18 @@
 <template>
 	<GlobalActions>
-		<BaseButton
-			name="New Session"
-			icon="add"
-			@click="showModal = true"
-		/>
-
-		<ModalNewSession v-if="showModal" @close="showModal = false"/>
+		<ButtonNewSession/>
 	</GlobalActions>
 </template>
 
 <script>
 import GlobalActions from '@/components/GlobalActions.vue';
-import BaseButton from '@/components/BaseButton.vue';
-import ModalNewSession from '@/components/ModalNewSession.vue';
+import ButtonNewSession from '@/components/ButtonNewSession.vue';
 
 export default {
 	name: 'TheSessionsGlobalActions',
-	data() {
-		return {
-			showModal: false,
-		};
-	},
 	components: {
 		GlobalActions,
-		BaseButton,
-		ModalNewSession,
+		ButtonNewSession,
 	},
 };
 </script>

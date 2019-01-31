@@ -35,7 +35,7 @@ td {
 	text-align: left;
 	white-space: nowrap;
 	vertical-align: middle;
-	color: var(--color-white);
+	color: var(--color-cube-white);
 }
 
 th {

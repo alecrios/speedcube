@@ -44,7 +44,7 @@ export default {
 	font-weight: 500;
 	padding: .75rem;
 	opacity: .5;
-	color: var(--color-white);
+	color: var(--color-cube-white);
 }
 
 .link::after {
@@ -62,6 +62,6 @@ export default {
 }
 
 .link.is-active::after {
-	background-color: var(--color-white);
+	background-color: var(--color-cube-white);
 }
 </style>

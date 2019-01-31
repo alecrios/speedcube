@@ -128,7 +128,7 @@ export default {
 
 .display {
 	padding: 1.5rem;
-	color: var(--color-white);
+	color: var(--color-cube-white);
 	font-size: 4.5rem;
 	line-height: 4rem;
 	font-weight: 300;
@@ -137,9 +137,9 @@ export default {
 	user-select: none;
 }
 
-.display[data-status="idle"] {color: var(--color-white)}
-.display[data-status="pending"] {color: var(--color-red)}
-.display[data-status="ready"] {color: var(--color-green)}
-.display[data-status="running"] {color: var(--color-white)}
-.display[data-status="complete"] {color: var(--color-white)}
+.display[data-status="idle"] {color: var(--color-cube-white)}
+.display[data-status="pending"] {color: var(--color-cube-red)}
+.display[data-status="ready"] {color: var(--color-cube-green)}
+.display[data-status="running"] {color: var(--color-cube-white)}
+.display[data-status="complete"] {color: var(--color-cube-white)}
 </style>
