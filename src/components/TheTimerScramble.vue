@@ -16,6 +16,7 @@ import ScrambleString from '@/components/ScrambleString.vue';
 
 export default {
 	name: 'TheTimerScramble',
+	props: ['scramble', 'solve-id'],
 	components: {
 		ScrambleString,
 	},
@@ -33,9 +34,6 @@ export default {
 		cubeSize() {
 			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
 		},
-		scramble() {
-			return this.$store.state.currentSolve.scramble;
-		},
 		scrambleFirstHalf() {
 			return this.scramble.slice(0, 10);
 		},
@@ -48,16 +46,16 @@ export default {
 			return scrambler.generateScramble(this.cubeSize, this.turnsToGenerate[this.cubeSize]);
 		},
 		updateScramble() {
-			this.$store.commit('updateCurrentSolveScramble', this.getScramble());
+			this.$emit('new-scramble', this.getScramble());
+		},
+	},
+	watch: {
+		solveId() {
+			this.updateScramble();
 		},
 	},
 	mounted() {
-		if (!this.scramble.length) this.updateScramble();
-
-		this.$root.$on('reset', this.updateScramble);
-	},
-	beforeDestroy() {
-		this.$root.$off('reset', this.updateScramble);
+		this.updateScramble();
 	},
 };
 </script>

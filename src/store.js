@@ -52,10 +52,8 @@ export default new Vuex.Store({
 			state.currentSession = id;
 		},
 		addSolve(state, payload) {
-			state.solveIds.unshift(payload.id);
-			Vue.set(state.solves, payload.id, Object.assign(
-				{session: payload.session}, state.currentSolve,
-			));
+			state.solveIds.unshift(payload.solveId);
+			Vue.set(state.solves, payload.solveId, payload.solve);
 		},
 		removeSolve(state, id) {
 			state.solveIds.splice(state.solveIds.indexOf(id), 1);

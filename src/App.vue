@@ -30,10 +30,15 @@ export default {
 		TheNav,
 		TheFooter,
 	},
-	created() {
-		if (this.$store.state.sessionIds.length) return;
+	methods: {
+		initializeSession() {
+			if (this.$store.state.currentSession) return;
 
-		this.$_addSession();
+			this.$_addSession();
+		},
+	},
+	created() {
+		this.initializeSession();
 	},
 };
 </script>
@@ -52,48 +57,53 @@ export default {
 	--color-gray-8: rgba(80, 87, 87, 1);
 	--color-gray-9: rgba(86, 95, 95, 1);
 
-	--color-white: hsl(220, 10%, 90%);
-	--color-white-lighter: hsl(220, 10%, 93%);
-	--color-white-darker: hsl(220, 10%, 84%);
+	--color-white: hsla(220, 10%, 85%, 1);
+	--color-white-lighter: hsla(220, 10%, 88%, 1);
+	--color-white-darker: hsla(220, 10%, 79%, 1);
 
-	--color-background: hsl(220, 10%, 15%);
-	--color-background-lighter: hsl(220, 10%, 18%);
-	--color-background-darker: hsl(220, 10%, 9%);
+	--color-background: hsla(220, 10%, 15%, 1);
+	--color-background-lighter: hsla(220, 10%, 18%, 1);
+	--color-background-darker: hsla(220, 10%, 9%, 1);
 
-	--color-primary: hsl(220, 75%, 50%);
-	--color-primary-lighter: hsl(220, 75%, 53%);
-	--color-primary-darker: hsl(220, 75%, 44%);
+	--color-primary: hsla(220, 75%, 50%, 1);
+	--color-primary-lighter: hsla(220, 75%, 53%, 1);
+	--color-primary-darker: hsla(220, 75%, 44%, 1);
 
-	--color-secondary: hsl(220, 15%, 25%);
-	--color-secondary-lighter: hsl(220, 15%, 28%);
-	--color-secondary-darker: hsl(220, 15%, 19%);
+	--color-secondary: hsla(220, 15%, 25%, 1);
+	--color-secondary-lighter: hsla(220, 15%, 28%, 1);
+	--color-secondary-darker: hsla(220, 15%, 19%, 1);
 
-	--color-cube-white: hsl(0, 0%, 90%);
-	--color-cube-green: hsl(127, 80%, 70%);
-	--color-cube-red: hsl(0, 80%, 70%);
-	--color-cube-blue: hsl(223, 80%, 70%);
-	--color-cube-orange: hsl(23, 80%, 70%);
-	--color-cube-yellow: hsl(47, 80%, 70%);
+	--color-cube-white: hsla(0, 0%, 90%, 1);
+	--color-cube-green: hsla(127, 80%, 70%, 1);
+	--color-cube-red: hsla(0, 80%, 70%, 1);
+	--color-cube-blue: hsla(223, 80%, 70%, 1);
+	--color-cube-orange: hsla(23, 80%, 70%, 1);
+	--color-cube-yellow: hsla(47, 80%, 70%, 1);
 
-	--box-shadow: 0 .125rem .25rem 0 rgba(0, 0, 0, .5);
+	--box-shadow-focus: 0 0 0 .125rem hsla(220, 100%, 75%, .5);
+	--box-shadow: 0 .125rem .25rem 0 hsla(0, 0%, 0%, 0.5);
 }
 
 html {
 	background-color: var(--color-gray-5);
 	font-family: 'Roboto';
-	color: var(--color-cube-white);
+	color: red; /* TODO REMOVE */
 }
 
 body {
-	background-color: var(--color-gray-1);
+	background-color: var(--color-background);
 }
 
 ::-moz-focus-inner {
 	border: 0;
 }
 
-.js-focus-visible :focus:not([data-focus-visible-added]) {
+.js-focus-visible :focus {
 	outline: none;
+	box-shadow: var(--box-shadow-focus);
+}
+.js-focus-visible :focus:not([data-focus-visible-added]) {
+	box-shadow: none;
 }
 
 #app {

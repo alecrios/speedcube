@@ -8,17 +8,17 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalNewSession v-if="showModal" @close="showModal = false"/>
+			<ModalCreateSession v-if="showModal" @close="showModal = false"/>
 		</Portal>
 	</div>
 </template>
 
 <script>
 import BaseButton from '@/components/BaseButton.vue';
-import ModalNewSession from '@/components/ModalNewSession.vue';
+import ModalCreateSession from '@/components/ModalCreateSession.vue';
 
 export default {
-	name: 'ButtonNewSession',
+	name: 'ButtonCreateSession',
 	data() {
 		return {
 			showModal: false,
@@ -26,7 +26,7 @@ export default {
 	},
 	components: {
 		BaseButton,
-		ModalNewSession,
+		ModalCreateSession,
 	},
 };
 </script>

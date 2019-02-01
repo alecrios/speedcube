@@ -1,18 +1,18 @@
 <template>
 	<GlobalActions>
-		<ButtonNewSession/>
+		<ButtonCreateSession/>
 	</GlobalActions>
 </template>
 
 <script>
 import GlobalActions from '@/components/GlobalActions.vue';
-import ButtonNewSession from '@/components/ButtonNewSession.vue';
+import ButtonCreateSession from '@/components/ButtonCreateSession.vue';
 
 export default {
 	name: 'TheSessionsGlobalActions',
 	components: {
 		GlobalActions,
-		ButtonNewSession,
+		ButtonCreateSession,
 	},
 };
 </script>

@@ -16,6 +16,7 @@
 <script>
 export default {
 	name: 'TheTimerClock',
+	props: ['solve-id'],
 	data() {
 		return {
 			status: 'idle',
@@ -56,8 +57,7 @@ export default {
 		stopTimer() {
 			clearInterval(this.timerInterval);
 			this.status = 'complete';
-			this.$store.commit('updateCurrentSolveTime', this.duration);
-			this.$root.$emit('timer-ended');
+			this.$emit('new-time', this.duration);
 		},
 		resetTimer() {
 			this.previousTime = this.duration;
@@ -106,13 +106,16 @@ export default {
 			this.releaseTimer();
 		},
 	},
+	watch: {
+		solveId() {
+			this.resetTimer();
+		},
+	},
 	mounted() {
-		this.$root.$on('reset', this.resetTimer);
 		document.addEventListener('keydown', this.keydownHandler);
 		document.addEventListener('keyup', this.keyupHandler);
 	},
 	beforeDestroy() {
-		this.$root.$off('reset', this.resetTimer);
 		document.removeEventListener('keydown', this.keydownHandler);
 		document.removeEventListener('keyup', this.keyupHandler);
 	},

@@ -33,6 +33,10 @@ export default {
 	cursor: pointer;
 }
 
+.button:focus {
+	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+}
+
 .button:active {
 	padding-top: .5rem;
 	padding-bottom: .5rem;

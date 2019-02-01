@@ -17,11 +17,6 @@ export default {
 
 .form .header {
 	padding: .75rem;
-	margin-bottom: .75rem;
-}
-
-.form .body {
-	margin-bottom: .75rem;
 }
 
 .form .body .field {
@@ -29,10 +24,11 @@ export default {
 }
 
 .form .body .field > * + * {
-	margin-top: .25rem;
+	margin-top: .75rem;
 }
 
 .form .footer {
+	margin-top: .75rem;
 	padding: .75rem;
 	display: flex;
 	justify-content: center;

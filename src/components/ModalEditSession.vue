@@ -1,7 +1,7 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Create New Session" type="h2"/>
+			<BaseHeading value="Create Session" type="h2"/>
 		</div>
 
 		<div class="body">
@@ -36,7 +36,7 @@ import BaseButton from '@/components/BaseButton.vue';
 import addSession from '@/mixins/addSession';
 
 export default {
-	name: 'ModalNewSession',
+	name: 'ModalEditSession',
 	mixins: [addSession],
 	components: {
 		BaseModal,
