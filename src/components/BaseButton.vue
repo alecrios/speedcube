@@ -29,7 +29,6 @@ export default {
 	font-size: 1rem;
 	line-height: 1.5rem;
 	letter-spacing: .03125rem;
-	transition: background-color 100ms ease;
 	cursor: pointer;
 }
 

@@ -59,14 +59,19 @@ export default new Vuex.Store({
 			state.solveIds.splice(state.solveIds.indexOf(id), 1);
 			Vue.delete(state.solves, id);
 		},
-		toggleSolveDnf(state, id) {
-			Vue.set(state.solves[id], 'dnf', !state.solves[id].dnf);
+		setSolveDnf(state, payload) {
+			if (state.solves[payload.id].dnf === payload.value) return;
+
+			Vue.set(state.solves[payload.id], 'dnf', payload.value);
 		},
-		toggleSolveP2(state, id) {
-			Vue.set(state.solves[id], 'time', state.solves[id].p2
-				? state.solves[id].time - 2000
-				: state.solves[id].time + 2000);
-			Vue.set(state.solves[id], 'p2', !state.solves[id].p2);
+		setSolveP2(state, payload) {
+			if (state.solves[payload.id].p2 === payload.value) return;
+
+			Vue.set(state.solves[payload.id], 'p2', payload.value);
+
+			Vue.set(state.solves[payload.id], 'time', state.solves[payload.id].p2
+				? state.solves[payload.id].time + 2000
+				: state.solves[payload.id].time - 2000);
 		},
 		updateCurrentSolveScramble(state, scramble) {
 			state.currentSolve.scramble = scramble;
