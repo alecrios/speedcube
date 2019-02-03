@@ -105,7 +105,7 @@ export default {
 
 .penalty-action {
 	position: relative;
-	margin-right: .75rem;
+	margin-right: .375rem;
 }
 
 .menu-button {
@@ -141,7 +141,7 @@ export default {
 	align-items: center;
 	width: 100%;
 	text-align: left;
-	color: var(--color-cube-white);
+	color: var(--color-white);
 	font-size: .75rem;
 	line-height: 1.5rem;
 	letter-spacing: .0625rem;

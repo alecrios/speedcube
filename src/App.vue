@@ -61,6 +61,10 @@ export default {
 	--color-white-lighter: hsla(220, 10%, 88%, 1);
 	--color-white-darker: hsla(220, 10%, 79%, 1);
 
+	--color-bg2: hsla(220, 10%, 10%, 1);
+	--color-bg2-lighter: hsla(220, 10%, 13%, 1);
+	--color-bg2-darker: hsla(220, 10%, 4%, 1);
+
 	--color-background: hsla(220, 10%, 15%, 1);
 	--color-background-lighter: hsla(220, 10%, 18%, 1);
 	--color-background-darker: hsla(220, 10%, 9%, 1);
@@ -81,13 +85,15 @@ export default {
 	--color-cube-yellow: hsla(47, 80%, 70%, 1);
 
 	--box-shadow-focus: 0 0 0 .125rem hsla(220, 100%, 75%, .5);
-	--box-shadow: 0 .125rem .25rem 0 hsla(0, 0%, 0%, 0.5);
+	--box-shadow: 0 .125rem .25rem 0 hsla(0, 0%, 0%, .5);
+	--text-shadow: 0 .125rem .25rem hsla(0, 0%, 0%, .25);
 }
 
 html {
-	background-color: var(--color-gray-5);
+	background-color: var(--color-background);
 	font-family: 'Roboto';
 	color: red; /* TODO REMOVE */
+	text-shadow: var(--text-shadow);
 }
 
 body {
@@ -102,6 +108,7 @@ body {
 	outline: none;
 	box-shadow: var(--box-shadow-focus);
 }
+
 .js-focus-visible :focus:not([data-focus-visible-added]) {
 	box-shadow: none;
 }
@@ -123,6 +130,9 @@ body {
 #content {
 	flex: 1 0 auto;
 	padding: 1.5rem 0;
+	background-color: var(--color-background);
+	border-top: .125rem solid var(--color-background-lighter);
+	border-bottom: .125rem solid var(--color-background-darker);
 }
 
 #footer {

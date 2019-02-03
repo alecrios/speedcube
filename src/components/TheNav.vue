@@ -24,8 +24,9 @@ export default {
 
 <style scoped>
 .nav {
-	background-color: var(--color-gray-6);
-	border-bottom: .125rem solid var(--color-gray-9);
+	background-color: var(--color-bg2);
+	border-top: .125rem solid var(--color-bg2-lighter);
+	border-bottom: .125rem solid var(--color-bg2-darker);
 }
 
 .links {
@@ -43,25 +44,25 @@ export default {
 	text-transform: uppercase;
 	font-weight: 500;
 	padding: .75rem;
-	opacity: .5;
-	color: var(--color-cube-white);
+	color: var(--color-white);
 }
 
 .link::after {
 	content: '';
 	position: absolute;
+	bottom: 0;
 	left: 0;
-	bottom: -.125rem;
 	width: 100%;
 	height: .125rem;
-	background-color: var(--color-gray-9);
+	transition: background-color 100ms ease;
+	background-color: transparent;
 }
 
-.link.is-active {
-	opacity: 1;
+.link:hover::after {
+	background-color: var(--color-secondary);
 }
 
 .link.is-active::after {
-	background-color: var(--color-cube-white);
+	background-color: var(--color-primary);
 }
 </style>

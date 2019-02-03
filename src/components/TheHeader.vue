@@ -27,7 +27,9 @@ export default {
 
 <style scoped>
 .header {
-	background-color: var(--color-gray-5);
+	background-color: var(--color-bg2);
+	border-top: .125rem solid var(--color-bg2-lighter);
+	border-bottom: .125rem solid var(--color-bg2-darker);
 }
 
 .bar {

@@ -1,9 +1,11 @@
 <template>
-	<BaseWrapper>
-		<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No solves to display"/>
+	<div>
+		<BaseWrapper>
+			<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No solves to display"/>
 
-		<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>
-	</BaseWrapper>
+			<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>
+		</BaseWrapper>
+	</div>
 </template>
 
 <script>

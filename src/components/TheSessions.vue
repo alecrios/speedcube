@@ -6,9 +6,9 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th class="align-right">Cube</th>
+					<th>Cube</th>
 					<th class="align-right">Solves</th>
-					<th class="align-right">Actions</th>
+					<th>Edit</th>
 				</tr>
 			</thead>
 
@@ -18,11 +18,11 @@
 					:key="sessionId"
 					:class="{'is-inactive': !isActive(sessionId)}"
 				>
-					<td class="name">
+					<td class="name overflow-ellipses">
 						{{ getName(sessionId) }}
 					</td>
 
-					<td class="cube align-right">
+					<td class="cube">
 						{{ getCubeType(sessionId) }}
 					</td>
 

@@ -8,20 +8,22 @@
 
 		<TheTimerClock
 			:solve-id="solveId"
-			@new-time="xxx"
+			@new-time="addSolve"
 		/>
 	</div>
 </template>
 
 <script>
+import store from '@/store';
+
 import TheTimerScramble from '@/components/TheTimerScramble.vue';
 import TheTimerClock from '@/components/TheTimerClock.vue';
 
-// import addSolve from '@/mixins/addSolve';
+import addSolve from '@/mixins/addSolve';
 
 export default {
 	name: 'TheTimer',
-	// mixins: [addSolve],
+	mixins: [addSolve],
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
@@ -30,7 +32,7 @@ export default {
 		return {
 			solveId: String(Date.now()),
 			solve: {
-				session: this.$store.state.currentSession,
+				session: store.state.currentSession,
 				scramble: [],
 				time: null,
 				dnf: false,
@@ -39,13 +41,13 @@ export default {
 		};
 	},
 	methods: {
-		xxx(time) {
+		addSolve(time) {
 			this.solve.time = time;
-			// this.$_addSolve(this.solveId, this.solve);
+			this.$_addSolve(this.solveId, this.solve);
 			this.resetSolve();
 		},
 		resetSolve() {
-			this.solveId = String(Date.now());
+			Object.assign(this.$data, this.$options.data());
 		},
 	},
 };

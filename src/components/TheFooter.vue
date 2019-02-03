@@ -1,7 +1,7 @@
 <template>
 	<footer class="footer">
 		<BaseWrapper>
-			<div class="x">
+			<div class="bar">
 				<p class="text">
 					Copyright &copy; {{ new Date().getFullYear() }}
 					<a href="http://alecrios.com">Alec Rios</a>
@@ -24,10 +24,12 @@ export default {
 
 <style scoped>
 .footer {
-	background-color: var(--color-gray-5);
+	background-color: var(--color-background);
+	border-top: .125rem solid var(--color-background-lighter);
+	border-bottom: .125rem solid var(--color-background-darker);
 }
 
-.x {
+.bar {
 	text-align: center;
 	padding: .75rem;
 }
@@ -36,6 +38,6 @@ export default {
 	font-size: .75rem;
 	line-height: 1.5rem;
 	letter-spacing: .03125rem;
-	color: rgba(191, 191, 191, 1);
+	color: var(--color-white);
 }
 </style>

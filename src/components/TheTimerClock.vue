@@ -131,7 +131,6 @@ export default {
 
 .display {
 	padding: 1.5rem;
-	color: var(--color-cube-white);
 	font-size: 4.5rem;
 	line-height: 4rem;
 	font-weight: 300;

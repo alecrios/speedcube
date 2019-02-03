@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .container {
-	padding: 1.5rem;
+	padding: 1.5rem 0;
 }
 
 table {
@@ -22,11 +22,11 @@ table {
 }
 
 tbody {
-	border-top: .125rem solid var(--color-gray-3);
+	border-top: .125rem solid var(--color-background-lighter);
 }
 
 tr + tr {
-	border-top: .125rem solid var(--color-gray-3);
+	border-top: .125rem solid var(--color-background-lighter);
 }
 
 th,
@@ -35,7 +35,17 @@ td {
 	text-align: left;
 	white-space: nowrap;
 	vertical-align: middle;
-	color: var(--color-cube-white);
+	color: var(--color-white);
+}
+
+th:first-child,
+td:first-child {
+	padding-left: 1.5rem;
+}
+
+th:last-child,
+td:last-child {
+	padding-right: 1.5rem;
 }
 
 th {

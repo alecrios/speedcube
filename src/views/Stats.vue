@@ -1,9 +1,11 @@
 <template>
-	<BaseWrapper>
-		<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No stats to display"/>
+	<div>
+		<BaseWrapper>
+			<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No stats to display"/>
 
-		<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
-	</BaseWrapper>
+			<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
+		</BaseWrapper>
+	</div>
 </template>
 
 <script>

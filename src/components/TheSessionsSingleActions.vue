@@ -55,6 +55,6 @@ export default {
 }
 
 .rename-action {
-	margin-right: .75rem;
+	margin-right: .375rem;
 }
 </style>

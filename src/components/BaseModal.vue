@@ -46,7 +46,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 	padding: 1.5rem;
-	background-color: rgba(0, 0, 0, .75);
+	background-color: rgba(0, 0, 0, .5);
 	transition: opacity 250ms ease;
 }
 

@@ -1,9 +1,11 @@
 <template>
-	<BaseWrapper>
-		<EmptyContent v-if="!sessionIds.length" message="No sessions to display"/>
+	<div>
+		<BaseWrapper>
+			<EmptyContent v-if="!sessionIds.length" message="No sessions to display"/>
 
-		<TheSessions v-if="sessionIds.length"/>
-	</BaseWrapper>
+			<TheSessions v-if="sessionIds.length"/>
+		</BaseWrapper>
+	</div>
 </template>
 
 <script>

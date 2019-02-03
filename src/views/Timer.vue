@@ -1,7 +1,9 @@
 <template>
-	<BaseWrapper>
-		<TheTimer/>
-	</BaseWrapper>
+	<div>
+		<BaseWrapper>
+			<TheTimer/>
+		</BaseWrapper>
+	</div>
 </template>
 
 <script>

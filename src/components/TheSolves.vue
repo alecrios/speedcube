@@ -7,7 +7,7 @@
 				<tr>
 					<th class="align-right">Time</th>
 					<th>Scramble</th>
-					<th class="align-right">Actions</th>
+					<th>Edit</th>
 				</tr>
 			</thead>
 
