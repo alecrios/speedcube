@@ -36,7 +36,7 @@ select {
 	padding-top: .4375rem;
 	padding-bottom: .5625rem;
 	padding-left: 1rem;
-	padding-right: 1rem;
+	padding-right: 2.5rem;
 	border-radius: .25rem;
 	background-image: url('../assets/icon-select.svg');
 	background-size: 1.5rem 1.5rem;

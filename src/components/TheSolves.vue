@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<TheSolvesGlobalActions/>
+		<ButtonCreateSolve/>
 
 		<BaseTable>
 			<thead>
 				<tr>
 					<th class="align-right">Time</th>
 					<th>Scramble</th>
-					<th>Edit</th>
+					<th class="align-right">Actions</th>
 				</tr>
 			</thead>
 
@@ -25,8 +25,11 @@
 						<ScrambleString :scramble="getSolve(solveId).scramble"/>
 					</td>
 
-					<td class="actions">
-						<TheSolvesSingleActions :solve-id="solveId"/>
+					<td>
+						<div class="actions">
+							<IconPenalizeSolve :solve-id="solveId"/>
+							<IconDeleteSolve :solve-id="solveId"/>
+						</div>
 					</td>
 				</tr>
 			</tbody>
@@ -35,9 +38,10 @@
 </template>
 
 <script>
+import ButtonCreateSolve from '@/components/ButtonCreateSolve.vue';
 import BaseTable from '@/components/BaseTable.vue';
-import TheSolvesGlobalActions from '@/components/TheSolvesGlobalActions.vue';
-import TheSolvesSingleActions from '@/components/TheSolvesSingleActions.vue';
+import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
+import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
 import ScrambleString from '@/components/ScrambleString.vue';
 
 import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
@@ -46,10 +50,11 @@ export default {
 	name: 'TheSolves',
 	mixins: [solveIdsOfCurrentSession],
 	components: {
+		ButtonCreateSolve,
 		BaseTable,
 		ScrambleString,
-		TheSolvesSingleActions,
-		TheSolvesGlobalActions,
+		IconPenalizeSolve,
+		IconDeleteSolve,
 	},
 	methods: {
 		getSolve(solveId) {
@@ -60,16 +65,12 @@ export default {
 </script>
 
 <style scoped>
-.is-dnf .time {
-	opacity: .25;
-}
-
-.is-dnf .scramble {
-	opacity: .25;
-}
-
 .actions {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.actions > * + * {
+	margin-left: .375rem;
 }
 </style>

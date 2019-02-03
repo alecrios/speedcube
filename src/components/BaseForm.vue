@@ -27,6 +27,12 @@ export default {
 	margin-top: .75rem;
 }
 
+.form .body .field p {
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: var(--color-white);
+}
+
 .form .footer {
 	margin-top: .75rem;
 	padding: .75rem;

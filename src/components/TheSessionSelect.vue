@@ -1,24 +1,23 @@
 <template>
-	<select class="session-select" v-model="currentSession">
-		<option
-			v-for="sessionId in sessionIds"
-			:key="sessionId"
-			:value="sessionId"
-		>
-			{{ $_getSessionById(sessionId).name }}
-		</option>
-	</select>
+	<div class="container">
+		<BaseSelect name="Cube Type" v-model="currentSession" :options="sessions"/>
+	</div>
 </template>
 
 <script>
-import getSessionById from '@/mixins/getSessionById';
+import BaseSelect from '@/components/BaseSelect.vue';
 
 export default {
 	name: 'TheSessionSelect',
-	mixins: [getSessionById],
+	components: {
+		BaseSelect,
+	},
 	computed: {
-		sessionIds() {
-			return this.$store.state.sessionIds;
+		sessions() {
+			return this.$store.state.sessionIds.map((sessionId) => ({
+				value: sessionId,
+				label: this.$store.state.sessions[sessionId].name,
+			}));
 		},
 		currentSession: {
 			get() {
@@ -33,17 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.session-select {
-	font-size: .75rem;
-	line-height: 1.5rem;
-	letter-spacing: .03125rem;
-	background-color: var(--color-gray-6);
-	color: var(--color-white);
-	padding: .25rem 1.5rem .25rem .75rem;
-	background-image: url('../assets/icon-select.svg');
-	background-size: 1rem 1rem;
-	background-position: calc(100% - .25rem) 50%;
-	background-repeat: no-repeat;
-	border-radius: .25rem;
+.container {
+	max-width: 10rem;
 }
 </style>

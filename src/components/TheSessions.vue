@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<TheSessionsGlobalActions/>
+		<ButtonCreateSession/>
 
 		<BaseTable>
 			<thead>
@@ -8,7 +8,7 @@
 					<th>Name</th>
 					<th>Cube</th>
 					<th class="align-right">Solves</th>
-					<th>Edit</th>
+					<th class="align-right">Actions</th>
 				</tr>
 			</thead>
 
@@ -18,7 +18,7 @@
 					:key="sessionId"
 					:class="{'is-inactive': !isActive(sessionId)}"
 				>
-					<td class="name overflow-ellipses">
+					<td class="name">
 						{{ getName(sessionId) }}
 					</td>
 
@@ -30,8 +30,11 @@
 						{{ getSolvesCount(sessionId) }}
 					</td>
 
-					<td class="actions">
-						<TheSessionsSingleActions :session-id="sessionId"/>
+					<td>
+						<div class="actions">
+							<IconRenameSession :session-id="sessionId"/>
+							<IconDeleteSession :session-id="sessionId"/>
+						</div>
 					</td>
 				</tr>
 			</tbody>
@@ -40,9 +43,10 @@
 </template>
 
 <script>
+import ButtonCreateSession from '@/components/ButtonCreateSession.vue';
 import BaseTable from '@/components/BaseTable.vue';
-import TheSessionsSingleActions from '@/components/TheSessionsSingleActions.vue';
-import TheSessionsGlobalActions from '@/components/TheSessionsGlobalActions.vue';
+import IconRenameSession from '@/components/IconRenameSession.vue';
+import IconDeleteSession from '@/components/IconDeleteSession.vue';
 
 import getSessionById from '@/mixins/getSessionById';
 
@@ -50,9 +54,10 @@ export default {
 	name: 'TheSessions',
 	mixins: [getSessionById],
 	components: {
+		ButtonCreateSession,
 		BaseTable,
-		TheSessionsSingleActions,
-		TheSessionsGlobalActions,
+		IconRenameSession,
+		IconDeleteSession,
 	},
 	computed: {
 		sessionIds() {
@@ -82,5 +87,9 @@ export default {
 .actions {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.actions > * + * {
+	margin-left: .375rem;
 }
 </style>

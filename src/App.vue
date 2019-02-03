@@ -77,6 +77,10 @@ export default {
 	--color-secondary-lighter: hsla(220, 15%, 28%, 1);
 	--color-secondary-darker: hsla(220, 15%, 19%, 1);
 
+	--color-danger: hsla(0, 75%, 35%, 1);
+	--color-danger-lighter: hsla(0, 75%, 38%, 1);
+	--color-danger-darker: hsla(0, 75%, 29%, 1);
+
 	--color-cube-white: hsla(0, 0%, 90%, 1);
 	--color-cube-green: hsla(127, 80%, 70%, 1);
 	--color-cube-red: hsla(0, 80%, 70%, 1);

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	name: 'IconButton',
+	name: 'Icon',
 	props: ['name', 'icon', 'is-active', 'disabled'],
 };
 </script>

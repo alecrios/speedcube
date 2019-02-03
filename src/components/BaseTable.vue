@@ -15,6 +15,8 @@ export default {
 <style scoped>
 .container {
 	padding: 1.5rem 0;
+	max-width: 100%;
+	overflow-x: auto;
 }
 
 table {

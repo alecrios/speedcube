@@ -65,6 +65,17 @@ export default {
 	border-bottom: .125rem solid var(--color-secondary-lighter);
 }
 
+.button.danger {
+	background-color: var(--color-danger);
+	border-top: .125rem solid var(--color-danger-lighter);
+	border-bottom: .125rem solid var(--color-danger-darker);
+}
+
+.button.danger:active {
+	border-top: .125rem solid var(--color-danger-darker);
+	border-bottom: .125rem solid var(--color-danger-lighter);
+}
+
 /* .button.has-icon {
 	padding: .25rem .75rem .25rem .5rem;
 }
