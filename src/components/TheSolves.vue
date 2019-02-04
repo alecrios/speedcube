@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<ButtonCreateSolve/>
-
 		<BaseTable>
 			<thead>
 				<tr>
@@ -38,7 +36,6 @@
 </template>
 
 <script>
-import ButtonCreateSolve from '@/components/ButtonCreateSolve.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
@@ -50,7 +47,6 @@ export default {
 	name: 'TheSolves',
 	mixins: [solveIdsOfCurrentSession],
 	components: {
-		ButtonCreateSolve,
 		BaseTable,
 		ScrambleString,
 		IconPenalizeSolve,

@@ -1,6 +1,6 @@
 <template>
 	<button
-		:class="['button', type, {'has-icon': hasIcon}, icon]"
+		:class="['button', type]"
 		:aria-label="name"
 		@click="$emit('click')"
 	>
@@ -11,7 +11,7 @@
 <script>
 export default {
 	name: 'BaseButton',
-	props: ['name', 'type', 'has-icon', 'icon'],
+	props: ['name', 'type'],
 };
 </script>
 
@@ -74,26 +74,4 @@ export default {
 	border-top: .125rem solid var(--color-danger-darker);
 	border-bottom: .125rem solid var(--color-danger-lighter);
 }
-
-/* .button.has-icon {
-	padding: .25rem .75rem .25rem .5rem;
-}
-
-.button.has-icon::before {
-	content: '';
-	width: 1rem;
-	height: 1rem;
-	background-size: 1rem 1rem;
-	background-position: center center;
-	background-repeat: no-repeat;
-	margin-right: .25rem;
-}
-
-.button.has-icon.add::before {
-	background-image: url('../assets/icon-add.svg');
-}
-
-.button.has-icon.remove::before {
-	background-image: url('../assets/icon-remove.svg');
-} */
 </style>

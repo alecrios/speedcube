@@ -3,7 +3,7 @@
 		<BaseWrapper>
 			<div class="bar">
 				<RouterLink to="/">
-					Logo
+					<img src="../assets/logo.svg" alt="">
 				</RouterLink>
 
 				<TheSessionSelect/>
@@ -36,6 +36,11 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: .75rem 1.5rem;
+	padding: 0 .75rem;
+}
+
+img {
+	width: 8.625rem;
+	height: 3.25rem;
 }
 </style>

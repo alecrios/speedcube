@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<BaseWrapper>
-			<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No solves to display"/>
+			<EmptyContent
+				v-if="!$_solveIdsOfCurrentSession.length"
+				message="No solves in the current session"
+			/>
 
 			<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>
 		</BaseWrapper>

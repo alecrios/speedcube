@@ -1,11 +1,6 @@
 <template>
 	<div>
-		<BaseButton
-			name="New Session"
-			:has-icon="true"
-			icon="add"
-			@click="showModal = true"
-		/>
+		<BaseButton name="New Session" type="secondary" @click="showModal = true"/>
 
 		<Portal to="modals" v-if="showModal">
 			<ModalCreateSession v-if="showModal" @close="showModal = false"/>

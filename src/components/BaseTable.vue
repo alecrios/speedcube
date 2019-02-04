@@ -27,6 +27,10 @@ tbody {
 	border-top: .125rem solid var(--color-background-lighter);
 }
 
+tr.highlight {
+	background-color: var(--color-background-lighter);
+}
+
 tr + tr {
 	border-top: .125rem solid var(--color-background-lighter);
 }

@@ -25,7 +25,7 @@ export default {
 	vertical-align: middle;
 	cursor: pointer;
 	transition: opacity 100ms ease;
-	opacity: .25;
+	opacity: .5;
 }
 
 .icon-button.penalty {

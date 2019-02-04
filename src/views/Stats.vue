@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<BaseWrapper>
-			<EmptyContent v-if="!$_solveIdsOfCurrentSession.length" message="No stats to display"/>
+			<EmptyContent
+				v-if="!$_solveIdsOfCurrentSession.length"
+				message="No stats for the current session"
+			/>
 
 			<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
 		</BaseWrapper>

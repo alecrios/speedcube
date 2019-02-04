@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<ButtonCreateSession/>
+		<div class="create-session-container">
+			<ButtonCreateSession/>
+		</div>
 
 		<BaseTable>
 			<thead>
@@ -16,7 +18,7 @@
 				<tr
 					v-for="sessionId in sessionIds"
 					:key="sessionId"
-					:class="{'is-inactive': !isActive(sessionId)}"
+					:class="{'highlight': isCurrentSession(sessionId)}"
 				>
 					<td class="name">
 						{{ getName(sessionId) }}
@@ -76,7 +78,7 @@ export default {
 			return this.$store.state.solveIds
 				.filter((solveId) => this.$store.state.solves[solveId].session === id).length;
 		},
-		isActive(id) {
+		isCurrentSession(id) {
 			return id === this.$store.state.currentSession;
 		},
 	},
@@ -84,6 +86,12 @@ export default {
 </script>
 
 <style scoped>
+.create-session-container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 1.5rem;
+}
+
 .actions {
 	display: flex;
 	justify-content: flex-end;

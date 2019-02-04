@@ -1,6 +1,11 @@
 <template>
 	<div class="container">
-		<BaseSelect name="Cube Type" v-model="currentSession" :options="sessions"/>
+		<BaseSelect
+			name="Session"
+			v-model="currentSession"
+			:options="sessions"
+			size="small"
+		/>
 	</div>
 </template>
 
@@ -34,5 +39,6 @@ export default {
 <style scoped>
 .container {
 	max-width: 10rem;
+	padding: .75rem;
 }
 </style>
