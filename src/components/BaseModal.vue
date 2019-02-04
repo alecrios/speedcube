@@ -43,7 +43,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	padding: 1.5rem;
 	background-color: rgba(0, 0, 0, .5);
@@ -61,16 +61,13 @@ export default {
 	transition: transform 250ms ease;
 }
 
-.modal-enter {
-	opacity: 0;
-}
-
+.modal-enter,
 .modal-leave-active {
 	opacity: 0;
 }
 
 .modal-enter .container,
 .modal-leave-active .container {
-	transform: translateY(1.5rem);
+	transform: translateY(-1.5rem);
 }
 </style>
