@@ -13,14 +13,13 @@
 				<tr
 					v-for="solveId in $_solveIdsOfCurrentSession"
 					:key="solveId"
-					:class="{'is-dnf': getSolve(solveId).dnf}"
 				>
-					<td class="time align-right">
-						{{ getSolve(solveId).time | formatTime }}
+					<td class="align-right">
+						<div class="time">{{ getTime(solveId) }}</div>
 					</td>
 
-					<td class="scramble overflow-ellipses">
-						<ScrambleString :scramble="getSolve(solveId).scramble" :show-title="true"/>
+					<td class="overflow-ellipses">
+						<ScrambleString :scramble="getScramble(solveId)" :show-title="true"/>
 					</td>
 
 					<td>
@@ -52,9 +51,19 @@ export default {
 		IconPenalizeSolve,
 		IconDeleteSolve,
 	},
+	computed: {
+	},
 	methods: {
 		getSolve(solveId) {
 			return this.$store.state.solves[solveId];
+		},
+		getScramble(solveId) {
+			return this.getSolve(solveId).scramble;
+		},
+		getTime(solveId) {
+			const solve = this.getSolve(solveId);
+			const time = this.$options.filters.formatTime(solve.time);
+			return solve.dnf ? 'DNF' : `${time}${solve.p2 ? '+' : ''}`;
 		},
 	},
 };

@@ -1,5 +1,5 @@
 <template>
-	<div class="scramble" :title="title">
+	<div class="scramble" :title="showTitle ? title : ''">
 		<span
 			v-for="(turn, index) in scramble"
 			:key="index"
