@@ -90,7 +90,7 @@ export default {
 
 	--box-shadow-focus: 0 0 0 .125rem hsla(220, 100%, 75%, .5);
 	--box-shadow: 0 .125rem .25rem 0 hsla(0, 0%, 0%, .5);
-	--text-shadow: 0 .125rem .25rem hsla(0, 0%, 0%, .25);
+	--text-shadow: 0 .125rem .125rem hsla(0, 0%, 0%, .125);
 }
 
 html {

@@ -20,7 +20,7 @@
 					</td>
 
 					<td class="scramble overflow-ellipses">
-						<ScrambleString :scramble="getSolve(solveId).scramble"/>
+						<ScrambleString :scramble="getSolve(solveId).scramble" :show-title="true"/>
 					</td>
 
 					<td>

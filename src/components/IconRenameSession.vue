@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Icon
+		<BaseIcon
 			icon="rename"
 			name="Rename"
 			@click="showModal = true"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon.vue';
+import BaseIcon from '@/components/BaseIcon.vue';
 import ModalRenameSession from '@/components/ModalRenameSession.vue';
 
 export default {
@@ -25,7 +25,7 @@ export default {
 		};
 	},
 	components: {
-		Icon,
+		BaseIcon,
 		ModalRenameSession,
 	},
 };

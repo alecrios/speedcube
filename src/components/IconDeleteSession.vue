@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Icon
+		<BaseIcon
 			icon="remove"
 			name="Delete"
 			@click="showModal = true"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon.vue';
+import BaseIcon from '@/components/BaseIcon.vue';
 import ModalDeleteSession from '@/components/ModalDeleteSession.vue';
 
 export default {
@@ -26,7 +26,7 @@ export default {
 		};
 	},
 	components: {
-		Icon,
+		BaseIcon,
 		ModalDeleteSession,
 	},
 	methods: {

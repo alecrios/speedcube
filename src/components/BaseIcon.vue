@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	name: 'Icon',
+	name: 'BaseIcon',
 	props: ['name', 'icon', 'is-active', 'disabled'],
 };
 </script>

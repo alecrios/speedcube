@@ -40,6 +40,11 @@ export default {
 			},
 		};
 	},
+	computed: {
+		currentSession() {
+			return this.$store.state.currentSession;
+		},
+	},
 	methods: {
 		addSolve(time) {
 			this.solve.time = time;
@@ -48,6 +53,11 @@ export default {
 		},
 		resetSolve() {
 			Object.assign(this.$data, this.$options.data());
+		},
+	},
+	watch: {
+		currentSession() {
+			this.resetSolve();
 		},
 	},
 };

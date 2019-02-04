@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Icon
+		<BaseIcon
 			icon="penalty"
 			name="Penalize"
 			@click="showModal = true"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon.vue';
+import BaseIcon from '@/components/BaseIcon.vue';
 import ModalPenalizeSolve from '@/components/ModalPenalizeSolve.vue';
 
 export default {
@@ -25,7 +25,7 @@ export default {
 		};
 	},
 	components: {
-		Icon,
+		BaseIcon,
 		ModalPenalizeSolve,
 	},
 };

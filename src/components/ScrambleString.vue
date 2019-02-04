@@ -1,12 +1,12 @@
 <template>
-	<div class="scramble">
+	<div class="scramble" :title="title">
 		<span
 			v-for="(turn, index) in scramble"
 			:key="index"
 			:data-color="getColor(turn)"
 			class="turn"
 		>
-			{{ getText(turn) }}
+			{{ getTurnText(turn) }}
 		</span>
 	</div>
 </template>
@@ -14,7 +14,7 @@
 <script>
 export default {
 	name: 'ScrambleString',
-	props: ['scramble'],
+	props: ['scramble', 'show-title'],
 	data() {
 		return {
 			faceColors: {
@@ -27,8 +27,13 @@ export default {
 			},
 		};
 	},
+	computed: {
+		title() {
+			return this.scramble.map((turn) => this.getTurnText(turn)).join(' ');
+		},
+	},
 	methods: {
-		getText(turn) {
+		getTurnText(turn) {
 			return turn.depth > 1
 				? `${turn.face.toLowerCase()}${turn.modifier}`
 				: `${turn.face}${turn.modifier}`;

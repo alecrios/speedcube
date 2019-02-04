@@ -1,11 +1,7 @@
 <template>
 	<div class="scramble-display">
-		<div>
-			<ScrambleString :scramble="scrambleFirstHalf"/>
-		</div>
-
-		<div>
-			<ScrambleString :scramble="scrambleSecondHalf"/>
+		<div class="container">
+			<ScrambleString :scramble="scramble"/>
 		</div>
 	</div>
 </template>
@@ -25,20 +21,14 @@ export default {
 			turnsToGenerate: {
 				2: 10,
 				3: 20,
-				4: 30,
-				5: 40,
+				4: 40,
+				5: 60,
 			},
 		};
 	},
 	computed: {
 		cubeSize() {
 			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
-		},
-		scrambleFirstHalf() {
-			return this.scramble.slice(0, 10);
-		},
-		scrambleSecondHalf() {
-			return this.scramble.slice(10, 20);
 		},
 	},
 	methods: {
@@ -63,8 +53,13 @@ export default {
 <style scoped>
 .scramble-display {
 	padding: 1.5rem;
+}
+
+.container {
+	max-width: 20rem;
+	margin: 0 auto;
+	text-align: center;
 	font-size: 1.5rem;
 	line-height: 2.25rem;
-	text-align: center;
 }
 </style>
