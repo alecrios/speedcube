@@ -7,6 +7,7 @@
 			@mouseup="mouseupHandler()"
 			@touchstart.prevent="touchstartHandler()"
 			@touchend.prevent="touchendHandler()"
+			@mouseleave="mouseleaveHandler()"
 		>
 			{{ status === 'complete' ? previousTime : duration | formatTime }}
 		</div>
@@ -45,6 +46,7 @@ export default {
 		},
 		finishPreparation() {
 			this.status = 'ready';
+			clearTimeout(this.preparationTimer);
 		},
 		startTimer() {
 			this.startTime = Date.now();
@@ -88,6 +90,11 @@ export default {
 		},
 		mouseupHandler() {
 			this.releaseTimer();
+		},
+		mouseleaveHandler() {
+			if (this.status !== 'pending' && this.status !== 'ready') return;
+
+			this.cancelPreparation();
 		},
 		touchstartHandler() {
 			this.pressTimer();
