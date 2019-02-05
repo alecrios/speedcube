@@ -2,7 +2,7 @@
 	<transition name="modal">
 		<div class="backdrop" @click.self="$emit('close')">
 			<div class="container">
-				<BaseForm>
+				<BaseForm ref="form">
 					<slot></slot>
 				</BaseForm>
 			</div>
@@ -24,9 +24,14 @@ export default {
 
 			this.$emit('close');
 		},
+		focusFirstFocusableElement() {
+			const focusableElements = this.$refs.form.$el.querySelectorAll('button, input, select');
+			focusableElements[0].focus();
+		},
 	},
 	mounted() {
 		document.addEventListener('keydown', this.keydownHandler);
+		this.focusFirstFocusableElement();
 	},
 	beforeDestroy() {
 		document.removeEventListener('keydown', this.keydownHandler);
