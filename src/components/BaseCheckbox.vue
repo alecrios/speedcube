@@ -7,6 +7,7 @@
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
 		>
+
 		<label class="label" :for="name | toKebabCase">{{ name }}</label>
 	</div>
 </template>

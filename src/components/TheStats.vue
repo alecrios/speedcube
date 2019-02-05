@@ -4,10 +4,12 @@
 			<div class="label">Best</div>
 			<div class="value">{{ best | formatTime }}</div>
 		</div>
+
 		<div class="stat">
 			<div class="label">Worst</div>
 			<div class="value">{{ worst | formatTime }}</div>
 		</div>
+
 		<div class="stat">
 			<div class="label">Mean</div>
 			<div class="value">{{ mean | formatTime }}</div>

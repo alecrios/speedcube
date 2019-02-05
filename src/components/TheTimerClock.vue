@@ -146,9 +146,9 @@ export default {
 	user-select: none;
 }
 
-.display[data-status="idle"] {color: var(--color-cube-white)}
-.display[data-status="pending"] {color: var(--color-cube-red)}
-.display[data-status="ready"] {color: var(--color-cube-green)}
-.display[data-status="running"] {color: var(--color-cube-white)}
-.display[data-status="complete"] {color: var(--color-cube-white)}
+.display[data-status='idle']     {color: var(--color-cube-white)}
+.display[data-status='pending']  {color: var(--color-cube-red)}
+.display[data-status='ready']    {color: var(--color-cube-green)}
+.display[data-status='running']  {color: var(--color-cube-white)}
+.display[data-status='complete'] {color: var(--color-cube-white)}
 </style>

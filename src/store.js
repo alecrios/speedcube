@@ -9,17 +9,11 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		currentSession: null,
 		sessionIds: [],
 		sessions: {},
-		currentSession: null,
 		solveIds: [],
 		solves: {},
-		currentSolve: {
-			scramble: [],
-			time: null,
-			p2: false,
-			dnf: false,
-		},
 	},
 	mutations: {
 		addSession(state, payload) {
@@ -31,9 +25,6 @@ export default new Vuex.Store({
 		},
 		renameSession(state, payload) {
 			Vue.set(state.sessions[payload.id], 'name', payload.name);
-		},
-		changeCubeSizeOfSession(state, payload) {
-			Vue.set(state.sessions[payload.id], 'cubeSize', payload.cubeSize);
 		},
 		removeSession(state, id) {
 			state.sessionIds.splice(state.sessionIds.indexOf(id), 1);
@@ -72,12 +63,6 @@ export default new Vuex.Store({
 			Vue.set(state.solves[payload.id], 'time', state.solves[payload.id].p2
 				? state.solves[payload.id].time + 2000
 				: state.solves[payload.id].time - 2000);
-		},
-		updateCurrentSolveScramble(state, scramble) {
-			state.currentSolve.scramble = scramble;
-		},
-		updateCurrentSolveTime(state, time) {
-			state.currentSolve.time = time;
 		},
 	},
 });
