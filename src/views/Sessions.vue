@@ -1,9 +1,9 @@
 <template>
-	<div>
+	<main>
 		<BaseWrapper>
 			<TheSessions/>
 		</BaseWrapper>
-	</div>
+	</main>
 </template>
 
 <script>

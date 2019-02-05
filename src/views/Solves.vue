@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<main>
 		<BaseWrapper>
 			<EmptyContent
 				v-if="!$_solveIdsOfCurrentSession.length"
@@ -8,7 +8,7 @@
 
 			<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>
 		</BaseWrapper>
-	</div>
+	</main>
 </template>
 
 <script>

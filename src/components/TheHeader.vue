@@ -3,7 +3,7 @@
 		<BaseWrapper>
 			<div class="bar">
 				<RouterLink to="/">
-					<img src="../assets/logo.svg" alt="">
+					<img src="../assets/logo.svg" alt="Logo">
 				</RouterLink>
 
 				<TheSessionSelect/>

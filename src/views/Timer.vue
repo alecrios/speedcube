@@ -1,9 +1,9 @@
 <template>
-	<div>
+	<main>
 		<BaseWrapper>
 			<TheTimer/>
 		</BaseWrapper>
-	</div>
+	</main>
 </template>
 
 <script>
