@@ -80,12 +80,13 @@ export default {
 			const times = this.getLastNTimes(n);
 			let average;
 
-			if (times.length < n) {
+			if (times.length < 3 || times.length < n) {
 				average = null;
 			} else if (times.includes(Infinity)) {
 				average = Infinity;
 			} else {
-				average = times.reduce((sum, time) => sum + time, 0) / times.length;
+				const trimmedTimes = times.sort((a, b) => a - b).slice(1, times.length - 1);
+				average = trimmedTimes.reduce((sum, time) => sum + time, 0) / trimmedTimes.length;
 			}
 
 			return this.getFormattedTime(average);
