@@ -45,27 +45,31 @@ export default {
 :root {
 	--color-white: hsla(220, 10%, 85%, 1);
 	--color-white-lighter: hsla(220, 10%, 88%, 1);
-	--color-white-darker: hsla(220, 10%, 79%, 1);
+	--color-white-darker: hsla(220, 10%, 80%, 1);
 
-	--color-bg2: hsla(220, 10%, 10%, 1);
-	--color-bg2-lighter: hsla(220, 10%, 13%, 1);
-	--color-bg2-darker: hsla(220, 10%, 4%, 1);
+	--color-smoke: hsla(220, 10%, 60%, 1);
+	--color-smoke-lighter: hsla(220, 10%, 63%, 1);
+	--color-smoke-darker: hsla(220, 10%, 55%, 1);
 
-	--color-background: hsla(220, 10%, 15%, 1);
-	--color-background-lighter: hsla(220, 10%, 18%, 1);
-	--color-background-darker: hsla(220, 10%, 9%, 1);
+	--color-charcoal: hsla(220, 10%, 10%, 1);
+	--color-charcoal-lighter: hsla(220, 10%, 13%, 1);
+	--color-charcoal-darker: hsla(220, 10%, 5%, 1);
+
+	--color-slate: hsla(220, 10%, 15%, 1);
+	--color-slate-lighter: hsla(220, 10%, 18%, 1);
+	--color-slate-darker: hsla(220, 10%, 10%, 1);
 
 	--color-primary: hsla(220, 75%, 50%, 1);
 	--color-primary-lighter: hsla(220, 75%, 53%, 1);
-	--color-primary-darker: hsla(220, 75%, 44%, 1);
+	--color-primary-darker: hsla(220, 75%, 45%, 1);
 
 	--color-secondary: hsla(220, 15%, 25%, 1);
 	--color-secondary-lighter: hsla(220, 15%, 28%, 1);
-	--color-secondary-darker: hsla(220, 15%, 19%, 1);
+	--color-secondary-darker: hsla(220, 15%, 20%, 1);
 
 	--color-danger: hsla(0, 75%, 35%, 1);
 	--color-danger-lighter: hsla(0, 75%, 38%, 1);
-	--color-danger-darker: hsla(0, 75%, 29%, 1);
+	--color-danger-darker: hsla(0, 75%, 30%, 1);
 
 	--color-cube-white: hsla(0, 0%, 90%, 1);
 	--color-cube-green: hsla(127, 80%, 70%, 1);
@@ -81,8 +85,7 @@ export default {
 
 html {
 	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;;
-	background-color: var(--color-background);
-	color: red; /* TODO CHANGE */
+	background-color: var(--color-slate);
 	text-shadow: var(--text-shadow);
 }
 
@@ -116,9 +119,9 @@ html {
 #content {
 	flex: 1 0 auto;
 	padding: 1.5rem 0;
-	background-color: var(--color-background);
-	border-top: .125rem solid var(--color-background-lighter);
-	border-bottom: .125rem solid var(--color-background-darker);
+	background-color: var(--color-slate);
+	border-top: .125rem solid var(--color-slate-lighter);
+	border-bottom: .125rem solid var(--color-slate-darker);
 }
 
 #footer {

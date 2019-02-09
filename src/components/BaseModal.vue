@@ -58,9 +58,9 @@ export default {
 .container {
 	width: 100%;
 	max-width: 20rem;
-	background-color: var(--color-background);
-	border-top: .125rem solid var(--color-background-lighter);
-	border-bottom: .125rem solid var(--color-background-darker);
+	background-color: var(--color-slate);
+	border-top: .125rem solid var(--color-slate-lighter);
+	border-bottom: .125rem solid var(--color-slate-darker);
 	border-radius: .25rem;
 	box-shadow: 0 .75rem 1.5rem 0 rgba(0, 0, 0, .5);
 	transition: transform 250ms ease;

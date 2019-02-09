@@ -24,9 +24,9 @@ export default {
 
 <style scoped>
 .nav {
-	background-color: var(--color-bg2);
-	border-top: .125rem solid var(--color-bg2-lighter);
-	border-bottom: .125rem solid var(--color-bg2-darker);
+	background-color: var(--color-charcoal);
+	border-top: .125rem solid var(--color-charcoal-lighter);
+	border-bottom: .125rem solid var(--color-charcoal-darker);
 }
 
 .links {

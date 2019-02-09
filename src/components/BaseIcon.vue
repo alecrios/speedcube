@@ -1,17 +1,30 @@
 <template>
 	<button
-		:class="['icon-button', {'is-active': isActive}, icon]"
+		class="icon-button"
 		:aria-label="name"
 		:title="name"
 		:disabled="disabled"
 		@click="$emit('click')"
-	/>
+	>
+		<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<path class="path" :d="pathData[icon]"/>
+		</svg>
+	</button>
 </template>
 
 <script>
 export default {
 	name: 'BaseIcon',
-	props: ['name', 'icon', 'is-active', 'disabled'],
+	props: ['name', 'icon', 'disabled'],
+	data() {
+		return {
+			pathData: {
+				penalty: 'M13,14H11V7h2Zm0,1H11v2h2Zm8-3a9,9,0,1,1-9-9A9,9,0,0,1,21,12Zm-2,0a7,7,0,1,0-7,7A7,7,0,0,0,19,12Z',
+				remove: 'M13.4142,12l5.6568,5.6569L17.6569,19.071,12,13.4142,6.3431,19.071,4.929,17.6569,10.5858,12,4.929,6.3431,6.3431,4.9289,12,10.5858l5.6569-5.6569L19.071,6.3431Z',
+				rename: 'M14.61,6.56,5.18,16,4,17.18V20H6.82L8,18.82l9.44-9.43ZM5,19V17H6v1H7v1ZM15.3137,5.8579l1.4142-1.4142,2.8284,2.8284L18.1421,8.6863Z',
+			},
+		};
+	},
 };
 </script>
 
@@ -19,37 +32,29 @@ export default {
 .icon-button {
 	width: 1.5rem;
 	height: 1.5rem;
-	background-size: 1.5rem 1.5rem;
-	background-position: center center;
-	background-repeat: no-repeat;
 	vertical-align: middle;
 	cursor: pointer;
-	transition: opacity 100ms ease;
-	opacity: .5;
-}
-
-.icon-button.penalty {
-	background-image: url('../assets/icon-penalty.svg');
-}
-
-.icon-button.remove {
-	background-image: url('../assets/icon-remove.svg');
-}
-
-.icon-button.rename {
-	background-image: url('../assets/icon-rename.svg');
-}
-
-.icon-button:hover {
-	opacity: 1;
-}
-
-.icon-button.is-active {
-	opacity: 1;
 }
 
 .icon-button:disabled {
-	opacity: .1;
 	cursor: not-allowed;
+}
+
+.icon-button .svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.icon-button .svg .path {
+	fill: var(--color-smoke);
+	transition: fill 100ms ease;
+}
+
+.icon-button:disabled .svg .path {
+	fill: var(--color-secondary);
+}
+
+.icon-button:not(:disabled):hover .svg .path {
+	fill: var(--color-white);
 }
 </style>

@@ -2,10 +2,13 @@
 	<footer class="footer">
 		<BaseWrapper>
 			<div class="bar">
-				<p class="text">
-					Copyright &copy; {{ new Date().getFullYear() }}
-					<a href="http://alecrios.com">Alec Rios</a>
-				</p>
+				<span class="item">
+					&copy; {{ new Date().getFullYear() }} <a href="http://alecrios.com">Alec Rios</a>
+				</span>
+
+				<span class="item">
+					<a href="http://alecrios.com">Send Feedback</a>
+				</span>
 			</div>
 		</BaseWrapper>
 	</footer>
@@ -24,9 +27,9 @@ export default {
 
 <style scoped>
 .footer {
-	background-color: var(--color-background);
-	border-top: .125rem solid var(--color-background-lighter);
-	border-bottom: .125rem solid var(--color-background-darker);
+	background-color: var(--color-slate);
+	border-top: .125rem solid var(--color-slate-lighter);
+	border-bottom: .125rem solid var(--color-slate-darker);
 }
 
 .bar {
@@ -34,10 +37,18 @@ export default {
 	padding: .75rem;
 }
 
-.text {
+.item {
 	font-size: .75rem;
 	line-height: 1.5rem;
 	letter-spacing: .03125rem;
-	color: var(--color-white);
+	color: var(--color-smoke);
+}
+
+.item + .item {
+	margin-left: 1.5rem;
+}
+
+.item a:hover {
+	text-decoration: underline;
 }
 </style>

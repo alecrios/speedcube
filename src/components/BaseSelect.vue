@@ -43,6 +43,7 @@ select {
 	background-repeat: no-repeat;
 	background-size: 1.5rem 1.5rem;
 	background-position: calc(100% - .5rem) 50%;
+	cursor: pointer;
 }
 
 select.small {

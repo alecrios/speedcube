@@ -106,7 +106,7 @@ export default {
 }
 
 .set + .set {
-	border-top: .125rem solid var(--color-background-lighter);
+	border-top: .125rem solid var(--color-slate-lighter);
 }
 
 .heading {

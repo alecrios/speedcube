@@ -18,18 +18,12 @@
 </template>
 
 <script>
-import BaseModal from '@/components/BaseModal.vue';
-import BaseHeading from '@/components/BaseHeading.vue';
-import BaseButton from '@/components/BaseButton.vue';
+import modalComponents from '@/mixins/modalComponents';
 
 export default {
 	name: 'ModalDeleteSolve',
+	mixins: [modalComponents],
 	props: ['solve-id'],
-	components: {
-		BaseModal,
-		BaseHeading,
-		BaseButton,
-	},
 	methods: {
 		submit() {
 			this.$store.commit('removeSolve', this.solveId);

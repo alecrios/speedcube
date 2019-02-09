@@ -1,8 +1,9 @@
 <template>
 	<div class="time">
-		<div
+		<button
 			class="display"
 			:data-status="status"
+			ref="display"
 			@mousedown="mousedownHandler()"
 			@mouseup="mouseupHandler()"
 			@touchstart.prevent="touchstartHandler()"
@@ -10,7 +11,7 @@
 			@mouseleave="mouseleaveHandler()"
 		>
 			{{ status === 'complete' ? previousTime : duration | formatTime }}
-		</div>
+		</button>
 	</div>
 </template>
 
@@ -105,6 +106,7 @@ export default {
 		keydownHandler(event) {
 			if (event.key !== ' ' || event.repeat) return;
 
+			this.$refs.display.focus();
 			this.pressTimer();
 		},
 		keyupHandler(event) {
@@ -151,4 +153,8 @@ export default {
 .display[data-status='ready']    {color: var(--color-cube-green)}
 .display[data-status='running']  {color: var(--color-cube-white)}
 .display[data-status='complete'] {color: var(--color-cube-white)}
+
+.display:focus {
+	box-shadow: none;
+}
 </style>

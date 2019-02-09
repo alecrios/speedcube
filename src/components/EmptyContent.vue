@@ -22,6 +22,6 @@ export default {
 .message {
 	font-size: 1.25rem;
 	line-height: 1.5rem;
-	color: var(--color-white);
+	color: var(--color-smoke);
 }
 </style>

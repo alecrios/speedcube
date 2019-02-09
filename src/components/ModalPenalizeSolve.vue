@@ -19,20 +19,12 @@
 </template>
 
 <script>
-import BaseModal from '@/components/BaseModal.vue';
-import BaseHeading from '@/components/BaseHeading.vue';
-import BaseCheckbox from '@/components/BaseCheckbox.vue';
-import BaseButton from '@/components/BaseButton.vue';
+import modalComponents from '@/mixins/modalComponents';
 
 export default {
 	name: 'ModalPenalizeSolve',
+	mixins: [modalComponents],
 	props: ['solve-id'],
-	components: {
-		BaseModal,
-		BaseHeading,
-		BaseCheckbox,
-		BaseButton,
-	},
 	data() {
 		return {
 			dnf: this.$store.state.solves[this.solveId].dnf,

@@ -18,18 +18,12 @@
 </template>
 
 <script>
-import BaseModal from '@/components/BaseModal.vue';
-import BaseHeading from '@/components/BaseHeading.vue';
-import BaseButton from '@/components/BaseButton.vue';
+import modalComponents from '@/mixins/modalComponents';
 
 export default {
 	name: 'ModalDeleteSession',
+	mixins: [modalComponents],
 	props: ['session-id'],
-	components: {
-		BaseModal,
-		BaseHeading,
-		BaseButton,
-	},
 	data() {
 		return {
 			name: this.$store.state.sessions[this.sessionId].name,

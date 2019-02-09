@@ -21,25 +21,14 @@
 <script>
 import moment from 'moment';
 
-import BaseModal from '@/components/BaseModal.vue';
-import BaseHeading from '@/components/BaseHeading.vue';
-import BaseLabel from '@/components/BaseLabel.vue';
-import BaseInput from '@/components/BaseInput.vue';
-import BaseButton from '@/components/BaseButton.vue';
+import modalComponents from '@/mixins/modalComponents';
 
 import renameSession from '@/mixins/renameSession';
 
 export default {
 	name: 'ModalEditSession',
-	mixins: [renameSession],
+	mixins: [modalComponents, renameSession],
 	props: ['session-id'],
-	components: {
-		BaseModal,
-		BaseHeading,
-		BaseLabel,
-		BaseInput,
-		BaseButton,
-	},
 	data() {
 		return {
 			name: this.$store.state.sessions[this.sessionId].name,

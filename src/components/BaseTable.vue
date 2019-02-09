@@ -24,15 +24,15 @@ table {
 }
 
 tbody {
-	border-top: .125rem solid var(--color-background-lighter);
+	border-top: .125rem solid var(--color-slate-lighter);
 }
 
 tr.highlight {
-	background-color: var(--color-background-lighter);
+	background-color: var(--color-slate-lighter);
 }
 
 tr + tr {
-	border-top: .125rem solid var(--color-background-lighter);
+	border-top: .125rem solid var(--color-slate-lighter);
 }
 
 th,

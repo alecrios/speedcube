@@ -3,6 +3,7 @@ import BaseHeading from '@/components/BaseHeading.vue';
 import BaseLabel from '@/components/BaseLabel.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
+import BaseCheckbox from '@/components/BaseCheckbox.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
 export default {
@@ -12,6 +13,7 @@ export default {
 		BaseLabel,
 		BaseInput,
 		BaseSelect,
+		BaseCheckbox,
 		BaseButton,
 	},
 };
