@@ -72,4 +72,8 @@ select.small:active {
 	padding-top: .25rem;
 	padding-bottom: .25rem;
 }
+
+select:focus {
+	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+}
 </style>
