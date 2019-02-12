@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Export" type="primary" @click="exportSession()"/>
+			<BaseButton name="Export" type="primary" @click="exportSolves()"/>
 			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
@@ -51,7 +51,7 @@ import modalComponents from '@/mixins/modalComponents';
 import getScrambleTurnText from '@/mixins/getScrambleTurnText';
 
 export default {
-	name: 'ModalExportSession',
+	name: 'ModalExportSolves',
 	mixins: [modalComponents, getScrambleTurnText],
 	data() {
 		return {
@@ -126,7 +126,7 @@ export default {
 		formatScramble(solve) {
 			return solve.scramble.map((turn) => this.$_getScrambleTurnText(turn)).join(' ');
 		},
-		exportSession() {
+		exportSolves() {
 			const data = this[this.fileType];
 			const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
 			saveAs(blob, `${kebabCase(this.sessionName)}.${this.fileType}`);

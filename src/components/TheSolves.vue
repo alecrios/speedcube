@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<div class="global-actions">
+			<ButtonExportSolves/>
+		</div>
+
 		<BaseTable>
 			<thead>
 				<tr>
@@ -35,6 +39,7 @@
 </template>
 
 <script>
+import ButtonExportSolves from '@/components/ButtonExportSolves.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
@@ -46,6 +51,7 @@ export default {
 	name: 'TheSolves',
 	mixins: [solveIdsOfCurrentSession],
 	components: {
+		ButtonExportSolves,
 		BaseTable,
 		ScrambleString,
 		IconPenalizeSolve,
@@ -70,6 +76,13 @@ export default {
 </script>
 
 <style scoped>
+.global-actions {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
 .actions {
 	display: flex;
 	justify-content: flex-end;
