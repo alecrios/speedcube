@@ -2,7 +2,6 @@
 	<div>
 		<div class="global-actions">
 			<ButtonCreateSession/>
-			<ButtonImportSession/>
 			<ButtonExportSession/>
 		</div>
 
@@ -48,7 +47,6 @@
 
 <script>
 import ButtonCreateSession from '@/components/ButtonCreateSession.vue';
-import ButtonImportSession from '@/components/ButtonImportSession.vue';
 import ButtonExportSession from '@/components/ButtonExportSession.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import IconRenameSession from '@/components/IconRenameSession.vue';
@@ -61,7 +59,6 @@ export default {
 	mixins: [getSessionById],
 	components: {
 		ButtonCreateSession,
-		ButtonImportSession,
 		ButtonExportSession,
 		BaseTable,
 		IconRenameSession,

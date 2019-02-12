@@ -6,7 +6,7 @@
 * Offers the ability to create unlimited named sessions
 * Displays scrambles with color-coded turns for easy reading
 * Provides the option of marking solves with DNF and +2 penalties
-* Allows importing and exporting of solves
+* Allows exporting of solves
 * Shows statistics about solves
 * Works even without an internet connection
 * Optimized for both mobile and desktop devices

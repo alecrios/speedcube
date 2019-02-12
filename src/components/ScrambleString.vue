@@ -6,14 +6,17 @@
 			:data-color="getColor(turn)"
 			class="turn"
 		>
-			{{ getTurnText(turn) }}
+			{{ $_getScrambleTurnText(turn) }}
 		</span>
 	</div>
 </template>
 
 <script>
+import getScrambleTurnText from '@/mixins/getScrambleTurnText';
+
 export default {
 	name: 'ScrambleString',
+	mixins: [getScrambleTurnText],
 	props: ['scramble', 'show-title'],
 	data() {
 		return {
@@ -29,15 +32,10 @@ export default {
 	},
 	computed: {
 		title() {
-			return this.scramble.map((turn) => this.getTurnText(turn)).join(' ');
+			return this.scramble.map((turn) => this.$_getScrambleTurnText(turn)).join(' ');
 		},
 	},
 	methods: {
-		getTurnText(turn) {
-			return turn.depth > 1
-				? `${turn.face.toLowerCase()}${turn.modifier}`
-				: `${turn.face}${turn.modifier}`;
-		},
 		getColor(turn) {
 			return this.faceColors[turn.face];
 		},
