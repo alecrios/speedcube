@@ -1,19 +1,19 @@
 <template>
 	<div>
-		<BaseButton name="Create" size="small" type="primary" @click="showModal = true"/>
+		<BaseButton name="Export" size="small" type="secondary" @click="showModal = true"/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalCreateSession v-if="showModal" @close="showModal = false"/>
+			<ModalExportSession v-if="showModal" @close="showModal = false"/>
 		</Portal>
 	</div>
 </template>
 
 <script>
 import BaseButton from '@/components/BaseButton.vue';
-import ModalCreateSession from '@/components/ModalCreateSession.vue';
+import ModalExportSession from '@/components/ModalExportSession.vue';
 
 export default {
-	name: 'ButtonCreateSession',
+	name: 'ButtonExportSession',
 	data() {
 		return {
 			showModal: false,
@@ -21,7 +21,7 @@ export default {
 	},
 	components: {
 		BaseButton,
-		ModalCreateSession,
+		ModalExportSession,
 	},
 };
 </script>

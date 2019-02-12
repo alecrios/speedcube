@@ -7,7 +7,7 @@
 		@click="$emit('click')"
 	>
 		<svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<path class="path" :d="pathData[icon]"/>
+			<path :class="['path', icon]" :d="pathData[icon]"/>
 		</svg>
 	</button>
 </template>
@@ -54,7 +54,7 @@ export default {
 	fill: var(--color-secondary);
 }
 
-.icon-button:not(:disabled):hover .svg .path {
-	fill: var(--color-white);
-}
+.icon-button:not(:disabled):hover .svg .path.penalty {fill: var(--color-cube-orange)}
+.icon-button:not(:disabled):hover .svg .path.remove  {fill: var(--color-cube-red)}
+.icon-button:not(:disabled):hover .svg .path.rename  {fill: var(--color-cube-yellow)}
 </style>
