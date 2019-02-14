@@ -3,11 +3,11 @@
 		<BaseWrapper>
 			<div class="bar">
 				<span class="item">
-					&copy; {{ new Date().getFullYear() }} <a href="http://alecrios.com">Alec Rios</a>
+					&copy; {{ new Date().getFullYear() }} <a href="https://alecrios.com">Alec Rios</a>
 				</span>
 
 				<span class="item">
-					<a href="http://alecrios.com/contact">Send Feedback</a>
+					<a href="https://alecrios.com/contact">Send Feedback</a>
 				</span>
 			</div>
 		</BaseWrapper>
