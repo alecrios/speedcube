@@ -2,6 +2,7 @@
 	<input
 		type="text"
 		:id="name | toKebabCase"
+		:aria-label="name"
 		:placeholder="placeholder"
 		:value="value"
 		@input="$emit('input', $event.target.value)"

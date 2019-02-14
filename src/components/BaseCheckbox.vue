@@ -4,6 +4,7 @@
 			class="checkbox"
 			type="checkbox"
 			:id="name | toKebabCase"
+			:aria-label="name"
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
 		>

@@ -2,6 +2,7 @@
 	<select
 		:class="size"
 		:id="name | toKebabCase"
+		:aria-label="name"
 		:value="value"
 		@input="$emit('input', $event.target.value)"
 	>
