@@ -7,7 +7,7 @@
 				</span>
 
 				<span class="item">
-					<a href="http://alecrios.com">Send Feedback</a>
+					<a href="http://alecrios.com/contact">Send Feedback</a>
 				</span>
 			</div>
 		</BaseWrapper>
