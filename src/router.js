@@ -4,6 +4,7 @@ import Timer from './views/Timer.vue';
 import Sessions from './views/Sessions.vue';
 import Solves from './views/Solves.vue';
 import Stats from './views/Stats.vue';
+import NotFound from './views/NotFound.vue';
 
 Vue.use(Router);
 
@@ -31,6 +32,11 @@ export default new Router({
 			path: '/stats',
 			name: 'stats',
 			component: Stats,
+		},
+		{
+			path: '*',
+			name: 'not-found',
+			component: NotFound,
 		},
 	],
 });
