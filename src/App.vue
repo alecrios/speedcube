@@ -40,7 +40,38 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 300;
+	src:
+		local('Roboto Light'),
+		local('Roboto-Light'),
+		url('./assets/fonts/roboto-v18-latin-300.woff2') format('woff2'),
+		url('./assets/fonts/roboto-v18-latin-300.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		local('Roboto'),
+		local('Roboto-Regular'),
+		url('./assets/fonts/roboto-v18-latin-regular.woff2') format('woff2'),
+		url('./assets/fonts/roboto-v18-latin-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	src:
+		local('Roboto Medium'),
+		local('Roboto-Medium'),
+		url('./assets/fonts/roboto-v18-latin-500.woff2') format('woff2'),
+		url('./assets/fonts/roboto-v18-latin-500.woff') format('woff');
+}
 
 :root {
 	--color-white: hsla(220, 10%, 85%, 1);
