@@ -80,7 +80,6 @@ export default {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 1.5rem;
-	margin-bottom: 1.5rem;
 }
 
 .actions {
