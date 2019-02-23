@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="timer">
 		<TheTimerScramble
 			:solve-id="solveId"
 			:scramble="solve.scramble"
@@ -62,3 +62,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.timer {
+	padding: 1.5rem 0;
+}
+</style>

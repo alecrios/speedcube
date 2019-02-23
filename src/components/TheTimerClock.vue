@@ -139,7 +139,7 @@ export default {
 }
 
 .display {
-	padding: 1.5rem;
+	padding: 3rem;
 	font-size: 4.5rem;
 	line-height: 4rem;
 	font-weight: 300;

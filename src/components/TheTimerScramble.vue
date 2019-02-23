@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .scramble-display {
-	padding: 1.5rem;
+	padding: 0 1.5rem;
 }
 
 .container {
