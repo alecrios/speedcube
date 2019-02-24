@@ -1,16 +1,5 @@
 # Speedcube
 
-## Features
-
-* Supports the the most popular cube sizes: 2×2×2, 3×3×3, 4×4×4, and 5×5×5
-* Offers the ability to create unlimited named sessions
-* Displays scrambles with color-coded turns for easy reading
-* Provides the option of marking solves with DNF and +2 penalties
-* Allows exporting of solves
-* Shows statistics about solves
-* Works even without an internet connection
-* Optimized for both mobile and desktop devices
-
 ## Development
 
 ### Set up project
@@ -30,3 +19,7 @@ npm run serve
 ```
 npm run build
 ```
+
+## Deployment
+
+This project is configured with Netlify to automatically build and deploy when a change is pushed to the master branch.

@@ -115,7 +115,7 @@ export default {
 }
 
 html {
-	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;;
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	background-color: var(--color-slate);
 	text-shadow: var(--text-shadow);
 }
