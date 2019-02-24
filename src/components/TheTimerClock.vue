@@ -39,7 +39,7 @@ export default {
 	methods: {
 		startPreparation() {
 			this.status = 'pending';
-			this.preparationTimer = setTimeout(this.finishPreparation, 500);
+			this.preparationTimer = setTimeout(this.finishPreparation, 250);
 		},
 		cancelPreparation() {
 			this.status = 'idle';
