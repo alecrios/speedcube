@@ -2,10 +2,10 @@
 	<nav class="nav">
 		<BaseWrapper>
 			<div class="links">
-				<RouterLink class="link" to="/">Timer</RouterLink>
-				<RouterLink class="link" to="/sessions">Sessions</RouterLink>
-				<RouterLink class="link" to="/solves">Solves</RouterLink>
-				<RouterLink class="link" to="/stats">Stats</RouterLink>
+				<RouterLink class="link" to="/">{{ $t('timer') }}</RouterLink>
+				<RouterLink class="link" to="/sessions">{{ $t('sessions') }}</RouterLink>
+				<RouterLink class="link" to="/solves">{{ $t('solves') }}</RouterLink>
+				<RouterLink class="link" to="/stats">{{ $t('stats') }}</RouterLink>
 			</div>
 		</BaseWrapper>
 	</nav>
@@ -31,7 +31,7 @@ export default {
 
 .links {
 	display: flex;
-	justify-content: center;
+	overflow-x: auto;
 }
 
 .link {

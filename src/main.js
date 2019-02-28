@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import PortalVue from 'portal-vue';
+import store from '@/store';
+import router from '@/router';
+import translate from '@/mixins/translate';
+import App from '@/App.vue';
+
+import '@/registerServiceWorker';
+
 import kebabCase from 'lodash.kebabcase';
-import App from './App.vue';
-import store from './store';
-import './registerServiceWorker';
-import router from './router';
 
 Vue.config.productionTip = false;
 
@@ -25,6 +28,8 @@ Vue.filter('formatTime', (time) => {
 
 	return `${HH}${mm}${ss}${SS}`;
 });
+
+Vue.mixin(translate);
 
 new Vue({
 	store,
