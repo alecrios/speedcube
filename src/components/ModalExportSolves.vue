@@ -1,27 +1,17 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Export Session" type="h2"/>
+			<BaseHeading value="Export Solves" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel name="Session"/>
+				<BaseLabel name="File Name"/>
 
-				<BaseSelect
-					name="Session"
-					v-model="session"
-					:options="sessions"
-				/>
-			</div>
-
-			<div class="field">
-				<BaseLabel name="Export Type"/>
-
-				<BaseSelect
-					name="Export Type"
-					v-model="exportType"
-					:options="exportTypes"
+				<BaseInput
+					name="File Name"
+					:placeholder="sessionName"
+					v-model="fileName"
 				/>
 			</div>
 
@@ -32,6 +22,16 @@
 					name="File Type"
 					v-model="fileType"
 					:options="fileTypes"
+				/>
+			</div>
+
+			<div class="field">
+				<BaseLabel name="Export Type"/>
+
+				<BaseSelect
+					name="Export Type"
+					v-model="exportType"
+					:options="exportTypes"
 				/>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 
 <script>
 import {saveAs} from 'file-saver';
-import kebabCase from 'lodash.kebabcase';
+import filenamify from 'filenamify';
 
 import modalComponents from '@/mixins/modalComponents';
 import getScrambleTurnText from '@/mixins/getScrambleTurnText';
@@ -63,24 +63,21 @@ export default {
 				{label: 'CSV', value: 'csv'},
 				{label: 'JSON', value: 'json'},
 			],
-			session: this.$store.state.currentSession,
-			exportType: 'timesOnly',
+			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,
 			fileType: 'csv',
+			exportType: 'timesOnly',
 		};
 	},
 	computed: {
-		sessions() {
-			return this.$store.state.sessionIds.map((sessionId) => ({
-				value: sessionId,
-				label: this.$store.state.sessions[sessionId].name,
-			}));
+		sessionId() {
+			return this.$store.state.currentSession;
 		},
 		sessionName() {
-			return this.$store.state.sessions[this.session].name;
+			return this.$store.state.sessions[this.sessionId].name;
 		},
 		solves() {
 			return this.$store.state.solveIds
-				.filter((solveId) => this.$store.state.solves[solveId].session === this.session)
+				.filter((solveId) => this.$store.state.solves[solveId].session === this.sessionId)
 				.map((solveId) => this.$store.state.solves[solveId]);
 		},
 		csv() {
@@ -127,9 +124,10 @@ export default {
 			return solve.scramble.map((turn) => this.$_getScrambleTurnText(turn)).join(' ');
 		},
 		exportSolves() {
+			const fileName = filenamify(this.fileName || this.sessionName, {replacement: '-'});
 			const data = this[this.fileType];
 			const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
-			saveAs(blob, `${kebabCase(this.sessionName)}.${this.fileType}`);
+			saveAs(blob, `${fileName}.${this.fileType}`);
 			this.$emit('close');
 		},
 	},
