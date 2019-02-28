@@ -109,8 +109,10 @@ export default {
 	--color-cube-orange: hsla(23, 80%, 70%, 1);
 	--color-cube-yellow: hsla(47, 80%, 70%, 1);
 
+	--color-backdrop: hsla(0, 0%, 0%, .5);
 	--box-shadow-focus: 0 0 0 .125rem hsla(220, 100%, 75%, .5);
-	--box-shadow: 0 .125rem .25rem 0 hsla(0, 0%, 0%, .5);
+	--box-shadow-small: 0 .125rem .25rem 0 hsla(0, 0%, 0%, .5);
+	--box-shadow-large: 0 .75rem 1.5rem 0 hsla(0, 0%, 0%, .5);
 	--text-shadow: 0 .125rem .125rem hsla(0, 0%, 0%, .125);
 }
 

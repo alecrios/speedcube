@@ -47,7 +47,7 @@ export default {
 	border-top: .125rem solid var(--color-secondary-lighter);
 	border-bottom: .125rem solid var(--color-secondary-darker);
 	border-radius: .25rem;
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow-small);
 	margin-right: .75rem;
 }
 
@@ -57,7 +57,7 @@ export default {
 }
 
 .checkbox:focus + .label::before {
-	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+	box-shadow: var(--box-shadow-focus), var(--box-shadow-small);
 }
 
 .checkbox:checked + .label::after {
