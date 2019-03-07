@@ -118,7 +118,7 @@ export default {
 
 html {
 	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-	background-color: var(--color-slate);
+	background-color: var(--color-charcoal);
 	text-shadow: var(--text-shadow);
 }
 
@@ -133,6 +133,10 @@ html {
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
 	box-shadow: none;
+}
+
+body {
+	background-color: var(--color-charcoal);
 }
 
 #app {
