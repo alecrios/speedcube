@@ -1,13 +1,13 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Penalize Solve" type="h2"/>
+			<BaseHeading :value="$t('penalizeSolve')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseCheckbox name="DNF (Did Not Finish)" v-model="dnf"/>
-				<BaseCheckbox name="+2 (Plus 2 Seconds)" v-model="p2"/>
+				<BaseCheckbox :name="`${$t('dnf')} (${$t('didNotFinish')})`" v-model="dnf"/>
+				<BaseCheckbox :name="`${$t('+2')} (${$t('plus2Seconds')})`" v-model="p2"/>
 			</div>
 		</div>
 

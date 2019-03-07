@@ -1,35 +1,35 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Export Solves" type="h2"/>
+			<BaseHeading :value="$t('exportSolves')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel name="File Name"/>
+				<BaseLabel :name="$t('fileName')"/>
 
 				<BaseInput
-					name="File Name"
+					:name="$t('fileName')"
 					:placeholder="sessionName"
 					v-model="fileName"
 				/>
 			</div>
 
 			<div class="field">
-				<BaseLabel name="File Type"/>
+				<BaseLabel :name="$t('fileType')"/>
 
 				<BaseSelect
-					name="File Type"
+					:name="$t('fileType')"
 					v-model="fileType"
 					:options="fileTypes"
 				/>
 			</div>
 
 			<div class="field">
-				<BaseLabel name="Export Type"/>
+				<BaseLabel :name="$t('exportType')"/>
 
 				<BaseSelect
-					name="Export Type"
+					:name="$t('exportType')"
 					v-model="exportType"
 					:options="exportTypes"
 				/>
@@ -37,8 +37,8 @@
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Export" type="primary" @click="exportSolves()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('export')" type="primary" @click="exportSolves()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>
@@ -56,12 +56,12 @@ export default {
 	data() {
 		return {
 			exportTypes: [
-				{label: 'Times Only', value: 'timesOnly'},
-				{label: 'Times and Scrambles', value: 'timesAndScrambles'},
+				{label: this.$t('timesOnly'), value: 'timesOnly'},
+				{label: this.$t('timesAndScrambles'), value: 'timesAndScrambles'},
 			],
 			fileTypes: [
-				{label: 'CSV', value: 'csv'},
-				{label: 'JSON', value: 'json'},
+				{label: this.$t('csv'), value: 'csv'},
+				{label: this.$t('json'), value: 'json'},
 			],
 			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,
 			fileType: 'csv',

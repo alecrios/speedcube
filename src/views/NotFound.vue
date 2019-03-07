@@ -2,7 +2,7 @@
 	<main>
 		<BaseWrapper>
 			<EmptyContent
-				message="Page not found"
+				:message="$t('pageNotFound')"
 			/>
 		</BaseWrapper>
 	</main>

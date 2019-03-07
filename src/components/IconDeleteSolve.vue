@@ -2,7 +2,7 @@
 	<div>
 		<BaseIcon
 			icon="remove"
-			name="Delete"
+			:name="$t('delete')"
 			@click="showModal = true"
 		/>
 

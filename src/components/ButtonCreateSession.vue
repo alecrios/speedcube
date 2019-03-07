@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<BaseButton name="Create Session" size="small" type="primary" @click="showModal = true"/>
+		<BaseButton
+			:name="$t('createSession')"
+			size="small"
+			type="primary"
+			@click="showModal = true"
+		/>
 
 		<Portal to="modals" v-if="showModal">
 			<ModalCreateSession v-if="showModal" @close="showModal = false"/>

@@ -1,19 +1,19 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Rename Session" type="h2"/>
+			<BaseHeading :value="$t('renameSession')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel name="Session Name"/>
-				<BaseInput name="Session Name" :placeholder="getDateString()" v-model="name"/>
+				<BaseLabel :name="$t('sessionName')"/>
+				<BaseInput :name="$t('sessionName')" :placeholder="getDateString()" v-model="name"/>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Save" type="primary" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('save')" type="primary" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>
