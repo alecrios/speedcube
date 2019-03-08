@@ -5,11 +5,18 @@
 				<span class="item">
 					&copy;
 					{{ new Date().getFullYear() }}
-					<a href="https://alecrios.com" target="_blank" rel="noopener">Alec Rios</a>
+					<a
+						href="https://alecrios.com"
+						target="_blank"
+						rel="noopener">Alec Rios</a>
 				</span>
 
 				<span class="item">
-					<a href="https://alecrios.com/contact" target="_blank" rel="noopener">Send Feedback</a>
+					<a
+						href="https://alecrios.com/contact"
+						target="_blank"
+						rel="noopener"
+					>{{ $t('sendFeedback') }}</a>
 				</span>
 			</div>
 		</BaseWrapper>

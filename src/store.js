@@ -9,6 +9,9 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		settings: {
+			locale: 'en',
+		},
 		currentSession: null,
 		sessionIds: [],
 		sessions: {},
@@ -16,6 +19,9 @@ export default new Vuex.Store({
 		solves: {},
 	},
 	mutations: {
+		setLocale(state, locale) {
+			state.settings.locale = locale;
+		},
 		addSession(state, payload) {
 			state.sessionIds.unshift(payload.id);
 			Vue.set(state.sessions, payload.id, {

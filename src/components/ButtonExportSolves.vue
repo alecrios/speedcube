@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<BaseButton name="Export Solves" size="small" type="primary" @click="showModal = true"/>
+		<BaseButton
+			:name="$t('exportSolves')"
+			size="small"
+			type="primary"
+			@click="showModal = true"
+		/>
 
 		<Portal to="modals" v-if="showModal">
 			<ModalExportSolves v-if="showModal" @close="showModal = false"/>

@@ -1,7 +1,8 @@
 <template>
 	<div class="container">
 		<BaseSelect
-			name="Session"
+			id="session"
+			:name="$t('session')"
 			v-model="currentSession"
 			:options="sessions"
 			size="small"

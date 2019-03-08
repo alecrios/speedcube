@@ -1,51 +1,63 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Export Session" type="h2"/>
+			<BaseHeading :value="$t('exportSolves')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel name="Session"/>
+				<BaseLabel
+					field-id="file-name"
+					:name="$t('fileName')"
+				/>
 
-				<BaseSelect
-					name="Session"
-					v-model="session"
-					:options="sessions"
+				<BaseInput
+					id="file-name"
+					:name="$t('fileName')"
+					:placeholder="sessionName"
+					v-model="fileName"
 				/>
 			</div>
 
 			<div class="field">
-				<BaseLabel name="Export Type"/>
-
-				<BaseSelect
-					name="Export Type"
-					v-model="exportType"
-					:options="exportTypes"
+				<BaseLabel
+					field-id="file-type"
+					:name="$t('fileType')"
 				/>
-			</div>
-
-			<div class="field">
-				<BaseLabel name="File Type"/>
 
 				<BaseSelect
-					name="File Type"
+					id="file-type"
+					:name="$t('fileType')"
 					v-model="fileType"
 					:options="fileTypes"
+				/>
+			</div>
+
+			<div class="field">
+				<BaseLabel
+					field-id="export-type"
+					:name="$t('exportType')"
+				/>
+
+				<BaseSelect
+					id="export-type"
+					:name="$t('exportType')"
+					v-model="exportType"
+					:options="exportTypes"
 				/>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Export" type="primary" @click="exportSolves()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('export')" type="primary" @click="exportSolves()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>
 
 <script>
 import {saveAs} from 'file-saver';
-import kebabCase from 'lodash.kebabcase';
+import filenamify from 'filenamify';
 
 import modalComponents from '@/mixins/modalComponents';
 import getScrambleTurnText from '@/mixins/getScrambleTurnText';
@@ -56,31 +68,28 @@ export default {
 	data() {
 		return {
 			exportTypes: [
-				{label: 'Times Only', value: 'timesOnly'},
-				{label: 'Times and Scrambles', value: 'timesAndScrambles'},
+				{label: this.$t('timesOnly'), value: 'timesOnly'},
+				{label: this.$t('timesAndScrambles'), value: 'timesAndScrambles'},
 			],
 			fileTypes: [
-				{label: 'CSV', value: 'csv'},
-				{label: 'JSON', value: 'json'},
+				{label: this.$t('csv'), value: 'csv'},
+				{label: this.$t('json'), value: 'json'},
 			],
-			session: this.$store.state.currentSession,
-			exportType: 'timesOnly',
+			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,
 			fileType: 'csv',
+			exportType: 'timesOnly',
 		};
 	},
 	computed: {
-		sessions() {
-			return this.$store.state.sessionIds.map((sessionId) => ({
-				value: sessionId,
-				label: this.$store.state.sessions[sessionId].name,
-			}));
+		sessionId() {
+			return this.$store.state.currentSession;
 		},
 		sessionName() {
-			return this.$store.state.sessions[this.session].name;
+			return this.$store.state.sessions[this.sessionId].name;
 		},
 		solves() {
 			return this.$store.state.solveIds
-				.filter((solveId) => this.$store.state.solves[solveId].session === this.session)
+				.filter((solveId) => this.$store.state.solves[solveId].session === this.sessionId)
 				.map((solveId) => this.$store.state.solves[solveId]);
 		},
 		csv() {
@@ -127,9 +136,10 @@ export default {
 			return solve.scramble.map((turn) => this.$_getScrambleTurnText(turn)).join(' ');
 		},
 		exportSolves() {
+			const fileName = filenamify(this.fileName || this.sessionName, {replacement: '-'});
 			const data = this[this.fileType];
 			const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
-			saveAs(blob, `${kebabCase(this.sessionName)}.${this.fileType}`);
+			saveAs(blob, `${fileName}.${this.fileType}`);
 			this.$emit('close');
 		},
 	},

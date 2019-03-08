@@ -1,16 +1,15 @@
 import Vue from 'vue';
 import PortalVue from 'portal-vue';
-import kebabCase from 'lodash.kebabcase';
-import App from './App.vue';
-import store from './store';
-import './registerServiceWorker';
-import router from './router';
+import store from '@/store';
+import router from '@/router';
+import translate from '@/mixins/translate';
+import App from '@/App.vue';
+
+import '@/registerServiceWorker';
 
 Vue.config.productionTip = false;
 
 Vue.use(PortalVue);
-
-Vue.filter('toKebabCase', (string) => kebabCase(string));
 
 Vue.filter('formatTime', (time) => {
 	let SS = Math.floor((time / 10) % 100);
@@ -25,6 +24,8 @@ Vue.filter('formatTime', (time) => {
 
 	return `${HH}${mm}${ss}${SS}`;
 });
+
+Vue.mixin(translate);
 
 new Vue({
 	store,

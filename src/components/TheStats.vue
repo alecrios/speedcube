@@ -9,17 +9,17 @@
 
 			<div class="stats">
 				<div class="stat best">
-					<div class="label">Best</div>
+					<div class="label">{{ $t('best') }}</div>
 					<div class="value">{{ getBestTime(set.limit) }}</div>
 				</div>
 
 				<div class="stat worst">
-					<div class="label">Worst</div>
+					<div class="label">{{ $t('worst') }}</div>
 					<div class="value">{{ getWorstTime(set.limit) }}</div>
 				</div>
 
 				<div class="stat average">
-					<div class="label">Average</div>
+					<div class="label">{{ $t('average') }}</div>
 					<div class="value">{{ getAverageTime(set.limit) }}</div>
 				</div>
 			</div>
@@ -37,15 +37,15 @@ export default {
 		return {
 			sets: [
 				{
-					title: 'Session',
+					title: this.$t('session'),
 					limit: null,
 				},
 				{
-					title: 'Latest 5',
+					title: this.$t('latest5'),
 					limit: 5,
 				},
 				{
-					title: 'Latest 12',
+					title: this.$t('latest12'),
 					limit: 12,
 				},
 			],

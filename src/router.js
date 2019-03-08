@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Timer from './views/Timer.vue';
-import Sessions from './views/Sessions.vue';
-import Solves from './views/Solves.vue';
-import Stats from './views/Stats.vue';
-import NotFound from './views/NotFound.vue';
+import Timer from '@/views/Timer.vue';
+import Sessions from '@/views/Sessions.vue';
+import Solves from '@/views/Solves.vue';
+import Stats from '@/views/Stats.vue';
+import NotFound from '@/views/NotFound.vue';
 
 Vue.use(Router);
 

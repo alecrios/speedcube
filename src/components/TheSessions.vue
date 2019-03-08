@@ -7,10 +7,10 @@
 		<BaseTable>
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Cube</th>
-					<th class="align-right">Solves</th>
-					<th class="align-right">Actions</th>
+					<th>{{ $t('name') }}</th>
+					<th>{{ $t('cube') }}</th>
+					<th class="align-right">{{ $t('solves') }}</th>
+					<th class="align-right">{{ $t('actions') }}</th>
 				</tr>
 			</thead>
 

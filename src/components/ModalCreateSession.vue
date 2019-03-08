@@ -1,24 +1,42 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Create Session" type="h2"/>
+			<BaseHeading :value="$t('createSession')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel name="Session Name"/>
-				<BaseInput name="Session Name" :placeholder="getDateString()" v-model="name"/>
+				<BaseLabel
+					field-id="session-name"
+					:name="$t('sessionName')"
+				/>
+
+				<BaseInput
+					id="session-name"
+					:name="$t('sessionName')"
+					:placeholder="getDateString()"
+					v-model="name"
+				/>
 			</div>
 
 			<div class="field">
-				<BaseLabel name="Cube Type"/>
-				<BaseSelect name="Cube Type" v-model="cubeSize" :options="cubeSizes"/>
+				<BaseLabel
+					field-id="cube-type"
+					:name="$t('cubeType')"
+				/>
+
+				<BaseSelect
+					id="cube-type"
+					:name="$t('cubeType')"
+					v-model="cubeSize"
+					:options="cubeSizes"
+				/>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Submit" type="primary" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('submit')" type="primary" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>

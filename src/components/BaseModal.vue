@@ -51,7 +51,7 @@ export default {
 	align-items: flex-start;
 	justify-content: center;
 	padding: 1.5rem;
-	background-color: rgba(0, 0, 0, .5);
+	background-color: var(--color-backdrop);
 	transition: opacity 250ms ease;
 }
 
@@ -62,7 +62,7 @@ export default {
 	border-top: .125rem solid var(--color-slate-lighter);
 	border-bottom: .125rem solid var(--color-slate-darker);
 	border-radius: .25rem;
-	box-shadow: 0 .75rem 1.5rem 0 rgba(0, 0, 0, .5);
+	box-shadow: var(--box-shadow-large);
 	transition: transform 250ms ease;
 }
 

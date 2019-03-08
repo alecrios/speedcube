@@ -2,7 +2,7 @@
 	<div>
 		<BaseIcon
 			icon="penalty"
-			name="Penalize"
+			:name="$t('penalize')"
 			@click="showModal = true"
 		/>
 

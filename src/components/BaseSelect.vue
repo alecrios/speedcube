@@ -1,7 +1,7 @@
 <template>
 	<select
 		:class="size"
-		:id="name | toKebabCase"
+		:id="id"
 		:aria-label="name"
 		:value="value"
 		@input="$emit('input', $event.target.value)"
@@ -19,7 +19,7 @@
 <script>
 export default {
 	name: 'BaseSelect',
-	props: ['name', 'value', 'options', 'size'],
+	props: ['name', 'id', 'value', 'options', 'size'],
 };
 </script>
 
@@ -34,7 +34,7 @@ select {
 	background-color: var(--color-secondary);
 	border-top: .125rem solid var(--color-secondary-lighter);
 	border-bottom: .125rem solid var(--color-secondary-darker);
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow-small);
 	padding-top: .4375rem;
 	padding-bottom: .5625rem;
 	padding-left: 1rem;
@@ -75,6 +75,6 @@ select.small:active {
 }
 
 select:focus {
-	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+	box-shadow: var(--box-shadow-focus), var(--box-shadow-small);
 }
 </style>

@@ -3,20 +3,20 @@
 		<input
 			class="checkbox"
 			type="checkbox"
-			:id="name | toKebabCase"
+			:id="id"
 			:aria-label="name"
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
 		>
 
-		<label class="label" :for="name | toKebabCase">{{ name }}</label>
+		<label class="label" :for="id">{{ name }}</label>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'BaseCheckbox',
-	props: ['name', 'value'],
+	props: ['name', 'id', 'value'],
 };
 </script>
 
@@ -47,7 +47,7 @@ export default {
 	border-top: .125rem solid var(--color-secondary-lighter);
 	border-bottom: .125rem solid var(--color-secondary-darker);
 	border-radius: .25rem;
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow-small);
 	margin-right: .75rem;
 }
 
@@ -57,7 +57,7 @@ export default {
 }
 
 .checkbox:focus + .label::before {
-	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+	box-shadow: var(--box-shadow-focus), var(--box-shadow-small);
 }
 
 .checkbox:checked + .label::after {

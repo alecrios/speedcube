@@ -1,19 +1,28 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Penalize Solve" type="h2"/>
+			<BaseHeading :value="$t('penalizeSolve')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<BaseCheckbox name="DNF (Did Not Finish)" v-model="dnf"/>
-				<BaseCheckbox name="+2 (Plus 2 Seconds)" v-model="p2"/>
+				<BaseCheckbox
+					id="did-not-finish"
+					:name="`DNF (${$t('didNotFinish')})`"
+					v-model="dnf"
+				/>
+
+				<BaseCheckbox
+					id="plus-2-seconds"
+					:name="`+2 (${$t('plus2Seconds')})`"
+					v-model="p2"
+				/>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Save" type="primary" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('save')" type="primary" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>

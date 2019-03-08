@@ -2,7 +2,7 @@
 	<div>
 		<BaseIcon
 			icon="rename"
-			name="Rename"
+			:name="$t('rename')"
 			@click="showModal = true"
 		/>
 

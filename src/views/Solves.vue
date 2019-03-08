@@ -3,7 +3,7 @@
 		<BaseWrapper>
 			<EmptyContent
 				v-if="!$_solveIdsOfCurrentSession.length"
-				message="No solves in the current session"
+				:message="$t('noSolvesInCurrentSession')"
 			/>
 
 			<TheSolves v-if="$_solveIdsOfCurrentSession.length"/>

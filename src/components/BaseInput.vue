@@ -1,7 +1,7 @@
 <template>
 	<input
 		type="text"
-		:id="name | toKebabCase"
+		:id="id"
 		:aria-label="name"
 		:placeholder="placeholder"
 		:value="value"
@@ -12,7 +12,7 @@
 <script>
 export default {
 	name: 'BaseInput',
-	props: ['name', 'value', 'placeholder'],
+	props: ['name', 'id', 'value', 'placeholder'],
 };
 </script>
 

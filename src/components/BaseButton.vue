@@ -25,7 +25,7 @@ export default {
 	padding-right: 1.25rem;
 	color: var(--color-white);
 	border-radius: .25rem;
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--box-shadow-small);
 	font-size: 1rem;
 	line-height: 1.5rem;
 	letter-spacing: .03125rem;
@@ -54,7 +54,7 @@ export default {
 }
 
 .button:focus {
-	box-shadow: var(--box-shadow-focus), var(--box-shadow);
+	box-shadow: var(--box-shadow-focus), var(--box-shadow-small);
 }
 
 .button.primary {

@@ -1,18 +1,18 @@
 <template>
 	<BaseModal @close="$emit('close')">
 		<div class="header">
-			<BaseHeading value="Delete Session" type="h2"/>
+			<BaseHeading :value="$t('deleteSession')" type="h2"/>
 		</div>
 
 		<div class="body">
 			<div class="field">
-				<p>Are you sure you want to permanently delete "{{ name }}" and all its solves?</p>
+				<p>{{ $t('deleteSessionConfirmation') }}</p>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Delete" type="danger" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('delete')" type="danger" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>

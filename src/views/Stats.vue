@@ -3,7 +3,7 @@
 		<BaseWrapper>
 			<EmptyContent
 				v-if="!$_solveIdsOfCurrentSession.length"
-				message="No stats for the current session"
+				:message="$t('noStatsForCurrentSession')"
 			/>
 
 			<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
