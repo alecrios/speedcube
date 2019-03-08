@@ -3,20 +3,20 @@
 		<input
 			class="checkbox"
 			type="checkbox"
-			:id="name | toKebabCase"
+			:id="id"
 			:aria-label="name"
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
 		>
 
-		<label class="label" :for="name | toKebabCase">{{ name }}</label>
+		<label class="label" :for="id">{{ name }}</label>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'BaseCheckbox',
-	props: ['name', 'value'],
+	props: ['name', 'id', 'value'],
 };
 </script>
 

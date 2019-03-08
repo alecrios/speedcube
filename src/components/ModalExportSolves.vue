@@ -6,9 +6,13 @@
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel :name="$t('fileName')"/>
+				<BaseLabel
+					field-id="file-name"
+					:name="$t('fileName')"
+				/>
 
 				<BaseInput
+					id="file-name"
 					:name="$t('fileName')"
 					:placeholder="sessionName"
 					v-model="fileName"
@@ -16,9 +20,13 @@
 			</div>
 
 			<div class="field">
-				<BaseLabel :name="$t('fileType')"/>
+				<BaseLabel
+					field-id="file-type"
+					:name="$t('fileType')"
+				/>
 
 				<BaseSelect
+					id="file-type"
 					:name="$t('fileType')"
 					v-model="fileType"
 					:options="fileTypes"
@@ -26,9 +34,13 @@
 			</div>
 
 			<div class="field">
-				<BaseLabel :name="$t('exportType')"/>
+				<BaseLabel
+					field-id="export-type"
+					:name="$t('exportType')"
+				/>
 
 				<BaseSelect
+					id="export-type"
 					:name="$t('exportType')"
 					v-model="exportType"
 					:options="exportTypes"

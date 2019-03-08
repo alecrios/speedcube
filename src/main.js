@@ -7,13 +7,9 @@ import App from '@/App.vue';
 
 import '@/registerServiceWorker';
 
-import kebabCase from 'lodash.kebabcase';
-
 Vue.config.productionTip = false;
 
 Vue.use(PortalVue);
-
-Vue.filter('toKebabCase', (string) => kebabCase(string));
 
 Vue.filter('formatTime', (time) => {
 	let SS = Math.floor((time / 10) % 100);

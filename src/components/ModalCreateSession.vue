@@ -6,13 +6,31 @@
 
 		<div class="body">
 			<div class="field">
-				<BaseLabel :name="$t('sessionName')"/>
-				<BaseInput :name="$t('sessionName')" :placeholder="getDateString()" v-model="name"/>
+				<BaseLabel
+					field-id="session-name"
+					:name="$t('sessionName')"
+				/>
+
+				<BaseInput
+					id="session-name"
+					:name="$t('sessionName')"
+					:placeholder="getDateString()"
+					v-model="name"
+				/>
 			</div>
 
 			<div class="field">
-				<BaseLabel :name="$t('cubeType')"/>
-				<BaseSelect :name="$t('cubeType')" v-model="cubeSize" :options="cubeSizes"/>
+				<BaseLabel
+					field-id="cube-type"
+					:name="$t('cubeType')"
+				/>
+
+				<BaseSelect
+					id="cube-type"
+					:name="$t('cubeType')"
+					v-model="cubeSize"
+					:options="cubeSizes"
+				/>
 			</div>
 		</div>
 

@@ -6,8 +6,17 @@
 
 		<div class="body">
 			<div class="field">
-				<BaseCheckbox :name="`${$t('dnf')} (${$t('didNotFinish')})`" v-model="dnf"/>
-				<BaseCheckbox :name="`${$t('+2')} (${$t('plus2Seconds')})`" v-model="p2"/>
+				<BaseCheckbox
+					id="did-not-finish"
+					:name="`${$t('dnf')} (${$t('didNotFinish')})`"
+					v-model="dnf"
+				/>
+
+				<BaseCheckbox
+					id="plus-2-seconds"
+					:name="`${$t('+2')} (${$t('plus2Seconds')})`"
+					v-model="p2"
+				/>
 			</div>
 		</div>
 

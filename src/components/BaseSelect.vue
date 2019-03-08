@@ -1,7 +1,7 @@
 <template>
 	<select
 		:class="size"
-		:id="name | toKebabCase"
+		:id="id"
 		:aria-label="name"
 		:value="value"
 		@input="$emit('input', $event.target.value)"
@@ -19,7 +19,7 @@
 <script>
 export default {
 	name: 'BaseSelect',
-	props: ['name', 'value', 'options', 'size'],
+	props: ['name', 'id', 'value', 'options', 'size'],
 };
 </script>
 

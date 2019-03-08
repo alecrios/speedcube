@@ -1,11 +1,11 @@
 <template>
-	<label :for="name | toKebabCase">{{ name }}</label>
+	<label :for="fieldId">{{ name }}</label>
 </template>
 
 <script>
 export default {
 	name: 'BaseLabel',
-	props: ['name'],
+	props: ['name', 'field-id'],
 };
 </script>
 
