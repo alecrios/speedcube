@@ -11,8 +11,8 @@
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Delete" type="danger" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('delete')" type="danger" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>

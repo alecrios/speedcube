@@ -8,21 +8,21 @@
 			<div class="field">
 				<BaseCheckbox
 					id="did-not-finish"
-					:name="`${$t('dnf')} (${$t('didNotFinish')})`"
+					:name="`DNF (${$t('didNotFinish')})`"
 					v-model="dnf"
 				/>
 
 				<BaseCheckbox
 					id="plus-2-seconds"
-					:name="`${$t('+2')} (${$t('plus2Seconds')})`"
+					:name="`+2 (${$t('plus2Seconds')})`"
 					v-model="p2"
 				/>
 			</div>
 		</div>
 
 		<div class="footer">
-			<BaseButton name="Save" type="primary" @click="submit()"/>
-			<BaseButton name="Cancel" type="secondary" @click="$emit('close')"/>
+			<BaseButton :name="$t('save')" type="primary" @click="submit()"/>
+			<BaseButton :name="$t('cancel')" type="secondary" @click="$emit('close')"/>
 		</div>
 	</BaseModal>
 </template>
