@@ -1,6 +1,6 @@
 <template>
 	<select
-		:class="size"
+		:class="['select', size]"
 		:id="id"
 		:aria-label="name"
 		:value="value"
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped>
-select {
+.select {
 	display: block;
 	width: 100%;
 	font-size: 1rem;
@@ -47,7 +47,7 @@ select {
 	cursor: pointer;
 }
 
-select.small {
+.select.small {
 	font-size: .75rem;
 	line-height: 1.25rem;
 	font-weight: 500;
@@ -59,7 +59,7 @@ select.small {
 	background-position: calc(100% - .25rem) 50%;
 }
 
-select:active {
+.select:active {
 	border-top: .125rem solid var(--color-secondary-darker);
 	border-bottom: .125rem solid var(--color-secondary-lighter);
 	background-position: calc(100% - .5rem) calc(50% + .0625rem);
@@ -68,13 +68,14 @@ select:active {
 	box-shadow: none;
 }
 
-select.small:active {
+.select.small:active {
 	background-position: calc(100% - .25rem) calc(50% + .0625rem);
 	padding-top: .25rem;
 	padding-bottom: .25rem;
 }
 
-select:focus {
+/* Selector is contrived in order to beat the specificity of the focus-visible rule */
+.select:focus:not([data-focus-visible-added]) {
 	box-shadow: var(--box-shadow-focus), var(--box-shadow-small);
 }
 </style>
