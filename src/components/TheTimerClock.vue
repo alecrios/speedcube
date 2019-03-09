@@ -4,11 +4,12 @@
 			class="display"
 			:data-status="status"
 			ref="display"
-			@mousedown="mousedownHandler()"
-			@mouseup="mouseupHandler()"
-			@touchstart.prevent="touchstartHandler()"
-			@touchend.prevent="touchendHandler()"
-			@mouseleave="mouseleaveHandler()"
+			@mousedown="mousedownHandler"
+			@mouseup="mouseupHandler"
+			@mouseleave="mouseleaveHandler"
+			@touchstart.prevent="touchstartHandler"
+			@touchend.prevent="touchendHandler"
+			@touchmove.prevent="touchmoveHandler"
 		>
 			{{ status === 'complete' ? previousTime : duration | formatTime }}
 		</button>
@@ -102,6 +103,15 @@ export default {
 		},
 		touchendHandler() {
 			this.releaseTimer();
+		},
+		touchmoveHandler(event) {
+			if (this.status !== 'pending' && this.status !== 'ready') return;
+
+			const touch = event.touches[0];
+
+			if (document.elementFromPoint(touch.pageX, touch.pageY) === this.$refs.display) return;
+
+			this.cancelPreparation();
 		},
 		keydownHandler(event) {
 			if (event.key !== ' ' || event.repeat) return;
