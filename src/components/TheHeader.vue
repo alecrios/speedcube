@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .header {
 	background-color: var(--color-charcoal);
-	border-top: .125rem solid var(--color-charcoal-lighter);
+	border-top: .125rem solid var(--color-charcoal);
 	border-bottom: .125rem solid var(--color-charcoal-darker);
 }
 

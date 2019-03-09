@@ -1,9 +1,15 @@
 <template>
 	<div id="app">
-		<TheHeader id="header"/>
-		<TheNav id="nav"/>
-		<RouterView id="content"/>
-		<TheFooter id="footer"/>
+		<div class="head">
+			<TheHeader/>
+			<TheNav/>
+		</div>
+
+		<div class="body">
+			<TheMain/>
+			<TheFooter/>
+		</div>
+
 		<PortalTarget name="modals"/>
 	</div>
 </template>
@@ -14,6 +20,7 @@ import 'focus-visible';
 
 import TheHeader from '@/components/TheHeader.vue';
 import TheNav from '@/components/TheNav.vue';
+import TheMain from '@/components/TheMain.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
 import addSession from '@/mixins/addSession';
@@ -24,6 +31,7 @@ export default {
 	components: {
 		TheHeader,
 		TheNav,
+		TheMain,
 		TheFooter,
 	},
 	methods: {
@@ -40,6 +48,9 @@ export default {
 </script>
 
 <style>
+/* Fonts
+----------------------------- */
+
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
@@ -72,6 +83,9 @@ export default {
 		url('./assets/fonts/roboto-v18-latin-500.woff2') format('woff2'),
 		url('./assets/fonts/roboto-v18-latin-500.woff') format('woff');
 }
+
+/* Root
+----------------------------- */
 
 :root {
 	--color-white: hsla(220, 10%, 85%, 1);
@@ -116,11 +130,43 @@ export default {
 	--text-shadow: 0 .125rem .125rem hsla(0, 0%, 0%, .125);
 }
 
+/* Global
+----------------------------- */
+
 html {
 	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 	background-color: var(--color-charcoal);
 	text-shadow: var(--text-shadow);
+	height: 100%;
 }
+
+body {
+	background-color: var(--color-charcoal);
+	height: 100%;
+}
+
+/* Layout
+----------------------------- */
+
+#app {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#app > .head {
+	flex: none;
+}
+
+#app > .body {
+	flex: 1;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Focus
+----------------------------- */
 
 ::-moz-focus-inner {
 	border: 0;
@@ -133,35 +179,5 @@ html {
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
 	box-shadow: none;
-}
-
-body {
-	background-color: var(--color-charcoal);
-}
-
-#app {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-#header {
-	flex: none;
-}
-
-#nav {
-	flex: none;
-}
-
-#content {
-	flex: 1 0 auto;
-	padding: 1.5rem 0;
-	background-color: var(--color-slate);
-	border-top: .125rem solid var(--color-slate-lighter);
-	border-bottom: .125rem solid var(--color-slate-darker);
-}
-
-#footer {
-	flex: none;
 }
 </style>
