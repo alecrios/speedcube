@@ -2,7 +2,7 @@ import Vue from 'vue';
 import PortalVue from 'portal-vue';
 import store from '@/store';
 import router from '@/router';
-import translate from '@/mixins/translate';
+import localize from '@/mixins/localize';
 import App from '@/App.vue';
 
 import '@/registerServiceWorker';
@@ -25,7 +25,7 @@ Vue.filter('formatTime', (time) => {
 	return `${HH}${mm}${ss}${SS}`;
 });
 
-Vue.mixin(translate);
+Vue.mixin(localize);
 
 new Vue({
 	store,

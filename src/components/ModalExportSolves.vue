@@ -67,20 +67,24 @@ export default {
 	mixins: [modalComponents, getScrambleTurnText],
 	data() {
 		return {
-			exportTypes: [
-				{label: this.$t('timesOnly'), value: 'timesOnly'},
-				{label: this.$t('timesAndScrambles'), value: 'timesAndScrambles'},
-			],
-			fileTypes: [
-				{label: this.$t('csv'), value: 'csv'},
-				{label: this.$t('json'), value: 'json'},
-			],
 			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,
 			fileType: 'csv',
 			exportType: 'timesOnly',
 		};
 	},
 	computed: {
+		exportTypes() {
+			return [
+				{label: this.$t('timesOnly'), value: 'timesOnly'},
+				{label: this.$t('timesAndScrambles'), value: 'timesAndScrambles'},
+			];
+		},
+		fileTypes() {
+			return [
+				{label: this.$t('csv'), value: 'csv'},
+				{label: this.$t('json'), value: 'json'},
+			];
+		},
 		sessionId() {
 			return this.$store.state.currentSession;
 		},

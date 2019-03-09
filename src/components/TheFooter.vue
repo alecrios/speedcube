@@ -3,8 +3,7 @@
 		<BaseWrapper>
 			<div class="bar">
 				<span class="item">
-					&copy;
-					{{ new Date().getFullYear() }}
+					&copy; {{ new Date().getFullYear() }}
 					<a
 						href="https://alecrios.com"
 						target="_blank"
@@ -16,7 +15,18 @@
 						href="https://alecrios.com/contact"
 						target="_blank"
 						rel="noopener"
-					>{{ $t('sendFeedback') }}</a>
+					>{{ $t('contact') }}</a>
+				</span>
+
+				<span class="item">
+					<button @click="showLocaleModal = true">{{ $t('language') }}</button>
+
+					<Portal to="modals" v-if="showLocaleModal">
+						<ModalLocale
+							v-if="showLocaleModal"
+							@close="showLocaleModal = false"
+						/>
+					</Portal>
 				</span>
 			</div>
 		</BaseWrapper>
@@ -25,11 +35,18 @@
 
 <script>
 import BaseWrapper from '@/components/BaseWrapper.vue';
+import ModalLocale from '@/components/ModalLocale.vue';
 
 export default {
 	name: 'TheFooter',
 	components: {
 		BaseWrapper,
+		ModalLocale,
+	},
+	data() {
+		return {
+			showLocaleModal: false,
+		};
 	},
 };
 </script>
@@ -42,13 +59,14 @@ export default {
 }
 
 .bar {
-	text-align: center;
+	display: flex;
+	justify-content: center;
 	padding: .75rem;
 }
 
 .item {
 	font-size: .75rem;
-	line-height: 1.5rem;
+	line-height: 1rem;
 	letter-spacing: .03125rem;
 	color: var(--color-smoke);
 }
@@ -57,7 +75,14 @@ export default {
 	margin-left: 1.5rem;
 }
 
-.item a:hover {
+.item a,
+.item button {
+	color: inherit;
+	cursor: pointer;
+}
+
+.item a:hover,
+.item button:hover {
 	text-decoration: underline;
 }
 </style>

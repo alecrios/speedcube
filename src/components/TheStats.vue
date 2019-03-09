@@ -33,9 +33,9 @@ import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
 export default {
 	name: 'TheStats',
 	mixins: [solveIdsOfCurrentSession],
-	data() {
-		return {
-			sets: [
+	computed: {
+		sets() {
+			return [
 				{
 					title: this.$t('session'),
 					limit: null,
@@ -48,10 +48,8 @@ export default {
 					title: this.$t('latest12'),
 					limit: 12,
 				},
-			],
-		};
-	},
-	computed: {
+			];
+		},
 		times() {
 			return this.$_solveIdsOfCurrentSession
 				.map((solveId) => this.$store.state.solves[solveId])

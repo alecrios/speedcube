@@ -35,7 +35,7 @@
 	"submit": "Submit",
 	"save": "Save",
 	"cancel": "Cancel",
-	"sendFeedback": "Send Feedback",
+	"contact": "Contact",
 	"name": "Name",
 	"cube": "Cube",
 	"actions": "Actions",
@@ -43,5 +43,7 @@
 	"worst": "Worst",
 	"average": "Average",
 	"latest5": "Latest 5",
-	"latest12": "Latest 12"
+	"latest12": "Latest 12",
+	"language": "Language",
+	"changeLanguage": "Change Language"
 }
