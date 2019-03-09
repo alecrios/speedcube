@@ -51,6 +51,7 @@ export default {
 	align-items: flex-start;
 	justify-content: center;
 	padding: 1.5rem;
+	overflow-y: auto;
 	background-color: var(--color-backdrop);
 	transition: opacity 250ms ease;
 }
