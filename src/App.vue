@@ -67,7 +67,7 @@ export default {
 				if (this.refreshing) return;
 
 				this.refreshing = true;
-				window.location.reload();
+				window.location.reload(true);
 			});
 		},
 		reload() {
