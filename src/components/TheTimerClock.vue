@@ -1,7 +1,7 @@
 <template>
 	<button
 		ref="display"
-		class="display"
+		:class="['display', {'hidden-while-solving': hideClockWhileSolving}]"
 		:data-status="status"
 		@mousedown="mousedownHandler"
 		@mouseup="mouseupHandler"
@@ -10,7 +10,7 @@
 		@touchend.prevent="touchendHandler"
 		@touchmove.prevent="touchmoveHandler"
 	>
-		{{ status === 'complete' ? previousTime : duration | formatTime }}
+		{{ displayText }}
 	</button>
 </template>
 
@@ -29,13 +29,32 @@ export default {
 		};
 	},
 	computed: {
+		hideClockWhileSolving() {
+			return this.$store.state.settings.hideClockWhileSolving;
+		},
+		solvingText() {
+			return this.$t('solving');
+		},
 		duration() {
 			if (!this.currentTime || !this.startTime) return 0;
 
 			return this.currentTime - this.startTime;
 		},
+		displayText() {
+			switch (this.status) {
+			case 'running':
+				return this.hideClockWhileSolving ? this.solvingText : this.formatTime(this.duration);
+			case 'complete':
+				return this.formatTime(this.previousTime);
+			default:
+				return this.formatTime(this.duration);
+			}
+		},
 	},
 	methods: {
+		formatTime(time) {
+			return this.$options.filters.formatTime(time);
+		},
 		startPreparation() {
 			this.status = 'pending';
 			this.preparationTimer = setTimeout(this.finishPreparation, 250);
@@ -156,6 +175,10 @@ export default {
 .display[data-status='ready']    {color: var(--color-cube-green)}
 .display[data-status='running']  {color: var(--color-cube-white)}
 .display[data-status='complete'] {color: var(--color-cube-white)}
+
+.display.hidden-while-solving[data-status='running'] {
+	font-size: 3rem;
+}
 
 .display:focus {
 	box-shadow: none;

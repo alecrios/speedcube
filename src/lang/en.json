@@ -4,6 +4,7 @@
 	"session": "Session",
 	"sessions": "Sessions",
 	"solves": "Solves",
+	"solving": "Solving",
 	"stats": "Stats",
 	"scramble": "Scramble",
 	"pageNotFound": "Page not found",
@@ -48,6 +49,8 @@
 	"language": "Language",
 	"changeLanguage": "Change Language",
 	"toggleFullscreen": "Toggle Fullscreen",
+	"timerSettings": "Timer Settings",
+	"hideClockWhileSolving": "Hide clock while solving",
 	"updateAvailable": "A new update is available.",
 	"reload": "Reload"
 }

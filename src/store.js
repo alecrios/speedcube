@@ -12,6 +12,7 @@ export default new Vuex.Store({
 		settings: {
 			locale: 'en',
 			isFullscreen: false,
+			hideClockWhileSolving: false,
 		},
 		currentSession: null,
 		sessionIds: [],
@@ -25,6 +26,9 @@ export default new Vuex.Store({
 		},
 		setFullscreen(state, isFullscreen) {
 			state.settings.isFullscreen = isFullscreen;
+		},
+		setHideClockWhileSolving(state, hideClockWhileSolving) {
+			state.settings.hideClockWhileSolving = hideClockWhileSolving;
 		},
 		addSession(state, payload) {
 			state.sessionIds.unshift(payload.id);

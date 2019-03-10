@@ -1,9 +1,10 @@
 {
 	"time": "Tiempo",
-	"timer": "Cronógrafo",
+	"timer": "Temporizador",
 	"session": "Sesión",
 	"sessions": "Sesiones",
 	"solves": "Resoluciónes",
+	"solving": "Resolviendo",
 	"stats": "Estadísticas",
 	"scramble": "Mezcla",
 	"pageNotFound": "Página no encontrada",
@@ -48,6 +49,8 @@
 	"language": "Idioma",
 	"changeLanguage": "Cambiar Idioma",
 	"toggleFullscreen": "Alternar Pantalla Completa",
+	"timerSettings": "Ajustes del Temporizador",
+	"hideClockWhileSolving": "Ocultar reloj mientras se resuelve",
 	"updateAvailable": "Una nueva actualización está disponible.",
 	"reload": "Actualizar"
 }

@@ -1,11 +1,8 @@
 <template>
 	<div>
 		<div class="actions">
-			<BaseIcon
-				:icon="$store.state.settings.isFullscreen ? 'collapse' : 'expand'"
-				:name="$t('toggleFullscreen')"
-				@click="$store.commit('setFullscreen', !$store.state.settings.isFullscreen)"
-			/>
+			<IconTimerSettings/>
+			<IconFullscreen/>
 		</div>
 
 		<TheTimerScramble
@@ -26,7 +23,8 @@ import store from '@/store';
 
 import TheTimerScramble from '@/components/TheTimerScramble.vue';
 import TheTimerClock from '@/components/TheTimerClock.vue';
-import BaseIcon from '@/components/BaseIcon.vue';
+import IconTimerSettings from '@/components/IconTimerSettings.vue';
+import IconFullscreen from '@/components/IconFullscreen.vue';
 
 import addSolve from '@/mixins/addSolve';
 
@@ -36,7 +34,8 @@ export default {
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
-		BaseIcon,
+		IconTimerSettings,
+		IconFullscreen,
 	},
 	data() {
 		return {
@@ -76,7 +75,7 @@ export default {
 <style scoped>
 .actions {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	padding: 0 1.5rem;
 	margin-bottom: 1.5rem;
 }
