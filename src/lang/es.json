@@ -46,5 +46,7 @@
 	"latest12": "Últimos 12",
 	"language": "Idioma",
 	"changeLanguage": "Cambiar Idioma",
-	"toggleFullscreen": "Alternar Pantalla Completa"
+	"toggleFullscreen": "Alternar Pantalla Completa",
+	"updateAvailable": "Una nueva actualización está disponible.",
+	"reload": "Actualizar"
 }

@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" :data-version="version">
 		<div class="head">
 			<TheHeader v-if="!isFullscreen"/>
 			<TheNav v-if="!isFullscreen"/>
@@ -9,6 +9,8 @@
 			<TheMain/>
 			<TheFooter v-if="!isFullscreen"/>
 		</div>
+
+		<TheUpdatePrompt v-if="updateAvailable" @reload="reload"/>
 
 		<PortalTarget name="modals"/>
 	</div>
@@ -22,6 +24,7 @@ import TheHeader from '@/components/TheHeader.vue';
 import TheNav from '@/components/TheNav.vue';
 import TheMain from '@/components/TheMain.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import TheUpdatePrompt from '@/components/TheUpdatePrompt.vue';
 
 import addSession from '@/mixins/addSession';
 
@@ -33,6 +36,15 @@ export default {
 		TheNav,
 		TheMain,
 		TheFooter,
+		TheUpdatePrompt,
+	},
+	data() {
+		return {
+			version: process.env.VUE_APP_VERSION,
+			refreshing: false,
+			registration: null,
+			updateAvailable: false,
+		};
 	},
 	computed: {
 		isFullscreen() {
@@ -40,7 +52,36 @@ export default {
 		},
 	},
 	methods: {
+		handleServiceWorker() {
+			// Only continue if service workers are supported
+			if (!('serviceWorker' in navigator)) return;
+
+			// Listen for service worker update and prompt the user to reload
+			document.addEventListener('swUpdated', (event) => {
+				this.registration = event.detail;
+				this.updateAvailable = true;
+			}, {once: true});
+
+			// Refresh all open app tabs when a new service worker is installed
+			navigator.serviceWorker.addEventListener('controllerchange', () => {
+				if (this.refreshing) return;
+
+				this.refreshing = true;
+				window.location.reload();
+			});
+		},
+		reload() {
+			// Reset the update available flag
+			this.updateAvailable = false;
+
+			// Protect against missing registration.waiting
+			if (!this.registration || !this.registration.waiting) return;
+
+			// Tell the service worker to update immediately
+			this.registration.waiting.postMessage('skipWaiting');
+		},
 		initializeSession() {
+			// Only continue if no session has been created yet
 			if (this.$store.state.currentSession) return;
 
 			this.$_addSession();
@@ -50,6 +91,7 @@ export default {
 		},
 	},
 	created() {
+		this.handleServiceWorker();
 		this.initializeSession();
 		this.resetFullscreen();
 	},
@@ -135,6 +177,7 @@ export default {
 	--color-backdrop: hsla(0, 0%, 0%, .5);
 	--box-shadow-focus: 0 0 0 .125rem hsla(220, 100%, 75%, .5);
 	--box-shadow-small: 0 .125rem .25rem 0 hsla(0, 0%, 0%, .5);
+	--box-shadow-medium: 0 .5rem 1.125rem 0 hsla(0, 0%, 0%, .5);
 	--box-shadow-large: 0 .75rem 1.5rem 0 hsla(0, 0%, 0%, .5);
 	--text-shadow: 0 .125rem .125rem hsla(0, 0%, 0%, .125);
 }

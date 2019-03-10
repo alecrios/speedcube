@@ -46,5 +46,7 @@
 	"latest12": "Latest 12",
 	"language": "Language",
 	"changeLanguage": "Change Language",
-	"toggleFullscreen": "Toggle Fullscreen"
+	"toggleFullscreen": "Toggle Fullscreen",
+	"updateAvailable": "A new update is available.",
+	"reload": "Reload"
 }

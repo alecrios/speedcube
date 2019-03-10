@@ -1,11 +1,13 @@
+import dotenv from 'dotenv';
 import Vue from 'vue';
 import PortalVue from 'portal-vue';
 import store from '@/store';
 import router from '@/router';
 import localize from '@/mixins/localize';
 import App from '@/App.vue';
-
 import '@/registerServiceWorker';
+
+dotenv.config();
 
 Vue.config.productionTip = false;
 
