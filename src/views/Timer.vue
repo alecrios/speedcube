@@ -1,19 +1,15 @@
 <template>
-	<main>
-		<BaseWrapper>
-			<TheTimer/>
-		</BaseWrapper>
-	</main>
+	<div>
+		<TheTimer/>
+	</div>
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
 import TheTimer from '@/components/TheTimer.vue';
 
 export default {
 	name: 'timer',
 	components: {
-		BaseWrapper,
 		TheTimer,
 	},
 };

@@ -1,7 +1,7 @@
 <template>
 	<main class="main">
 		<BaseWrapper>
-			<RouterView id="content"/>
+			<RouterView/>
 		</BaseWrapper>
 	</main>
 </template>

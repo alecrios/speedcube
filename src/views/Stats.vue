@@ -1,18 +1,15 @@
 <template>
-	<main>
-		<BaseWrapper>
-			<EmptyContent
-				v-if="!$_solveIdsOfCurrentSession.length"
-				:message="$t('noStatsForCurrentSession')"
-			/>
+	<div>
+		<EmptyContent
+			v-if="!$_solveIdsOfCurrentSession.length"
+			:message="$t('noStatsForCurrentSession')"
+		/>
 
-			<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
-		</BaseWrapper>
-	</main>
+		<TheStats v-if="$_solveIdsOfCurrentSession.length"/>
+	</div>
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
 import EmptyContent from '@/components/EmptyContent.vue';
 import TheStats from '@/components/TheStats.vue';
 
@@ -22,7 +19,6 @@ export default {
 	name: 'stats',
 	mixins: [solveIdsOfCurrentSession],
 	components: {
-		BaseWrapper,
 		EmptyContent,
 		TheStats,
 	},
