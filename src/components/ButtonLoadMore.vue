@@ -1,6 +1,7 @@
 <template>
 	<div class="load-more-container">
 		<BaseButton
+			class="button"
 			:name="$t('loadMore')"
 			size="small"
 			type="secondary"
@@ -26,5 +27,9 @@ export default {
 .load-more-container {
 	display: flex;
 	justify-content: center;
+}
+
+.button {
+	margin-bottom: 1.5rem;
 }
 </style>
