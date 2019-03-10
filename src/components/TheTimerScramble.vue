@@ -7,7 +7,16 @@
 </template>
 
 <script>
+// Generates random-state scrambles for 3x3x3
+import min2phase from '@/lib/min2phase';
+
+// Generates random-move scrambles for NxNxN
 import * as scrambler from 'sr-scrambler';
+
+// Converts string scrambles (min2phase output format) into arrays (sr-scrambler output format)
+import convertScrambleStringToArray from '@/lib/convertScrambleStringToArray';
+
+// Displays a scramble array in the DOM
 import ScrambleString from '@/components/ScrambleString.vue';
 
 export default {
@@ -33,7 +42,18 @@ export default {
 	},
 	methods: {
 		getScramble() {
-			return scrambler.generateScramble(this.cubeSize, this.turnsToGenerate[this.cubeSize]);
+			// For 3x3x3, generate a random-state scramble
+			if (this.cubeSize === 3) {
+				const randomCube = min2phase.randomCube();
+				const scrambleString = min2phase.solve(randomCube);
+				const scrambleArray = convertScrambleStringToArray(scrambleString);
+				return scrambleArray;
+			}
+
+			// For NxNxN, generate a random-move scramble
+			const turns = this.turnsToGenerate[this.cubeSize];
+			const scrambleArray = scrambler.generateScramble(this.cubeSize, turns);
+			return scrambleArray;
 		},
 		updateScramble() {
 			this.$emit('new-scramble', this.getScramble());
@@ -43,6 +63,9 @@ export default {
 		solveId() {
 			this.updateScramble();
 		},
+	},
+	create() {
+		min2phase.initFull();
 	},
 	mounted() {
 		this.updateScramble();
