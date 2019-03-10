@@ -16,7 +16,7 @@
 
 			<tbody>
 				<tr
-					v-for="sessionId in sessionIds"
+					v-for="sessionId in sessionsToShow"
 					:key="sessionId"
 					:class="{'highlight': isCurrentSession(sessionId)}"
 				>
@@ -41,6 +41,12 @@
 				</tr>
 			</tbody>
 		</BaseTable>
+
+		<ButtonLoadMore
+			:pages-visible="pagesVisible"
+			:total-pages="totalPages"
+			@click="pagesVisible += 1"
+		/>
 	</div>
 </template>
 
@@ -49,6 +55,7 @@ import ButtonCreateSession from '@/components/ButtonCreateSession.vue';
 import BaseTable from '@/components/BaseTable.vue';
 import IconRenameSession from '@/components/IconRenameSession.vue';
 import IconDeleteSession from '@/components/IconDeleteSession.vue';
+import ButtonLoadMore from '@/components/ButtonLoadMore.vue';
 
 import getSessionById from '@/mixins/getSessionById';
 
@@ -60,10 +67,23 @@ export default {
 		BaseTable,
 		IconRenameSession,
 		IconDeleteSession,
+		ButtonLoadMore,
+	},
+	data() {
+		return {
+			pageSize: 25,
+			pagesVisible: 1,
+		};
 	},
 	computed: {
 		sessionIds() {
 			return this.$store.state.sessionIds;
+		},
+		totalPages() {
+			return Math.ceil(this.sessionIds.length / this.pageSize);
+		},
+		sessionsToShow() {
+			return this.sessionIds.slice(0, this.pageSize * this.pagesVisible);
 		},
 	},
 	methods: {

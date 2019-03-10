@@ -15,7 +15,7 @@
 
 			<tbody>
 				<tr
-					v-for="solveId in $_solveIdsOfCurrentSession"
+					v-for="solveId in solvesToShow"
 					:key="solveId"
 				>
 					<td class="align-right">
@@ -35,6 +35,12 @@
 				</tr>
 			</tbody>
 		</BaseTable>
+
+		<ButtonLoadMore
+			:pages-visible="pagesVisible"
+			:total-pages="totalPages"
+			@click="pagesVisible += 1"
+		/>
 	</div>
 </template>
 
@@ -44,6 +50,7 @@ import BaseTable from '@/components/BaseTable.vue';
 import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
 import ScrambleString from '@/components/ScrambleString.vue';
+import ButtonLoadMore from '@/components/ButtonLoadMore.vue';
 
 import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
 
@@ -56,8 +63,21 @@ export default {
 		ScrambleString,
 		IconPenalizeSolve,
 		IconDeleteSolve,
+		ButtonLoadMore,
+	},
+	data() {
+		return {
+			pageSize: 25,
+			pagesVisible: 1,
+		};
 	},
 	computed: {
+		totalPages() {
+			return Math.ceil(this.$_solveIdsOfCurrentSession.length / this.pageSize);
+		},
+		solvesToShow() {
+			return this.$_solveIdsOfCurrentSession.slice(0, this.pageSize * this.pagesVisible);
+		},
 	},
 	methods: {
 		getSolve(solveId) {
