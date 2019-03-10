@@ -1,13 +1,13 @@
 <template>
 	<div id="app">
 		<div class="head">
-			<TheHeader/>
-			<TheNav/>
+			<TheHeader v-if="!isFullscreen"/>
+			<TheNav v-if="!isFullscreen"/>
 		</div>
 
 		<div class="body">
 			<TheMain/>
-			<TheFooter/>
+			<TheFooter v-if="!isFullscreen"/>
 		</div>
 
 		<PortalTarget name="modals"/>
@@ -34,15 +34,24 @@ export default {
 		TheMain,
 		TheFooter,
 	},
+	computed: {
+		isFullscreen() {
+			return this.$store.state.settings.isFullscreen;
+		},
+	},
 	methods: {
 		initializeSession() {
 			if (this.$store.state.currentSession) return;
 
 			this.$_addSession();
 		},
+		resetFullscreen() {
+			this.$store.commit('setFullscreen', false);
+		},
 	},
 	created() {
 		this.initializeSession();
+		this.resetFullscreen();
 	},
 };
 </script>

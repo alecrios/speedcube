@@ -1,19 +1,17 @@
 <template>
-	<div class="time">
-		<button
-			class="display"
-			:data-status="status"
-			ref="display"
-			@mousedown="mousedownHandler"
-			@mouseup="mouseupHandler"
-			@mouseleave="mouseleaveHandler"
-			@touchstart.prevent="touchstartHandler"
-			@touchend.prevent="touchendHandler"
-			@touchmove.prevent="touchmoveHandler"
-		>
-			{{ status === 'complete' ? previousTime : duration | formatTime }}
-		</button>
-	</div>
+	<button
+		ref="display"
+		class="display"
+		:data-status="status"
+		@mousedown="mousedownHandler"
+		@mouseup="mouseupHandler"
+		@mouseleave="mouseleaveHandler"
+		@touchstart.prevent="touchstartHandler"
+		@touchend.prevent="touchendHandler"
+		@touchmove.prevent="touchmoveHandler"
+	>
+		{{ status === 'complete' ? previousTime : duration | formatTime }}
+	</button>
 </template>
 
 <script>
@@ -142,13 +140,8 @@ export default {
 </script>
 
 <style scoped>
-.time {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .display {
+	width: 100%;
 	padding: 3rem;
 	font-size: 4.5rem;
 	line-height: 4rem;

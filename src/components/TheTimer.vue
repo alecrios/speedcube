@@ -1,5 +1,13 @@
 <template>
-	<div class="timer">
+	<div>
+		<div class="actions">
+			<BaseIcon
+				:icon="$store.state.settings.isFullscreen ? 'collapse' : 'expand'"
+				:name="$t('toggleFullscreen')"
+				@click="$store.commit('setFullscreen', !$store.state.settings.isFullscreen)"
+			/>
+		</div>
+
 		<TheTimerScramble
 			:solve-id="solveId"
 			:scramble="solve.scramble"
@@ -18,6 +26,7 @@ import store from '@/store';
 
 import TheTimerScramble from '@/components/TheTimerScramble.vue';
 import TheTimerClock from '@/components/TheTimerClock.vue';
+import BaseIcon from '@/components/BaseIcon.vue';
 
 import addSolve from '@/mixins/addSolve';
 
@@ -27,6 +36,7 @@ export default {
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
+		BaseIcon,
 	},
 	data() {
 		return {
@@ -64,7 +74,10 @@ export default {
 </script>
 
 <style scoped>
-.timer {
-	padding: 1.5rem 0;
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 1.5rem;
+	margin-bottom: 1.5rem;
 }
 </style>

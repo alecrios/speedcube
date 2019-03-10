@@ -45,5 +45,6 @@
 	"latest5": "Últimos 5",
 	"latest12": "Últimos 12",
 	"language": "Idioma",
-	"changeLanguage": "Cambiar Idioma"
+	"changeLanguage": "Cambiar Idioma",
+	"toggleFullscreen": "Alternar Pantalla Completa"
 }

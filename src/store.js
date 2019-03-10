@@ -11,6 +11,7 @@ export default new Vuex.Store({
 	state: {
 		settings: {
 			locale: 'en',
+			isFullscreen: false,
 		},
 		currentSession: null,
 		sessionIds: [],
@@ -21,6 +22,9 @@ export default new Vuex.Store({
 	mutations: {
 		setLocale(state, locale) {
 			state.settings.locale = locale;
+		},
+		setFullscreen(state, isFullscreen) {
+			state.settings.isFullscreen = isFullscreen;
 		},
 		addSession(state, payload) {
 			state.sessionIds.unshift(payload.id);
