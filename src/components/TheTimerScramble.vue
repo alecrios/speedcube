@@ -79,7 +79,7 @@ export default {
 }
 
 .container {
-	max-width: 20rem;
+	max-width: 22rem;
 	margin: 0 auto;
 	text-align: center;
 	font-size: 1.5rem;
