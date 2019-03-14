@@ -1,5 +1,5 @@
 <template>
-	<div class="timer">
+	<div class="timer" ref="timer">
 		<TheTimerScramble
 			:solve-id="solveId"
 			:scramble="solve.scramble"
@@ -43,6 +43,7 @@ import IconTimerSettings from '@/components/IconTimerSettings.vue';
 import IconFullscreen from '@/components/IconFullscreen.vue';
 
 import addSolve from '@/mixins/addSolve';
+import inert from '@/mixins/inert';
 
 function newSolveData() {
 	return {
@@ -59,7 +60,7 @@ function newSolveData() {
 
 export default {
 	name: 'TheTimer',
-	mixins: [addSolve],
+	mixins: [addSolve, inert],
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
@@ -94,11 +95,63 @@ export default {
 			this.status = 'idle';
 			this.previousSolveId = null;
 		},
+		toggleFullscreen() {
+			this.$store.commit('setFullscreen', !this.$store.state.settings.isFullscreen);
+		},
+		deleteSolve() {
+			if (this.status !== 'complete') return;
+
+			this.$store.commit('removeSolve', this.previousSolveId);
+			this.onDeleted();
+		},
+		toggleP2() {
+			if (this.status !== 'complete') return;
+
+			this.$store.commit('setSolveP2', {
+				id: this.previousSolveId,
+				value: !this.$store.state.solves[this.previousSolveId].p2,
+			});
+		},
+		toggleDnf() {
+			if (this.status !== 'complete') return;
+
+			this.$store.commit('setSolveDnf', {
+				id: this.previousSolveId,
+				value: !this.$store.state.solves[this.previousSolveId].dnf,
+			});
+		},
+		keydownHandler(event) {
+			// Only continue if this is not inert
+			if (this.$_isInert(this.$refs.timer)) return;
+
+			switch (event.key) {
+			case 'f':
+				this.toggleFullscreen();
+				break;
+			case 'x':
+				this.deleteSolve();
+				break;
+			case '2':
+				this.toggleP2();
+				break;
+			case 'd':
+				this.toggleDnf();
+				break;
+			default:
+				break;
+			}
+		},
 	},
 	watch: {
 		currentSession() {
 			this.resetSolve();
 		},
+	},
+	mounted() {
+		document.addEventListener('keydown', this.keydownHandler);
+	},
+	beforeDestroy() {
+		document.removeEventListener('keydown', this.keydownHandler);
 	},
 };
 </script>
