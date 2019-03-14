@@ -13,10 +13,18 @@
 <script>
 import BaseForm from '@/components/BaseForm.vue';
 
+import inert from '@/mixins/inert';
+
 export default {
 	name: 'BaseModal',
+	mixins: [inert],
 	components: {
 		BaseForm,
+	},
+	data() {
+		return {
+			previouslyFocusedElement: null,
+		};
 	},
 	methods: {
 		keydownHandler(event) {
@@ -30,11 +38,27 @@ export default {
 		},
 	},
 	mounted() {
-		document.addEventListener('keydown', this.keydownHandler);
+		// Add listening for the escape key
+		this.$refs.form.$el.addEventListener('keydown', this.keydownHandler);
+
+		// Grab a reference to the element that was focused before modal opened
+		this.previouslyFocusedElement = document.activeElement;
+
+		// Focus the first focusable element in the modal
 		this.focusFirstFocusableElement();
+
+		// Make the rest of the page inert to trap the user's focus
+		this.$_togglePageInert(true);
 	},
 	beforeDestroy() {
-		document.removeEventListener('keydown', this.keydownHandler);
+		// Remove listening for the escape key
+		this.$refs.form.$el.removeEventListener('keydown', this.keydownHandler);
+
+		// Make the rest of the page usable again
+		this.$_togglePageInert(false);
+
+		// Return focus to the element that was focused before the modal opened
+		this.previouslyFocusedElement.focus();
 	},
 };
 </script>

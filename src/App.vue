@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import 'wicg-inert';
 import 'core-reset/core-reset.css';
 import 'focus-visible';
 

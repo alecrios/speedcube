@@ -15,8 +15,11 @@
 </template>
 
 <script>
+import inert from '@/mixins/inert';
+
 export default {
 	name: 'TheTimerClock',
+	mixins: [inert],
 	props: ['status', 'solve-id', 'previous-solve-id'],
 	data() {
 		return {
