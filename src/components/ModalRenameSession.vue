@@ -31,13 +31,11 @@
 <script>
 import moment from 'moment';
 
-import modalComponents from '@/mixins/modalComponents';
-
 import renameSession from '@/mixins/renameSession';
 
 export default {
 	name: 'ModalEditSession',
-	mixins: [modalComponents, renameSession],
+	mixins: [renameSession],
 	props: ['session-id'],
 	data() {
 		return {

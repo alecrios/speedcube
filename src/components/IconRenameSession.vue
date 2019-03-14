@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalRenameSession from '@/components/ModalRenameSession.vue';
 
 export default {
@@ -25,7 +24,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalRenameSession,
 	},
 };

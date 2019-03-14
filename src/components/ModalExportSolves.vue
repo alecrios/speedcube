@@ -62,12 +62,11 @@
 import {saveAs} from 'file-saver';
 import filenamify from 'filenamify';
 
-import modalComponents from '@/mixins/modalComponents';
 import getScrambleTurnText from '@/mixins/getScrambleTurnText';
 
 export default {
 	name: 'ModalExportSolves',
-	mixins: [modalComponents, getScrambleTurnText],
+	mixins: [getScrambleTurnText],
 	data() {
 		return {
 			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,

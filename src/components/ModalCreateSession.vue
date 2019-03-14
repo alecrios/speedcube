@@ -46,13 +46,12 @@
 <script>
 import moment from 'moment';
 
-import modalComponents from '@/mixins/modalComponents';
 import addSession from '@/mixins/addSession';
 import cubeSizes from '@/mixins/cubeSizes';
 
 export default {
 	name: 'ModalCreateSession',
-	mixins: [modalComponents, addSession, cubeSizes],
+	mixins: [addSession, cubeSizes],
 	data() {
 		return {
 			name: this.getDateString(),

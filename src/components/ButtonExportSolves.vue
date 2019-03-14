@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton.vue';
 import ModalExportSolves from '@/components/ModalExportSolves.vue';
 
 export default {
@@ -25,7 +24,6 @@ export default {
 		};
 	},
 	components: {
-		BaseButton,
 		ModalExportSolves,
 	},
 };

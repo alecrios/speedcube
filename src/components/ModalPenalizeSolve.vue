@@ -30,11 +30,8 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
-
 export default {
 	name: 'ModalPenalizeSolve',
-	mixins: [modalComponents],
 	props: ['solve-id'],
 	data() {
 		return {

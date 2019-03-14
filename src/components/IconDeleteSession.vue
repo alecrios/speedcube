@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalDeleteSession from '@/components/ModalDeleteSession.vue';
 
 export default {
@@ -26,7 +25,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalDeleteSession,
 	},
 	methods: {

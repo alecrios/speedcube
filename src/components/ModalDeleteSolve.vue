@@ -18,11 +18,8 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
-
 export default {
 	name: 'ModalDeleteSolve',
-	mixins: [modalComponents],
 	props: ['solve-id'],
 	methods: {
 		submit() {

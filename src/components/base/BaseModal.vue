@@ -11,16 +11,11 @@
 </template>
 
 <script>
-import BaseForm from '@/components/BaseForm.vue';
-
 import inert from '@/mixins/inert';
 
 export default {
 	name: 'BaseModal',
 	mixins: [inert],
-	components: {
-		BaseForm,
-	},
 	data() {
 		return {
 			previouslyFocusedElement: null,

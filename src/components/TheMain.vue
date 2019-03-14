@@ -7,13 +7,8 @@
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
-
 export default {
 	name: 'TheMain',
-	components: {
-		BaseWrapper,
-	},
 };
 </script>
 

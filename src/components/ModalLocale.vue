@@ -29,12 +29,10 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
 import localization from '@/localization';
 
 export default {
 	name: 'ModalLocale',
-	mixins: [modalComponents],
 	data() {
 		return {
 			locale: this.$store.state.settings.locale,

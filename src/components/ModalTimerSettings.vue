@@ -23,11 +23,8 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
-
 export default {
 	name: 'ModalTimerSettings',
-	mixins: [modalComponents],
 	data() {
 		return {
 			hideClockWhileSolving: this.$store.state.settings.hideClockWhileSolving,

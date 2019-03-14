@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
 import TheSessionSelect from '@/components/TheSessionSelect.vue';
 
 export default {
 	name: 'TheHeader',
 	components: {
-		BaseWrapper,
 		TheSessionSelect,
 	},
 };

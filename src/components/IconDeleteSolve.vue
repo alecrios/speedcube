@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalDeleteSolve from '@/components/ModalDeleteSolve.vue';
 
 export default {
@@ -31,7 +30,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalDeleteSolve,
 	},
 };

@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalPenalizeSolve from '@/components/ModalPenalizeSolve.vue';
 
 export default {
@@ -26,7 +25,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalPenalizeSolve,
 	},
 };

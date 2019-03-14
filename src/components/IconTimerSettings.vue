@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalTimerSettings from '@/components/ModalTimerSettings.vue';
 
 export default {
@@ -24,7 +23,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalTimerSettings,
 	},
 };

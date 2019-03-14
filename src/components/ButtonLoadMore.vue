@@ -12,14 +12,9 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton.vue';
-
 export default {
 	name: 'ButtonLoadMore',
 	props: ['pages-visible', 'total-pages'],
-	components: {
-		BaseButton,
-	},
 };
 </script>
 

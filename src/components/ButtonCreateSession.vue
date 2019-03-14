@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton.vue';
 import ModalCreateSession from '@/components/ModalCreateSession.vue';
 
 export default {
@@ -25,7 +24,6 @@ export default {
 		};
 	},
 	components: {
-		BaseButton,
 		ModalCreateSession,
 	},
 };

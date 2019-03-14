@@ -7,13 +7,8 @@
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
-
 export default {
 	name: 'IconFullscreen',
-	components: {
-		BaseIcon,
-	},
 };
 </script>
 

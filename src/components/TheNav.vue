@@ -12,13 +12,8 @@
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
-
 export default {
 	name: 'TheNav',
-	components: {
-		BaseWrapper,
-	},
 };
 </script>
 

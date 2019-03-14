@@ -34,13 +34,11 @@
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
 import ModalLocale from '@/components/ModalLocale.vue';
 
 export default {
 	name: 'TheFooter',
 	components: {
-		BaseWrapper,
 		ModalLocale,
 	},
 	data() {

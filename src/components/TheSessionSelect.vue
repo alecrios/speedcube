@@ -11,13 +11,8 @@
 </template>
 
 <script>
-import BaseSelect from '@/components/BaseSelect.vue';
-
 export default {
 	name: 'TheSessionSelect',
-	components: {
-		BaseSelect,
-	},
 	computed: {
 		sessions() {
 			return this.$store.state.sessionIds.map((sessionId) => ({
