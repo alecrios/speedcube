@@ -27,9 +27,6 @@ export default {
 		};
 	},
 	computed: {
-		previousSolve() {
-			return this.$store.state.solves[this.previousSolveId];
-		},
 		hideClockWhileSolving() {
 			return this.$store.state.settings.hideClockWhileSolving;
 		},
@@ -42,16 +39,17 @@ export default {
 			return this.currentTime - this.startTime;
 		},
 		displayText() {
-			switch (this.status) {
-			case 'running':
+			if (this.status === 'running') {
 				return this.hideClockWhileSolving ? this.solvingText : this.formatTime(this.duration);
-			case 'complete':
-				return this.previousSolve.dnf
-					? 'DNF'
-					: `${this.formatTime(this.previousSolve.time)}${this.previousSolve.p2 ? '+' : ''}`;
-			default:
-				return this.formatTime(this.duration);
 			}
+
+			if (this.status === 'complete') {
+				const previousSolve = this.$store.state.solves[this.previousSolveId];
+				const time = this.formatTime(previousSolve.time);
+				return previousSolve.dnf ? 'DNF' : `${time}${previousSolve.p2 ? '+' : ''}`;
+			}
+
+			return this.formatTime(this.duration);
 		},
 	},
 	methods: {
@@ -115,6 +113,7 @@ export default {
 		mouseleaveHandler() {
 			if (this.status !== 'pending' && this.status !== 'ready') return;
 
+			// The user dragged the mouse off of the display, cancel preparation
 			this.cancelPreparation();
 		},
 		touchstartHandler() {
@@ -126,19 +125,27 @@ export default {
 		touchmoveHandler(event) {
 			if (this.status !== 'pending' && this.status !== 'ready') return;
 
+			// Get the user's touch so we can essentially polyfill a 'touchleave' event
 			const touch = event.touches[0];
 
+			// If the user is still touching the display, do nothing
 			if (document.elementFromPoint(touch.pageX, touch.pageY) === this.$refs.display) return;
 
+			// The user is not touching the display anymore, cancel preparation
 			this.cancelPreparation();
 		},
 		keydownHandler(event) {
+			// Only continue if this is not inert
+			if (this.$_isInert(this.$refs.display)) return;
+
+			// Only continue if this is a non-repeated keydown of the space key
 			if (event.key !== ' ' || event.repeat) return;
 
 			this.$refs.display.focus();
 			this.pressTimer();
 		},
 		keyupHandler(event) {
+			// Only continue if this is a keydown of the space key
 			if (event.key !== ' ') return;
 
 			this.releaseTimer();
