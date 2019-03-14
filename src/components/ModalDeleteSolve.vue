@@ -27,6 +27,7 @@ export default {
 	methods: {
 		submit() {
 			this.$store.commit('removeSolve', this.solveId);
+			this.$emit('deleted');
 			this.$emit('close');
 		},
 	},

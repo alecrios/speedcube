@@ -7,6 +7,7 @@
 			:aria-label="name"
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
+			@keydown.enter.prevent="$emit('submit')"
 		>
 
 		<label class="label" :for="id">{{ name }}</label>

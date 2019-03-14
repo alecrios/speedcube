@@ -17,18 +17,19 @@
 <script>
 export default {
 	name: 'TheTimerClock',
-	props: ['solve-id'],
+	props: ['status', 'solve-id', 'previous-solve-id'],
 	data() {
 		return {
-			status: 'idle',
 			startTime: null,
 			currentTime: null,
-			previousTime: null,
 			preparationTimer: null,
 			timerInterval: null,
 		};
 	},
 	computed: {
+		previousSolve() {
+			return this.$store.state.solves[this.previousSolveId];
+		},
 		hideClockWhileSolving() {
 			return this.$store.state.settings.hideClockWhileSolving;
 		},
@@ -45,7 +46,9 @@ export default {
 			case 'running':
 				return this.hideClockWhileSolving ? this.solvingText : this.formatTime(this.duration);
 			case 'complete':
-				return this.formatTime(this.previousTime);
+				return this.previousSolve.dnf
+					? 'DNF'
+					: `${this.formatTime(this.previousSolve.time)}${this.previousSolve.p2 ? '+' : ''}`;
 			default:
 				return this.formatTime(this.duration);
 			}
@@ -56,32 +59,31 @@ export default {
 			return this.$options.filters.formatTime(time);
 		},
 		startPreparation() {
-			this.status = 'pending';
+			this.$emit('status-update', 'pending');
 			this.preparationTimer = setTimeout(this.finishPreparation, 250);
 		},
 		cancelPreparation() {
-			this.status = 'idle';
+			this.$emit('status-update', 'idle');
 			clearTimeout(this.preparationTimer);
 		},
 		finishPreparation() {
-			this.status = 'ready';
+			this.$emit('status-update', 'ready');
 			clearTimeout(this.preparationTimer);
 		},
 		startTimer() {
 			this.startTime = Date.now();
 			this.timerInterval = setInterval(this.updateTimer, 10);
-			this.status = 'running';
+			this.$emit('status-update', 'running');
 		},
 		updateTimer() {
 			this.currentTime = Date.now();
 		},
 		stopTimer() {
 			clearInterval(this.timerInterval);
-			this.status = 'complete';
+			this.$emit('status-update', 'complete');
 			this.$emit('new-time', this.duration);
 		},
 		resetTimer() {
-			this.previousTime = this.duration;
 			this.startTime = null;
 			this.currentTime = null;
 		},
@@ -161,7 +163,7 @@ export default {
 <style scoped>
 .display {
 	width: 100%;
-	padding: 3rem;
+	padding: 4.5rem 1.5rem;
 	font-size: 4.5rem;
 	line-height: 4rem;
 	font-weight: 300;

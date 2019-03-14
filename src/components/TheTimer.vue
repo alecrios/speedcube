@@ -1,10 +1,5 @@
 <template>
-	<div>
-		<div class="actions">
-			<IconTimerSettings/>
-			<IconFullscreen/>
-		</div>
-
+	<div class="timer">
 		<TheTimerScramble
 			:solve-id="solveId"
 			:scramble="solve.scramble"
@@ -12,9 +7,28 @@
 		/>
 
 		<TheTimerClock
+			:previous-solve-id="previousSolveId"
 			:solve-id="solveId"
+			:status="status"
+			@status-update="(status) => { this.status = status; }"
 			@new-time="addSolve"
 		/>
+
+		<div class="actions">
+			<IconPenalizeSolve
+				:solve-id="previousSolveId"
+				:disabled="status !== 'complete'"
+			/>
+
+			<IconDeleteSolve
+				:solve-id="previousSolveId"
+				:disabled="status !== 'complete'"
+				@deleted="onDeleted"
+			/>
+
+			<IconTimerSettings/>
+			<IconFullscreen/>
+		</div>
 	</div>
 </template>
 
@@ -23,10 +37,25 @@ import store from '@/store';
 
 import TheTimerScramble from '@/components/TheTimerScramble.vue';
 import TheTimerClock from '@/components/TheTimerClock.vue';
+import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
+import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
 import IconTimerSettings from '@/components/IconTimerSettings.vue';
 import IconFullscreen from '@/components/IconFullscreen.vue';
 
 import addSolve from '@/mixins/addSolve';
+
+function newSolveData() {
+	return {
+		solveId: String(Date.now()),
+		solve: {
+			session: store.state.currentSession,
+			scramble: [],
+			time: null,
+			dnf: false,
+			p2: false,
+		},
+	};
+}
 
 export default {
 	name: 'TheTimer',
@@ -34,19 +63,16 @@ export default {
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
+		IconPenalizeSolve,
+		IconDeleteSolve,
 		IconTimerSettings,
 		IconFullscreen,
 	},
 	data() {
 		return {
-			solveId: String(Date.now()),
-			solve: {
-				session: store.state.currentSession,
-				scramble: [],
-				time: null,
-				dnf: false,
-				p2: false,
-			},
+			status: 'idle',
+			previousSolveId: null,
+			...newSolveData(),
 		};
 	},
 	computed: {
@@ -61,7 +87,12 @@ export default {
 			this.resetSolve();
 		},
 		resetSolve() {
-			Object.assign(this.$data, this.$options.data());
+			this.previousSolveId = this.solveId;
+			Object.assign(this.$data, newSolveData());
+		},
+		onDeleted() {
+			this.status = 'idle';
+			this.previousSolveId = null;
 		},
 	},
 	watch: {
@@ -73,10 +104,17 @@ export default {
 </script>
 
 <style scoped>
+.timer {
+	padding: 1.5rem 0;
+}
+
 .actions {
-	display: flex;
-	justify-content: space-between;
 	padding: 0 1.5rem;
-	margin-bottom: 1.5rem;
+	display: flex;
+	justify-content: center;
+}
+
+.actions > * + * {
+	margin-left: .75rem;
 }
 </style>

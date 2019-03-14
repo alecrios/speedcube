@@ -16,6 +16,7 @@
 					:name="$t('language')"
 					v-model="locale"
 					:options="locales"
+					@submit="submit()"
 				/>
 			</div>
 		</div>

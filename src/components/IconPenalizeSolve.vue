@@ -4,6 +4,7 @@
 			icon="penalty"
 			:name="$t('penalize')"
 			@click="showModal = true"
+			:disabled="disabled"
 		/>
 
 		<Portal to="modals" v-if="showModal">
@@ -18,7 +19,7 @@ import ModalPenalizeSolve from '@/components/ModalPenalizeSolve.vue';
 
 export default {
 	name: 'IconPenalizeSolve',
-	props: ['solve-id'],
+	props: ['solve-id', 'disabled'],
 	data() {
 		return {
 			showModal: false,

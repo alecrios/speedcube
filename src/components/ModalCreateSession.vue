@@ -16,6 +16,7 @@
 					:name="$t('sessionName')"
 					:placeholder="getDateString()"
 					v-model="name"
+					@submit="submit()"
 				/>
 			</div>
 
@@ -30,6 +31,7 @@
 					:name="$t('cubeType')"
 					v-model="cubeSize"
 					:options="cubeSizes"
+					@submit="submit()"
 				/>
 			</div>
 		</div>

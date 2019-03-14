@@ -10,12 +10,14 @@
 					id="did-not-finish"
 					:name="`DNF (${$t('didNotFinish')})`"
 					v-model="dnf"
+					@submit="submit()"
 				/>
 
 				<BaseCheckbox
 					id="plus-2-seconds"
 					:name="`+2 (${$t('plus2Seconds')})`"
 					v-model="p2"
+					@submit="submit()"
 				/>
 			</div>
 		</div>

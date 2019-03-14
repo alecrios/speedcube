@@ -16,6 +16,7 @@
 					:name="$t('fileName')"
 					:placeholder="sessionName"
 					v-model="fileName"
+					@submit="submit()"
 				/>
 			</div>
 
@@ -30,6 +31,7 @@
 					:name="$t('fileType')"
 					v-model="fileType"
 					:options="fileTypes"
+					@submit="submit()"
 				/>
 			</div>
 
@@ -44,6 +46,7 @@
 					:name="$t('exportType')"
 					v-model="exportType"
 					:options="exportTypes"
+					@submit="submit()"
 				/>
 			</div>
 		</div>

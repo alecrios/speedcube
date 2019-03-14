@@ -5,6 +5,7 @@
 		:aria-label="name"
 		:value="value"
 		@input="$emit('input', $event.target.value)"
+		@keydown.enter.prevent="$emit('submit')"
 	>
 		<option
 			v-for="(option, index) in options"

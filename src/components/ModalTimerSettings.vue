@@ -10,6 +10,7 @@
 					id="hide-clock-while-solving"
 					:name="$t('hideClockWhileSolving')"
 					v-model="hideClockWhileSolving"
+					@submit="submit()"
 				/>
 			</div>
 		</div>

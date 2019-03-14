@@ -16,6 +16,7 @@
 					:name="$t('sessionName')"
 					:placeholder="getDateString()"
 					v-model="name"
+					@submit="submit()"
 				/>
 			</div>
 		</div>
