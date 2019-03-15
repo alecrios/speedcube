@@ -64,7 +64,7 @@ export default {
 			this.updateScramble();
 		},
 	},
-	create() {
+	created() {
 		min2phase.initFull();
 	},
 	mounted() {
