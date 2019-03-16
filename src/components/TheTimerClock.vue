@@ -2,7 +2,7 @@
 	<button
 		ref="display"
 		:class="['display', {'hidden-while-solving': hideClockWhileSolving}]"
-		:data-status="status"
+		:data-status="timerStatus"
 		@mousedown="mousedownHandler"
 		@mouseup="mouseupHandler"
 		@mouseleave="mouseleaveHandler"
@@ -20,7 +20,7 @@ import inert from '@/mixins/inert';
 export default {
 	name: 'TheTimerClock',
 	mixins: [inert],
-	props: ['status', 'solve-id', 'previous-solve-id'],
+	props: ['timer-status', 'scramble-status', 'solve-id', 'previous-solve-id'],
 	data() {
 		return {
 			startTime: null,
@@ -42,11 +42,11 @@ export default {
 			return this.currentTime - this.startTime;
 		},
 		displayText() {
-			if (this.status === 'running') {
+			if (this.timerStatus === 'running') {
 				return this.hideClockWhileSolving ? this.solvingText : this.formatTime(this.duration);
 			}
 
-			if (this.status === 'complete') {
+			if (this.timerStatus === 'complete') {
 				const previousSolve = this.$store.state.solves[this.previousSolveId];
 				const time = this.formatTime(previousSolve.time);
 				return previousSolve.dnf ? 'DNF' : `${time}${previousSolve.p2 ? '+' : ''}`;
@@ -60,28 +60,28 @@ export default {
 			return this.$options.filters.formatTime(time);
 		},
 		startPreparation() {
-			this.$emit('status-update', 'pending');
+			this.$emit('timer-status-update', 'pending');
 			this.preparationTimer = setTimeout(this.finishPreparation, 250);
 		},
 		cancelPreparation() {
-			this.$emit('status-update', 'idle');
+			this.$emit('timer-status-update', 'idle');
 			clearTimeout(this.preparationTimer);
 		},
 		finishPreparation() {
-			this.$emit('status-update', 'ready');
+			this.$emit('timer-status-update', 'ready');
 			clearTimeout(this.preparationTimer);
 		},
 		startTimer() {
 			this.startTime = Date.now();
 			this.timerInterval = setInterval(this.updateTimer, 10);
-			this.$emit('status-update', 'running');
+			this.$emit('timer-status-update', 'running');
 		},
 		updateTimer() {
 			this.currentTime = Date.now();
 		},
 		stopTimer() {
 			clearInterval(this.timerInterval);
-			this.$emit('status-update', 'complete');
+			this.$emit('timer-status-update', 'complete');
 			this.$emit('new-time', this.duration);
 		},
 		resetTimer() {
@@ -89,21 +89,27 @@ export default {
 			this.currentTime = null;
 		},
 		pressTimer() {
-			if (this.status === 'pending' || this.status === 'ready') return;
+			if (
+				this.scrambleStatus === 'loading'
+				|| this.timerStatus === 'pending'
+				|| this.timerStatus === 'ready'
+			) {
+				return;
+			}
 
-			if (this.status === 'idle' || this.status === 'complete') {
+			if (this.timerStatus === 'idle' || this.timerStatus === 'complete') {
 				this.startPreparation();
-			} else if (this.status === 'running') {
+			} else if (this.timerStatus === 'running') {
 				this.stopTimer();
 			}
 		},
 		releaseTimer() {
-			if (this.status === 'pending') {
+			if (this.timerStatus === 'pending') {
 				this.cancelPreparation();
 				return;
 			}
 
-			if (this.status !== 'ready') return;
+			if (this.timerStatus !== 'ready') return;
 
 			this.startTimer();
 		},
@@ -114,7 +120,7 @@ export default {
 			this.releaseTimer();
 		},
 		mouseleaveHandler() {
-			if (this.status !== 'pending' && this.status !== 'ready') return;
+			if (this.timerStatus !== 'pending' && this.timerStatus !== 'ready') return;
 
 			// The user dragged the mouse off of the display, cancel preparation
 			this.cancelPreparation();
@@ -126,7 +132,7 @@ export default {
 			this.releaseTimer();
 		},
 		touchmoveHandler(event) {
-			if (this.status !== 'pending' && this.status !== 'ready') return;
+			if (this.timerStatus !== 'pending' && this.timerStatus !== 'ready') return;
 
 			// Get the user's touch so we can essentially polyfill a 'touchleave' event
 			const touch = event.touches[0];
@@ -177,16 +183,14 @@ export default {
 	font-size: 4.5rem;
 	line-height: 4rem;
 	font-weight: 300;
+	color: var(--color-cube-white);
 	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;
 	user-select: none;
 }
 
-.display[data-status='idle']     {color: var(--color-cube-white)}
-.display[data-status='pending']  {color: var(--color-cube-red)}
-.display[data-status='ready']    {color: var(--color-cube-green)}
-.display[data-status='running']  {color: var(--color-cube-white)}
-.display[data-status='complete'] {color: var(--color-cube-white)}
+.display[data-status='pending'] {color: var(--color-cube-red)}
+.display[data-status='ready']   {color: var(--color-cube-green)}
 
 .display.hidden-while-solving[data-status='running'] {
 	font-size: 3rem;

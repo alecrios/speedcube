@@ -9,6 +9,10 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		scrambles: {
+			'3': [],
+		},
+
 		settings: {
 			locale: 'en',
 			isFullscreen: false,
@@ -21,6 +25,13 @@ export default new Vuex.Store({
 		solves: {},
 	},
 	mutations: {
+		pushScramble(state, payload) {
+			state.scrambles[payload.cubeSize].push(payload.scramble);
+		},
+		popScramble(state, cubeSize) {
+			state.scrambles[cubeSize].pop();
+		},
+
 		setLocale(state, locale) {
 			state.settings.locale = locale;
 		},

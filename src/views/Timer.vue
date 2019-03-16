@@ -1,157 +1,105 @@
 <template>
-	<div class="timer" ref="timer">
+	<div class="timer">
 		<TheTimerScramble
+			:scramble-status="scrambleStatus"
+			@scramble-status-update="(newStatus) => { scrambleStatus = newStatus }"
 			:solve-id="solveId"
-			:scramble="solve.scramble"
-			@new-scramble="(scramble) => { this.solve.scramble = scramble; }"
+			:scramble="scramble"
+			@new-scramble="(newScramble) => { scramble = newScramble }"
 		/>
 
 		<TheTimerClock
+			:timer-status="timerStatus"
+			@timer-status-update="(newStatus) => { timerStatus = newStatus }"
+			:scramble-status="scrambleStatus"
 			:previous-solve-id="previousSolveId"
 			:solve-id="solveId"
-			:status="status"
-			@status-update="(status) => { this.status = status; }"
 			@new-time="addSolve"
 		/>
 
-		<div class="actions">
-			<IconPenalizeSolve
-				:solve-id="previousSolveId"
-				:disabled="status !== 'complete'"
-			/>
-
-			<IconDeleteSolve
-				:solve-id="previousSolveId"
-				:disabled="status !== 'complete'"
-				@deleted="onDeleted"
-			/>
-
-			<IconTimerSettings/>
-			<IconFullscreen/>
-		</div>
+		<TheTimerActions
+			:timer-status="timerStatus"
+			:solve-id="previousSolveId"
+			@deleted="onDeleted"
+		/>
 	</div>
 </template>
 
 <script>
-import store from '@/store';
-
 import TheTimerScramble from '@/components/TheTimerScramble.vue';
 import TheTimerClock from '@/components/TheTimerClock.vue';
-import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
-import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
-import IconTimerSettings from '@/components/IconTimerSettings.vue';
-import IconFullscreen from '@/components/IconFullscreen.vue';
-
-import addSolve from '@/mixins/addSolve';
-import inert from '@/mixins/inert';
-
-function newSolveData() {
-	return {
-		solveId: String(Date.now()),
-		solve: {
-			session: store.state.currentSession,
-			scramble: [],
-			time: null,
-			dnf: false,
-			p2: false,
-		},
-	};
-}
+import TheTimerActions from '@/components/TheTimerActions.vue';
 
 export default {
 	name: 'Timer',
-	mixins: [addSolve, inert],
 	components: {
 		TheTimerScramble,
 		TheTimerClock,
-		IconPenalizeSolve,
-		IconDeleteSolve,
-		IconTimerSettings,
-		IconFullscreen,
+		TheTimerActions,
 	},
 	data() {
 		return {
-			status: 'idle',
+			scrambleStatus: 'ready',
+			timerStatus: 'idle',
 			previousSolveId: null,
-			...newSolveData(),
+			solveId: String(Date.now()),
+			scramble: [],
 		};
 	},
 	computed: {
+		// The current puzzle type
+		cubeSize() {
+			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
+		},
+		// The current session ID
 		currentSession() {
 			return this.$store.state.currentSession;
 		},
+		// The store of pregenerated scrambles for the current puzzle type
+		scrambles() {
+			return this.$store.state.scrambles[this.cubeSize];
+		},
 	},
 	methods: {
+		// Save the solve to the store
 		addSolve(time) {
-			this.solve.time = time;
-			this.$_addSolve(this.solveId, this.solve);
-			this.resetSolve();
+			this.$store.commit('addSolve', {
+				solveId: this.solveId,
+				solve: {
+					session: this.currentSession,
+					scramble: this.scramble,
+					time,
+					dnf: false,
+					p2: false,
+				},
+			});
+
+			// Create a new solve
+			this.newSolve();
 		},
-		resetSolve() {
+		// Set the data for a new solve
+		newSolve() {
 			this.previousSolveId = this.solveId;
-			Object.assign(this.$data, newSolveData());
+			this.solveId = String(Date.now());
 		},
+		// Reset when the previous solve is deleted
 		onDeleted() {
-			this.status = 'idle';
+			this.timerStatus = 'idle';
 			this.previousSolveId = null;
 		},
-		toggleFullscreen() {
-			this.$store.commit('setFullscreen', !this.$store.state.settings.isFullscreen);
-		},
-		deleteSolve() {
-			if (this.status !== 'complete') return;
-
-			this.$store.commit('removeSolve', this.previousSolveId);
-			this.onDeleted();
-		},
-		toggleP2() {
-			if (this.status !== 'complete') return;
-
-			this.$store.commit('setSolveP2', {
-				id: this.previousSolveId,
-				value: !this.$store.state.solves[this.previousSolveId].p2,
-			});
-		},
-		toggleDnf() {
-			if (this.status !== 'complete') return;
-
-			this.$store.commit('setSolveDnf', {
-				id: this.previousSolveId,
-				value: !this.$store.state.solves[this.previousSolveId].dnf,
-			});
-		},
-		keydownHandler(event) {
-			// Only continue if this is not inert
-			if (this.$_isInert(this.$refs.timer)) return;
-
-			switch (event.key) {
-			case 'f':
-				this.toggleFullscreen();
-				break;
-			case 'x':
-				this.deleteSolve();
-				break;
-			case '2':
-				this.toggleP2();
-				break;
-			case 'd':
-				this.toggleDnf();
-				break;
-			default:
-				break;
-			}
+		// Reset the solve
+		resetSolve() {
+			this.timerStatus = 'idle';
+			this.previousSolveId = null;
+			this.solveId = String(Date.now());
+			this.scramble = [];
 		},
 	},
 	watch: {
+		// If the session changes, reset the solve
 		currentSession() {
 			this.resetSolve();
 		},
-	},
-	mounted() {
-		document.addEventListener('keydown', this.keydownHandler);
-	},
-	beforeDestroy() {
-		document.removeEventListener('keydown', this.keydownHandler);
 	},
 };
 </script>
@@ -159,15 +107,5 @@ export default {
 <style scoped>
 .timer {
 	padding: 1.5rem 0;
-}
-
-.actions {
-	padding: 0 1.5rem;
-	display: flex;
-	justify-content: center;
-}
-
-.actions > * + * {
-	margin-left: .75rem;
 }
 </style>
