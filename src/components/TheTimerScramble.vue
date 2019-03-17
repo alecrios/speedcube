@@ -20,6 +20,12 @@ export default {
 	components: {
 		ScrambleString,
 	},
+	data() {
+		return {
+			scramblesToKeepOnReserve: 5,
+			scramblesPending: 0,
+		};
+	},
 	computed: {
 		// The current puzzle type
 		cubeSize() {
@@ -31,12 +37,30 @@ export default {
 		},
 	},
 	methods: {
+		// Ensure there are scrambles on reserve for safety
+		ensureEnoughScramblesOnReserve() {
+			// The number of scrambles required to meet the desired length
+			const requiredScrambles = this.scramblesToKeepOnReserve
+				- (this.scrambles.length + this.scramblesPending);
+
+			// Only continue if there are not enough scrambles on reserve
+			if (requiredScrambles <= 0) return;
+
+			// Request the scrambles from the worker
+			for (let i = 0; i < requiredScrambles; i += 1) {
+				this.requestScrambleFromWorker();
+			}
+		},
 		// Send a message to the worker requesting a new scramble
 		requestScrambleFromWorker() {
+			this.scramblesPending += 1;
 			scrambleWorker.postMessage(this.cubeSize);
 		},
 		// Receive a message from the worker containing a new scramble
 		receiveScrambleFromWorker(scramble) {
+			this.scramblesPending -= 1;
+
+			// Add the new scramble to the store
 			this.$store.commit('pushScramble', {cubeSize: this.cubeSize, scramble: scramble.data});
 
 			// Only continue if the timer has been waiting for a scramble
@@ -46,11 +70,19 @@ export default {
 			this.useScramble();
 			this.$emit('scramble-status-update', 'ready');
 		},
-		// Take the scramble and remove it from the store
+		// Use the scramble
 		useScramble() {
+			// Get a scramble from the store
 			const scramble = this.scrambles[this.scrambles.length - 1];
+
+			// Send the scramble to the timer
 			this.$emit('new-scramble', scramble);
+
+			// Remove the scramble from the store
 			this.$store.commit('popScramble', this.cubeSize);
+
+			// Top off the the scramble reserve
+			this.ensureEnoughScramblesOnReserve();
 		},
 	},
 	watch: {
@@ -68,19 +100,13 @@ export default {
 				this.useScramble();
 			},
 		},
-		// Watch the scrambles array and ensure there are always 5 scrambles ready
-		scrambles(scrambles) {
-			if (scrambles.length >= 5) return;
-
-			this.requestScrambleFromWorker();
-		},
 	},
 	created() {
 		// Add listener for incoming scrambles from the worker
 		scrambleWorker.addEventListener('message', this.receiveScrambleFromWorker);
 
-		// Send the first scramble request
-		this.requestScrambleFromWorker();
+		// Make sure the reserve is full
+		this.ensureEnoughScramblesOnReserve();
 	},
 	beforeDestroy() {
 		// Remove listener for incoming scrambles from the worker
@@ -106,6 +132,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: .75rem;
 }
 
 .loading-indicator::before {
