@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
+import puzzleTypes from '@/puzzleTypes';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -9,10 +11,7 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
-		scrambles: {
-			'3': [],
-		},
-
+		scrambles: puzzleTypes.reduce((obj, type) => Object.assign(obj, {[type.value]: []}), {}),
 		settings: {
 			locale: 'en',
 			isFullscreen: false,
@@ -26,12 +25,11 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		pushScramble(state, payload) {
-			state.scrambles[payload.cubeSize].push(payload.scramble);
+			state.scrambles[payload.puzzleType].push(payload.scramble);
 		},
-		popScramble(state, cubeSize) {
-			state.scrambles[cubeSize].pop();
+		popScramble(state, puzzleType) {
+			state.scrambles[puzzleType].pop();
 		},
-
 		setLocale(state, locale) {
 			state.settings.locale = locale;
 		},
@@ -45,7 +43,7 @@ export default new Vuex.Store({
 			state.sessionIds.unshift(payload.id);
 			Vue.set(state.sessions, payload.id, {
 				name: payload.name,
-				cubeSize: payload.cubeSize,
+				puzzleType: payload.puzzleType,
 			});
 		},
 		renameSession(state, payload) {

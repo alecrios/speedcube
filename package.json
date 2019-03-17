@@ -18,7 +18,6 @@
     "moment": "^2.24.0",
     "portal-vue": "^1.5.1",
     "register-service-worker": "^1.5.2",
-    "sr-scrambler": "^1.0.1",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",

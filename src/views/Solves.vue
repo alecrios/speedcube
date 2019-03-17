@@ -29,7 +29,11 @@
 						</td>
 
 						<td class="overflow-ellipses">
-							<ScrambleString :scramble="getScramble(solveId)" :show-title="true"/>
+							<ScrambleDisplay
+								:scramble="getScramble(solveId)"
+								:puzzle-type="getPuzzleType(solveId)"
+								display="inline"
+							/>
 						</td>
 
 						<td>
@@ -56,7 +60,7 @@ import EmptyContent from '@/components/EmptyContent.vue';
 import ButtonExportSolves from '@/components/ButtonExportSolves.vue';
 import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
-import ScrambleString from '@/components/ScrambleString.vue';
+import ScrambleDisplay from '@/components/ScrambleDisplay.vue';
 import ButtonLoadMore from '@/components/ButtonLoadMore.vue';
 
 import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
@@ -67,7 +71,7 @@ export default {
 	components: {
 		EmptyContent,
 		ButtonExportSolves,
-		ScrambleString,
+		ScrambleDisplay,
 		IconPenalizeSolve,
 		IconDeleteSolve,
 		ButtonLoadMore,
@@ -90,8 +94,14 @@ export default {
 		getSolve(solveId) {
 			return this.$store.state.solves[solveId];
 		},
+		getSession(solveId) {
+			return this.$store.state.sessions[this.getSolve(solveId).session];
+		},
 		getScramble(solveId) {
 			return this.getSolve(solveId).scramble;
+		},
+		getPuzzleType(solveId) {
+			return this.getSession(solveId).puzzleType;
 		},
 		getTime(solveId) {
 			const solve = this.getSolve(solveId);

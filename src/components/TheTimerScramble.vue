@@ -1,14 +1,23 @@
 <template>
-	<div class="scramble-display">
+	<div class="timer-scramble">
 		<div class="container">
-			<div class="loading-indicator" v-if="scrambleStatus === 'loading'"></div>
-			<ScrambleString :scramble="scramble" v-if="scrambleStatus !== 'loading'"/>
+			<div
+				v-if="scrambleStatus === 'loading' || !scramble"
+				class="loading-indicator"
+			></div>
+
+			<ScrambleDisplay
+				v-if="scrambleStatus !== 'loading' && scramble"
+				:scramble="scramble"
+				:puzzle-type="puzzleType"
+				display="block"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
-import ScrambleString from '@/components/ScrambleString.vue';
+import ScrambleDisplay from '@/components/ScrambleDisplay.vue';
 
 import ScrambleWorker from '@/scramble.worker';
 
@@ -18,7 +27,7 @@ export default {
 	name: 'TheTimerScramble',
 	props: ['scramble-status', 'scramble', 'solve-id'],
 	components: {
-		ScrambleString,
+		ScrambleDisplay,
 	},
 	data() {
 		return {
@@ -28,12 +37,12 @@ export default {
 	},
 	computed: {
 		// The current puzzle type
-		cubeSize() {
-			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
+		puzzleType() {
+			return this.$store.state.sessions[this.$store.state.currentSession].puzzleType;
 		},
 		// The store of pregenerated scrambles for the current puzzle type
 		scrambles() {
-			return this.$store.state.scrambles[this.cubeSize];
+			return this.$store.state.scrambles[this.puzzleType];
 		},
 	},
 	methods: {
@@ -54,14 +63,14 @@ export default {
 		// Send a message to the worker requesting a new scramble
 		requestScrambleFromWorker() {
 			this.scramblesPending += 1;
-			scrambleWorker.postMessage(this.cubeSize);
+			scrambleWorker.postMessage(this.puzzleType);
 		},
 		// Receive a message from the worker containing a new scramble
 		receiveScrambleFromWorker(scramble) {
 			this.scramblesPending -= 1;
 
 			// Add the new scramble to the store
-			this.$store.commit('pushScramble', {cubeSize: this.cubeSize, scramble: scramble.data});
+			this.$store.commit('pushScramble', {puzzleType: this.puzzleType, scramble: scramble.data});
 
 			// Only continue if the timer has been waiting for a scramble
 			if (this.scrambleStatus !== 'loading') return;
@@ -79,7 +88,7 @@ export default {
 			this.$emit('new-scramble', scramble);
 
 			// Remove the scramble from the store
-			this.$store.commit('popScramble', this.cubeSize);
+			this.$store.commit('popScramble', this.puzzleType);
 
 			// Top off the the scramble reserve
 			this.ensureEnoughScramblesOnReserve();
@@ -116,16 +125,8 @@ export default {
 </script>
 
 <style scoped>
-.scramble-display {
+.timer-scramble {
 	padding: 0 1.5rem;
-}
-
-.container {
-	max-width: 22rem;
-	margin: 0 auto;
-	text-align: center;
-	font-size: 1.5rem;
-	line-height: 2.25rem;
 }
 
 .loading-indicator {

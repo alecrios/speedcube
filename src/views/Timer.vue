@@ -43,13 +43,13 @@ export default {
 			timerStatus: 'idle',
 			previousSolveId: null,
 			solveId: String(Date.now()),
-			scramble: [],
+			scramble: '',
 		};
 	},
 	computed: {
 		// The current puzzle type
-		cubeSize() {
-			return this.$store.state.sessions[this.$store.state.currentSession].cubeSize;
+		puzzleType() {
+			return this.$store.state.sessions[this.$store.state.currentSession].puzzleType;
 		},
 		// The current session ID
 		currentSession() {
@@ -57,7 +57,7 @@ export default {
 		},
 		// The store of pregenerated scrambles for the current puzzle type
 		scrambles() {
-			return this.$store.state.scrambles[this.cubeSize];
+			return this.$store.state.scrambles[this.puzzleType];
 		},
 	},
 	methods: {
@@ -92,7 +92,7 @@ export default {
 			this.timerStatus = 'idle';
 			this.previousSolveId = null;
 			this.solveId = String(Date.now());
-			this.scramble = [];
+			this.scramble = '';
 		},
 	},
 	watch: {

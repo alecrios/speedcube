@@ -8,7 +8,7 @@
 			<thead>
 				<tr>
 					<th>{{ $t('name') }}</th>
-					<th>{{ $t('cube') }}</th>
+					<th>{{ $t('puzzle') }}</th>
 					<th class="align-right">{{ $t('solves') }}</th>
 					<th class="align-right">{{ $t('actions') }}</th>
 				</tr>
@@ -24,8 +24,8 @@
 						{{ getName(sessionId) }}
 					</td>
 
-					<td class="cube">
-						{{ getCubeType(sessionId) }}
+					<td class="puzzle">
+						{{ getPuzzleType(sessionId) }}
 					</td>
 
 					<td class="solves align-right">
@@ -58,6 +58,8 @@ import ButtonLoadMore from '@/components/ButtonLoadMore.vue';
 
 import getSessionById from '@/mixins/getSessionById';
 
+import puzzleTypes from '@/puzzleTypes';
+
 export default {
 	name: 'Sessions',
 	mixins: [getSessionById],
@@ -83,14 +85,17 @@ export default {
 		sessionsToShow() {
 			return this.sessionIds.slice(0, this.pageSize * this.pagesVisible);
 		},
+		puzzleTypes() {
+			return puzzleTypes
+				.reduce((obj, type) => (Object.assign(obj, {[type.value]: type.label})), {});
+		},
 	},
 	methods: {
 		getName(id) {
 			return this.$_getSessionById(id).name;
 		},
-		getCubeType(id) {
-			const size = this.$_getSessionById(id).cubeSize;
-			return `${size}×${size}×${size}`;
+		getPuzzleType(id) {
+			return this.puzzleTypes[this.$_getSessionById(id).puzzleType];
 		},
 		getSolvesCount(id) {
 			return this.$store.state.solveIds
