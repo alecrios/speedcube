@@ -89,6 +89,7 @@ export default {
 		},
 		// Reset the solve
 		resetSolve() {
+			this.scrambleStatus = 'ready';
 			this.timerStatus = 'idle';
 			this.previousSolveId = null;
 			this.solveId = String(Date.now());

@@ -99,6 +99,9 @@ export default {
 		solveId: {
 			immediate: true,
 			handler() {
+				// Make sure the reserve is full
+				this.ensureEnoughScramblesOnReserve();
+
 				// If there is no scramble available, set the status to loading
 				if (!this.scrambles.length) {
 					this.$emit('scramble-status-update', 'loading');
@@ -113,9 +116,6 @@ export default {
 	created() {
 		// Add listener for incoming scrambles from the worker
 		scrambleWorker.addEventListener('message', this.receiveScrambleFromWorker);
-
-		// Make sure the reserve is full
-		this.ensureEnoughScramblesOnReserve();
 	},
 	beforeDestroy() {
 		// Remove listener for incoming scrambles from the worker
