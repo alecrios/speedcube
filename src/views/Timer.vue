@@ -69,8 +69,7 @@ export default {
 					session: this.currentSession,
 					scramble: this.scramble,
 					time,
-					dnf: false,
-					p2: false,
+					status: 'OK',
 				},
 			});
 

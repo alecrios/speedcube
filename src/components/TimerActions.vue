@@ -1,6 +1,6 @@
 <template>
 	<div class="actions" ref="actions">
-		<IconPenalizeSolve
+		<IconChangeSolveStatus
 			:solve-id="solveId"
 			:disabled="timerStatus !== 'complete'"
 		/>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import IconPenalizeSolve from '@/components/IconPenalizeSolve.vue';
+import IconChangeSolveStatus from '@/components/IconChangeSolveStatus.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
 import IconTimerSettings from '@/components/IconTimerSettings.vue';
 import IconFullscreen from '@/components/IconFullscreen.vue';
@@ -28,7 +28,7 @@ export default {
 	name: 'TimerActions',
 	mixins: [inert],
 	components: {
-		IconPenalizeSolve,
+		IconChangeSolveStatus,
 		IconDeleteSolve,
 		IconTimerSettings,
 		IconFullscreen,
@@ -40,24 +40,29 @@ export default {
 			if (this.$_isInert(this.$refs.actions)) return;
 
 			switch (event.key) {
-			case 'f':
-				this.toggleFullscreen();
+			case '1':
+				this.setSolveStatus('OK');
+				break;
+			case '2':
+				this.setSolveStatus('+2');
+				break;
+			case '3':
+				this.setSolveStatus('DNF');
 				break;
 			case 'x':
 				this.deleteSolve();
 				break;
-			case '2':
-				this.toggleP2();
-				break;
-			case 'd':
-				this.toggleDnf();
+			case 'f':
+				this.toggleFullscreen();
 				break;
 			default:
 				break;
 			}
 		},
-		toggleFullscreen() {
-			this.$store.commit('setFullscreen', !this.$store.state.settings.isFullscreen);
+		setSolveStatus(status) {
+			if (this.timerStatus !== 'complete') return;
+
+			this.$store.commit('setSolveStatus', {id: this.solveId, status});
 		},
 		deleteSolve() {
 			if (this.timerStatus !== 'complete') return;
@@ -65,21 +70,8 @@ export default {
 			this.$store.commit('removeSolve', this.solveId);
 			this.$emit('deleted');
 		},
-		toggleP2() {
-			if (this.timerStatus !== 'complete') return;
-
-			this.$store.commit('setSolveP2', {
-				id: this.solveId,
-				value: !this.$store.state.solves[this.solveId].p2,
-			});
-		},
-		toggleDnf() {
-			if (this.timerStatus !== 'complete') return;
-
-			this.$store.commit('setSolveDnf', {
-				id: this.solveId,
-				value: !this.$store.state.solves[this.solveId].dnf,
-			});
+		toggleFullscreen() {
+			this.$store.commit('setFullscreen', !this.$store.state.settings.isFullscreen);
 		},
 	},
 	mounted() {

@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<BaseIcon
-			icon="penalty"
-			:name="$t('penalize')"
+			icon="status"
+			:name="$t('changeStatus')"
 			@click="showModal = true"
 			:disabled="disabled"
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalPenalizeSolve
+			<ModalChangeSolveStatus
 				v-if="showModal"
 				@close="showModal = false"
 				:solve-id="solveId"
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import ModalPenalizeSolve from '@/components/ModalPenalizeSolve.vue';
+import ModalChangeSolveStatus from '@/components/ModalChangeSolveStatus.vue';
 
 export default {
-	name: 'IconPenalizeSolve',
+	name: 'IconChangeSolveStatus',
 	props: ['solve-id', 'disabled'],
 	data() {
 		return {
@@ -29,7 +29,7 @@ export default {
 		};
 	},
 	components: {
-		ModalPenalizeSolve,
+		ModalChangeSolveStatus,
 	},
 };
 </script>

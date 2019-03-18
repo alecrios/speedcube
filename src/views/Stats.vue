@@ -39,6 +39,8 @@ import EmptyContent from '@/components/EmptyContent.vue';
 
 import solveIdsOfCurrentSession from '@/mixins/solveIdsOfCurrentSession';
 
+import formatTime from '@/utils/formatTime';
+
 export default {
 	name: 'Stats',
 	mixins: [solveIdsOfCurrentSession],
@@ -65,7 +67,7 @@ export default {
 		times() {
 			return this.$_solveIdsOfCurrentSession
 				.map((solveId) => this.$store.state.solves[solveId])
-				.map((solve) => (solve.dnf ? Infinity : solve.time));
+				.map((solve) => (solve.status === 'DNF' ? Infinity : solve.time));
 		},
 	},
 	methods: {
@@ -104,7 +106,7 @@ export default {
 		getFormattedTime(time) {
 			if (time === null) return '...';
 
-			return time === Infinity ? 'DNF' : this.$options.filters.formatTime(time);
+			return time === Infinity ? 'DNF' : formatTime(time);
 		},
 	},
 };

@@ -62,6 +62,8 @@
 import {saveAs} from 'file-saver';
 import filenamify from 'filenamify';
 
+import formatTime from '@/utils/formatTime';
+
 export default {
 	name: 'ModalExportSolves',
 	data() {
@@ -133,7 +135,7 @@ export default {
 	},
 	methods: {
 		formatTime(solve) {
-			return solve.dnf ? 'DNF' : this.$options.filters.formatTime(solve.time);
+			return formatTime(solve);
 		},
 		exportSolves() {
 			const fileName = filenamify(this.fileName || this.sessionName, {replacement: '-'});

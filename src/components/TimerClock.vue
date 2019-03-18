@@ -17,6 +17,8 @@
 <script>
 import inert from '@/mixins/inert';
 
+import formatTime from '@/utils/formatTime';
+
 export default {
 	name: 'TimerClock',
 	mixins: [inert],
@@ -48,16 +50,15 @@ export default {
 
 			if (this.timerStatus === 'complete') {
 				const previousSolve = this.$store.state.solves[this.previousSolveId];
-				const time = this.formatTime(previousSolve.time);
-				return previousSolve.dnf ? 'DNF' : `${time}${previousSolve.p2 ? '+' : ''}`;
+				return this.formatTime(previousSolve);
 			}
 
 			return this.formatTime(this.duration);
 		},
 	},
 	methods: {
-		formatTime(time) {
-			return this.$options.filters.formatTime(time);
+		formatTime(solve) {
+			return formatTime(solve);
 		},
 		startPreparation() {
 			this.$emit('timer-status-update', 'pending');

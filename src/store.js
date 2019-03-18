@@ -73,19 +73,21 @@ export default new Vuex.Store({
 			state.solveIds.splice(state.solveIds.indexOf(id), 1);
 			Vue.delete(state.solves, id);
 		},
-		setSolveDnf(state, payload) {
-			if (state.solves[payload.id].dnf === payload.value) return;
+		setSolveStatus(state, payload) {
+			const solve = state.solves[payload.id];
+			const oldStatus = solve.status;
+			const newStatus = payload.status;
 
-			Vue.set(state.solves[payload.id], 'dnf', payload.value);
-		},
-		setSolveP2(state, payload) {
-			if (state.solves[payload.id].p2 === payload.value) return;
+			if (oldStatus === newStatus) return;
 
-			Vue.set(state.solves[payload.id], 'p2', payload.value);
+			Vue.set(solve, 'status', newStatus);
 
-			Vue.set(state.solves[payload.id], 'time', state.solves[payload.id].p2
-				? state.solves[payload.id].time + 2000
-				: state.solves[payload.id].time - 2000);
+			// If this was a change to/from +2, adjust the solve time accordingly
+			if (oldStatus === '+2') {
+				Vue.set(solve, 'time', solve.time - 2000);
+			} else if (newStatus === '+2') {
+				Vue.set(solve, 'time', solve.time + 2000);
+			}
 		},
 	},
 });

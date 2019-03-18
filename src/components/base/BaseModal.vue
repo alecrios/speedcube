@@ -29,7 +29,17 @@ export default {
 		},
 		focusFirstFocusableElement() {
 			const focusableElements = this.$refs.form.$el.querySelectorAll('button, input, select');
-			focusableElements[0].focus();
+
+			let elementToFocus = focusableElements[0];
+
+			// If the element is a radio button, focus the selected item in that group
+			if (elementToFocus.matches('input[type="radio"]')) {
+				const radioGroupName = elementToFocus.getAttribute('name');
+				elementToFocus = this.$refs.form.$el
+					.querySelector(`input[type="radio"][name="${radioGroupName}"]:checked`);
+			}
+
+			elementToFocus.focus();
 		},
 	},
 	mounted() {
