@@ -15,7 +15,7 @@
 		</div>
 
 		<div :class="puzzleCategory" v-else-if="puzzleCategory === 'megaminx'">
-			<span class="scramble" v-html="display === 'block' ? megaminxTurnGroups : scramble"></span>
+			<span class="scramble" v-html="display === 'block' ? megaminxTurnGroups : scramble"/>
 		</div>
 
 		<div :class="puzzleCategory" v-else>

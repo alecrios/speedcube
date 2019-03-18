@@ -18,7 +18,7 @@
 import inert from '@/mixins/inert';
 
 export default {
-	name: 'TheTimerClock',
+	name: 'TimerClock',
 	mixins: [inert],
 	props: ['timer-status', 'scramble-status', 'solve-id', 'previous-solve-id'],
 	data() {

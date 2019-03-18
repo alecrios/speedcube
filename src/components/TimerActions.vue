@@ -25,7 +25,7 @@ import IconFullscreen from '@/components/IconFullscreen.vue';
 import inert from '@/mixins/inert';
 
 export default {
-	name: 'TheTimerActions',
+	name: 'TimerActions',
 	mixins: [inert],
 	components: {
 		IconPenalizeSolve,

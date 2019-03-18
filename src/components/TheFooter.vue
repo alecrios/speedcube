@@ -7,7 +7,8 @@
 					<a
 						href="https://alecrios.com"
 						target="_blank"
-						rel="noopener">Alec Rios</a>
+						rel="noopener"
+					>Alec Rios</a>
 				</span>
 
 				<span class="item">

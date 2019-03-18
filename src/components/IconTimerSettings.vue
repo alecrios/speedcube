@@ -7,7 +7,10 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalTimerSettings v-if="showModal" @close="showModal = false"/>
+			<ModalTimerSettings
+				v-if="showModal"
+				@close="showModal = false"
+			/>
 		</Portal>
 	</div>
 </template>

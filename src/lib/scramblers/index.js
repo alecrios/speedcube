@@ -1,3 +1,5 @@
+/* Scrambler sources: https://github.com/cubing/jsss https://github.com/nickcolley/scrambo */
+
 import scramble222 from './scramble_222';
 import scramble333 from './scramble_333';
 import scrambleNnn from './scramble_NNN';

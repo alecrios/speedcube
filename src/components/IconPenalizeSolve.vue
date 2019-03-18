@@ -8,7 +8,11 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalPenalizeSolve v-if="showModal" @close="showModal = false" :solve-id="solveId"/>
+			<ModalPenalizeSolve
+				v-if="showModal"
+				@close="showModal = false"
+				:solve-id="solveId"
+			/>
 		</Portal>
 	</div>
 </template>

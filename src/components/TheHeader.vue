@@ -3,22 +3,41 @@
 		<BaseWrapper>
 			<div class="bar">
 				<RouterLink to="/">
-					<img src="../assets/logo.svg" alt="Speedcube">
+					<img class="logo" src="../assets/logo.svg" alt="Speedcube">
 				</RouterLink>
 
-				<TheSessionSelect/>
+				<div class="session-select">
+					<BaseSelect
+						id="session"
+						:name="$t('session')"
+						v-model="currentSession"
+						:options="sessions"
+						size="small"
+					/>
+				</div>
 			</div>
 		</BaseWrapper>
 	</header>
 </template>
 
 <script>
-import TheSessionSelect from '@/components/TheSessionSelect.vue';
-
 export default {
 	name: 'TheHeader',
-	components: {
-		TheSessionSelect,
+	computed: {
+		sessions() {
+			return this.$store.state.sessionIds.map((sessionId) => ({
+				value: sessionId,
+				label: this.$store.state.sessions[sessionId].name,
+			}));
+		},
+		currentSession: {
+			get() {
+				return this.$store.state.currentSession;
+			},
+			set(id) {
+				this.$store.commit('updateCurrentSession', id);
+			},
+		},
 	},
 };
 </script>
@@ -37,8 +56,13 @@ export default {
 	padding: 0 .75rem;
 }
 
-img {
+.logo {
 	width: 8.5625rem;
 	height: 3rem;
+}
+
+.session-select {
+	max-width: 10rem;
+	padding: .75rem;
 }
 </style>

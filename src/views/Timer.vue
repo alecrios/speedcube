@@ -1,6 +1,6 @@
 <template>
 	<div class="timer">
-		<TheTimerScramble
+		<TimerScramble
 			:scramble-status="scrambleStatus"
 			@scramble-status-update="(newStatus) => { scrambleStatus = newStatus }"
 			:solve-id="solveId"
@@ -8,7 +8,7 @@
 			@new-scramble="(newScramble) => { scramble = newScramble }"
 		/>
 
-		<TheTimerClock
+		<TimerClock
 			:timer-status="timerStatus"
 			@timer-status-update="(newStatus) => { timerStatus = newStatus }"
 			:scramble-status="scrambleStatus"
@@ -17,7 +17,7 @@
 			@new-time="addSolve"
 		/>
 
-		<TheTimerActions
+		<TimerActions
 			:timer-status="timerStatus"
 			:solve-id="previousSolveId"
 			@deleted="onDeleted"
@@ -26,16 +26,16 @@
 </template>
 
 <script>
-import TheTimerScramble from '@/components/TheTimerScramble.vue';
-import TheTimerClock from '@/components/TheTimerClock.vue';
-import TheTimerActions from '@/components/TheTimerActions.vue';
+import TimerScramble from '@/components/TimerScramble.vue';
+import TimerClock from '@/components/TimerClock.vue';
+import TimerActions from '@/components/TimerActions.vue';
 
 export default {
 	name: 'Timer',
 	components: {
-		TheTimerScramble,
-		TheTimerClock,
-		TheTimerActions,
+		TimerScramble,
+		TimerClock,
+		TimerActions,
 	},
 	data() {
 		return {

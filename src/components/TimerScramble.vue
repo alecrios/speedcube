@@ -4,7 +4,7 @@
 			<div
 				v-if="scrambleStatus === 'loading' || !scramble"
 				class="loading-indicator"
-			></div>
+			/>
 
 			<ScrambleDisplay
 				v-if="scrambleStatus !== 'loading' && scramble"
@@ -24,7 +24,7 @@ import ScrambleWorker from '@/scramble.worker';
 const scrambleWorker = new ScrambleWorker();
 
 export default {
-	name: 'TheTimerScramble',
+	name: 'TimerScramble',
 	props: ['scramble-status', 'scramble', 'solve-id'],
 	components: {
 		ScrambleDisplay,

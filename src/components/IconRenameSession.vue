@@ -7,7 +7,11 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalRenameSession v-if="showModal" @close="showModal = false" :session-id="sessionId"/>
+			<ModalRenameSession
+				v-if="showModal"
+				@close="showModal = false"
+				:session-id="sessionId"
+			/>
 		</Portal>
 	</div>
 </template>

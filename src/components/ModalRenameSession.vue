@@ -31,11 +31,8 @@
 <script>
 import moment from 'moment';
 
-import renameSession from '@/mixins/renameSession';
-
 export default {
 	name: 'ModalEditSession',
-	mixins: [renameSession],
 	props: ['session-id'],
 	data() {
 		return {
@@ -47,9 +44,9 @@ export default {
 			return moment().format('YYYY-MM-DD');
 		},
 		submit() {
-			this.$_renameSession({
+			this.$store.commit('renameSession', {
 				id: this.sessionId,
-				name: this.name,
+				name: this.name || moment().format('YYYY-MM-DD'),
 			});
 
 			this.$emit('close');
