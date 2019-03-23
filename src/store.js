@@ -15,6 +15,8 @@ export default new Vuex.Store({
 		settings: {
 			locale: 'en',
 			isFullscreen: false,
+			enableInspection: false,
+			enableInspectionAudio: false,
 			hideClockWhileSolving: false,
 		},
 		currentSession: null,
@@ -35,6 +37,12 @@ export default new Vuex.Store({
 		},
 		setFullscreen(state, isFullscreen) {
 			state.settings.isFullscreen = isFullscreen;
+		},
+		setEnableInspection(state, enableInspection) {
+			state.settings.enableInspection = enableInspection;
+		},
+		setEnableInspectionAudio(state, enableInspectionAudio) {
+			state.settings.enableInspectionAudio = enableInspectionAudio;
 		},
 		setHideClockWhileSolving(state, hideClockWhileSolving) {
 			state.settings.hideClockWhileSolving = hideClockWhileSolving;
@@ -66,8 +74,15 @@ export default new Vuex.Store({
 			state.currentSession = id;
 		},
 		addSolve(state, payload) {
-			state.solveIds.unshift(payload.solveId);
-			Vue.set(state.solves, payload.solveId, payload.solve);
+			const {solveId, solve} = payload;
+
+			// If this solve has the +2 penalty, adjust the time
+			if (solve.status === '+2') {
+				solve.time += 2000;
+			}
+
+			state.solveIds.unshift(solveId);
+			Vue.set(state.solves, solveId, solve);
 		},
 		removeSolve(state, id) {
 			state.solveIds.splice(state.solveIds.indexOf(id), 1);

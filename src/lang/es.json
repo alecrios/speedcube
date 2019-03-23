@@ -51,6 +51,8 @@
 	"changeLanguage": "Cambiar Idioma",
 	"toggleFullscreen": "Alternar Pantalla Completa",
 	"timerSettings": "Ajustes del Temporizador",
+	"enableInspection": "Habilitar período de inspección",
+	"enableInspectionAudio": "Habilitar las señales de audio de inspección",
 	"hideClockWhileSolving": "Ocultar reloj mientras se resuelve",
 	"updateAvailable": "Una nueva actualización está disponible.",
 	"reload": "Actualizar"

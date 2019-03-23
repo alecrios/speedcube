@@ -11,7 +11,10 @@
 			@deleted="$emit('deleted')"
 		/>
 
-		<IconTimerSettings/>
+		<IconTimerSettings
+			:disabled="!['loading', 'idle', 'complete'].includes(timerStatus)"
+		/>
+
 		<IconFullscreen/>
 	</div>
 </template>

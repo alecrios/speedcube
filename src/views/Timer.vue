@@ -11,10 +11,11 @@
 		<TimerClock
 			:timer-status="timerStatus"
 			@timer-status-update="(newStatus) => { timerStatus = newStatus }"
+			@solve-status-update="(newStatus) => { solveStatus = newStatus }"
 			:scramble-status="scrambleStatus"
 			:previous-solve-id="previousSolveId"
 			:solve-id="solveId"
-			@new-time="addSolve"
+			@solve-completed="addSolve"
 		/>
 
 		<TimerActions
@@ -41,6 +42,7 @@ export default {
 		return {
 			scrambleStatus: 'ready',
 			timerStatus: 'idle',
+			solveStatus: 'OK',
 			previousSolveId: null,
 			solveId: String(Date.now()),
 			scramble: '',
@@ -68,8 +70,8 @@ export default {
 				solve: {
 					session: this.currentSession,
 					scramble: this.scramble,
+					status: this.solveStatus,
 					time,
-					status: 'OK',
 				},
 			});
 
@@ -80,16 +82,19 @@ export default {
 		newSolve() {
 			this.previousSolveId = this.solveId;
 			this.solveId = String(Date.now());
+			this.solveStatus = 'OK';
 		},
 		// Reset when the previous solve is deleted
 		onDeleted() {
 			this.timerStatus = 'idle';
 			this.previousSolveId = null;
+			this.solveStatus = 'OK';
 		},
 		// Reset the solve
 		resetSolve() {
 			this.scrambleStatus = 'ready';
 			this.timerStatus = 'idle';
+			this.solveStatus = 'OK';
 			this.previousSolveId = null;
 			this.solveId = String(Date.now());
 			this.scramble = '';

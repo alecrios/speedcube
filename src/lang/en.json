@@ -51,6 +51,8 @@
 	"changeLanguage": "Change Language",
 	"toggleFullscreen": "Toggle Fullscreen",
 	"timerSettings": "Timer Settings",
+	"enableInspection": "Enable inspection period",
+	"enableInspectionAudio": "Enable inspection audio cues",
 	"hideClockWhileSolving": "Hide clock while solving",
 	"updateAvailable": "A new update is available.",
 	"reload": "Reload"

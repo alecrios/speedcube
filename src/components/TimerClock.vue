@@ -3,12 +3,12 @@
 		ref="display"
 		:class="['display', {'hidden-while-solving': hideClockWhileSolving}]"
 		:data-status="timerStatus"
-		@mousedown="mousedownHandler"
-		@mouseup="mouseupHandler"
-		@mouseleave="mouseleaveHandler"
-		@touchstart.prevent="touchstartHandler"
-		@touchend.prevent="touchendHandler"
-		@touchmove.prevent="touchmoveHandler"
+		@mousedown="pressTimer"
+		@mouseup="releaseTimer"
+		@mouseleave="leaveTimer"
+		@touchstart.prevent="pressTimer"
+		@touchend.prevent="releaseTimer"
+		@touchmove.prevent="leaveTimer"
 	>
 		{{ displayText }}
 	</button>
@@ -18,6 +18,10 @@
 import inert from '@/mixins/inert';
 
 import formatTime from '@/utils/formatTime';
+
+import AudioCues from '@/lib/audioCues';
+
+const audioCues = new AudioCues();
 
 export default {
 	name: 'TimerClock',
@@ -29,9 +33,17 @@ export default {
 			currentTime: null,
 			preparationTimer: null,
 			timerInterval: null,
+			inspectionTimeElapsed: 0,
+			inspectionTimerInterval: null,
 		};
 	},
 	computed: {
+		enableInspection() {
+			return this.$store.state.settings.enableInspection;
+		},
+		enableInspectionAudio() {
+			return this.$store.state.settings.enableInspectionAudio;
+		},
 		hideClockWhileSolving() {
 			return this.$store.state.settings.hideClockWhileSolving;
 		},
@@ -43,29 +55,63 @@ export default {
 
 			return this.currentTime - this.startTime;
 		},
+		inspectionTime() {
+			return `${(15000 - this.inspectionTimeElapsed) / 1000}`;
+		},
 		displayText() {
-			if (this.timerStatus === 'running') {
-				return this.hideClockWhileSolving ? this.solvingText : this.formatTime(this.duration);
-			}
+			let text;
 
-			if (this.timerStatus === 'complete') {
+			if (this.timerStatus === 'inspecting') {
+				// Display the inspection timer
+				text = this.inspectionTime;
+			} else if (this.timerStatus === 'solving') {
+				// Display the solve timer (or the solving text when applicable)
+				text = this.hideClockWhileSolving ? this.solvingText : formatTime(this.duration);
+			} else if (this.timerStatus === 'complete') {
+				// Display the time of the previous solve
 				const previousSolve = this.$store.state.solves[this.previousSolveId];
-				return this.formatTime(previousSolve);
+				text = formatTime(previousSolve);
+			} else {
+				// Display either the inspection timer or the solve timer
+				text = this.enableInspection ? this.inspectionTime : formatTime(this.duration);
 			}
 
-			return this.formatTime(this.duration);
+			return text;
 		},
 	},
 	methods: {
-		formatTime(solve) {
-			return formatTime(solve);
+		markReadyToInspect() {
+			this.$emit('timer-status-update', 'ready-to-inspect');
+		},
+		startInspectionTimer() {
+			this.inspectionTimerInterval = setInterval(this.updateInspectionTimer, 1000);
+			this.$emit('timer-status-update', 'inspecting');
+		},
+		updateInspectionTimer() {
+			this.inspectionTimeElapsed += 1000;
+
+			if (this.inspectionTimeElapsed === 8000) {
+				audioCues.play('8-seconds');
+			} else if (this.inspectionTimeElapsed === 12000) {
+				audioCues.play('12-seconds');
+			} else if (this.inspectionTimeElapsed === 15000) {
+				this.$emit('solve-status-update', '+2');
+			} else if (this.inspectionTimeElapsed === 17000) {
+				this.$emit('solve-status-update', 'DNF');
+			}
+		},
+		cancelInspectionPreparation() {
+			this.$emit('timer-status-update', 'idle');
+		},
+		stopInspectionTimer() {
+			clearInterval(this.inspectionTimerInterval);
 		},
 		startPreparation() {
 			this.$emit('timer-status-update', 'pending');
 			this.preparationTimer = setTimeout(this.finishPreparation, 250);
 		},
 		cancelPreparation() {
-			this.$emit('timer-status-update', 'idle');
+			this.$emit('timer-status-update', this.enableInspection ? 'inspecting' : 'idle');
 			clearTimeout(this.preparationTimer);
 		},
 		finishPreparation() {
@@ -75,7 +121,7 @@ export default {
 		startTimer() {
 			this.startTime = Date.now();
 			this.timerInterval = setInterval(this.updateTimer, 10);
-			this.$emit('timer-status-update', 'running');
+			this.$emit('timer-status-update', 'solving');
 		},
 		updateTimer() {
 			this.currentTime = Date.now();
@@ -83,11 +129,12 @@ export default {
 		stopTimer() {
 			clearInterval(this.timerInterval);
 			this.$emit('timer-status-update', 'complete');
-			this.$emit('new-time', this.duration);
+			this.$emit('solve-completed', this.duration);
 		},
 		resetTimer() {
 			this.startTime = null;
 			this.currentTime = null;
+			this.inspectionTimeElapsed = null;
 		},
 		pressTimer() {
 			if (
@@ -98,51 +145,56 @@ export default {
 				return;
 			}
 
-			if (this.timerStatus === 'idle' || this.timerStatus === 'complete') {
-				this.startPreparation();
-			} else if (this.timerStatus === 'running') {
+			if (this.timerStatus === 'solving') {
 				this.stopTimer();
-			}
-		},
-		releaseTimer() {
-			if (this.timerStatus === 'pending') {
-				this.cancelPreparation();
 				return;
 			}
 
-			if (this.timerStatus !== 'ready') return;
+			if (this.enableInspection && this.timerStatus !== 'inspecting') {
+				this.markReadyToInspect();
+				return;
+			}
 
-			this.startTimer();
+			this.startPreparation();
 		},
-		mousedownHandler() {
-			this.pressTimer();
-		},
-		mouseupHandler() {
-			this.releaseTimer();
-		},
-		mouseleaveHandler() {
-			if (this.timerStatus !== 'pending' && this.timerStatus !== 'ready') return;
+		releaseTimer() {
+			if (this.timerStatus === 'ready-to-inspect') {
+				this.startInspectionTimer();
+			} else if (this.timerStatus === 'pending') {
+				this.cancelPreparation();
+			} else if (this.timerStatus === 'ready') {
+				if (this.enableInspection) {
+					this.stopInspectionTimer();
+				}
 
-			// The user dragged the mouse off of the display, cancel preparation
-			this.cancelPreparation();
+				this.startTimer();
+			}
 		},
-		touchstartHandler() {
-			this.pressTimer();
-		},
-		touchendHandler() {
-			this.releaseTimer();
-		},
-		touchmoveHandler(event) {
-			if (this.timerStatus !== 'pending' && this.timerStatus !== 'ready') return;
+		leaveTimer(event) {
+			// Only continue if the user is currently holding down the button
+			if (
+				this.timerStatus !== 'ready-to-inspect'
+				&& this.timerStatus !== 'pending'
+				&& this.timerStatus !== 'ready'
+			) {
+				return;
+			}
 
-			// Get the user's touch so we can essentially polyfill a 'touchleave' event
-			const touch = event.touches[0];
+			if (event.type === 'touchmove') {
+				// Get the user's touch so we can essentially polyfill a 'touchleave' event
+				const touch = event.touches[0];
 
-			// If the user is still touching the display, do nothing
-			if (document.elementFromPoint(touch.pageX, touch.pageY) === this.$refs.display) return;
+				// If the user is still touching the display, do nothing
+				if (document.elementFromPoint(touch.pageX, touch.pageY) === this.$refs.display) {
+					return;
+				}
+			}
 
-			// The user is not touching the display anymore, cancel preparation
-			this.cancelPreparation();
+			if (this.timerStatus === 'pending' || this.timerStatus === 'ready') {
+				this.cancelPreparation();
+			} else if (this.timerStatus === 'ready-to-inspect') {
+				this.cancelInspectionPreparation();
+			}
 		},
 		keydownHandler(event) {
 			// Only continue if this is not inert
@@ -190,10 +242,16 @@ export default {
 	user-select: none;
 }
 
+.display[data-status='loading'] {color: var(--color-cube-white)}
+.display[data-status='idle'] {color: var(--color-cube-white)}
+.display[data-status='ready-to-inspect'] {color: var(--color-cube-green)}
+.display[data-status='inspecting'] {color: var(--color-cube-yellow)}
 .display[data-status='pending'] {color: var(--color-cube-red)}
-.display[data-status='ready']   {color: var(--color-cube-green)}
+.display[data-status='ready'] {color: var(--color-cube-green)}
+.display[data-status='solving'] {color: var(--color-cube-white)}
+.display[data-status='complete'] {color: var(--color-cube-white)}
 
-.display.hidden-while-solving[data-status='running'] {
+.display.hidden-while-solving[data-status='solving'] {
 	font-size: 3rem;
 }
 

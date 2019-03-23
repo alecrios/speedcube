@@ -4,6 +4,7 @@
 			icon="gear"
 			:name="$t('timerSettings')"
 			@click="showModal = true"
+			:disabled="disabled"
 		/>
 
 		<Portal to="modals" v-if="showModal">
@@ -20,6 +21,7 @@ import ModalTimerSettings from '@/components/ModalTimerSettings.vue';
 
 export default {
 	name: 'IconTimerSettings',
+	props: ['disabled'],
 	data() {
 		return {
 			showModal: false,

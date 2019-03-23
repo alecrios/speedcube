@@ -4,9 +4,11 @@
  * @return {string} The formatted time string
  */
 export default function formatTime(input) {
-	const time = input.time || input;
+	const time = input.time !== undefined ? input.time : input;
 
 	if (input.status === 'DNF') return 'DNF';
+
+	if (time === 0) return '0.00';
 
 	let SS = Math.floor((time / 10) % 100);
 	let ss = Math.floor((time / 1000) % 60);
