@@ -94,6 +94,6 @@ export default {
 }
 
 .actions > * + * {
-	margin-left: .75rem;
+	margin-left: 1.125rem;
 }
 </style>
