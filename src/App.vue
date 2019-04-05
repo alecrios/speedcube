@@ -1,5 +1,5 @@
 <template>
-	<div id="app" :data-version="version">
+	<div id="app" :data-version="$store.state.version">
 		<div class="head">
 			<TheHeader v-if="!isFullscreen"/>
 			<TheNav v-if="!isFullscreen"/>
@@ -41,7 +41,6 @@ export default {
 	},
 	data() {
 		return {
-			version: process.env.VUE_APP_VERSION,
 			refreshing: false,
 			registration: null,
 			updateAvailable: false,

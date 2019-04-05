@@ -11,6 +11,7 @@ export default new Vuex.Store({
 		createPersistedState({key: 'store'}),
 	],
 	state: {
+		version: process.env.VUE_APP_VERSION,
 		scrambles: puzzleTypes.reduce((obj, type) => Object.assign(obj, {[type.value]: []}), {}),
 		settings: {
 			locale: 'en',
