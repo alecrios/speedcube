@@ -54,6 +54,14 @@
 	"enableInspection": "Habilitar período de inspección",
 	"enableInspectionAudio": "Habilitar las señales de audio de inspección",
 	"hideClockWhileSolving": "Ocultar reloj mientras se resuelve",
+	"help": "Ayuda",
+	"ok": "De acuerdo",
+	"hotkey": "Tecla",
+	"action": "Acción",
+	"controlTimer": "Controlar Temporizador",
+	"markSolveOk": "Márcalo Bien",
+	"markSolvePlus2": "Márcalo +2",
+	"markSolveDnf": "Márcalo DNF",
 	"updateAvailable": "Una nueva actualización está disponible.",
 	"reload": "Actualizar"
 }

@@ -10,41 +10,43 @@
 				<ButtonExportSolves/>
 			</div>
 
-			<BaseTable>
-				<thead>
-					<tr>
-						<th class="align-right">{{ $t('time') }}</th>
-						<th>{{ $t('scramble') }}</th>
-						<th class="align-right">{{ $t('edit') }}</th>
-					</tr>
-				</thead>
+			<div class="table-wrapper">
+				<BaseTable :has-side-padding="true">
+					<thead>
+						<tr>
+							<th class="align-right">{{ $t('time') }}</th>
+							<th>{{ $t('scramble') }}</th>
+							<th class="align-right">{{ $t('edit') }}</th>
+						</tr>
+					</thead>
 
-				<tbody>
-					<tr
-						v-for="solveId in solvesToShow"
-						:key="solveId"
-					>
-						<td class="align-right">
-							<div class="time">{{ getTime(solveId) }}</div>
-						</td>
+					<tbody>
+						<tr
+							v-for="solveId in solvesToShow"
+							:key="solveId"
+						>
+							<td class="align-right">
+								<div class="time">{{ getTime(solveId) }}</div>
+							</td>
 
-						<td class="overflow-ellipses">
-							<ScrambleDisplay
-								:scramble="getScramble(solveId)"
-								:puzzle-type="getPuzzleType(solveId)"
-								display="inline"
-							/>
-						</td>
+							<td class="overflow-ellipses">
+								<ScrambleDisplay
+									:scramble="getScramble(solveId)"
+									:puzzle-type="getPuzzleType(solveId)"
+									display="inline"
+								/>
+							</td>
 
-						<td>
-							<div class="actions">
-								<IconChangeSolveStatus :solve-id="solveId"/>
-								<IconDeleteSolve :solve-id="solveId"/>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</BaseTable>
+							<td>
+								<div class="actions">
+									<IconChangeSolveStatus :solve-id="solveId"/>
+									<IconDeleteSolve :solve-id="solveId"/>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</BaseTable>
+			</div>
 
 			<ButtonLoadMore
 				:pages-visible="pagesVisible"
@@ -118,6 +120,10 @@ export default {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 1.5rem;
+}
+
+.table-wrapper {
+	padding: 1.5rem 0;
 }
 
 .actions {

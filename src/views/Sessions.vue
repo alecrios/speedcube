@@ -4,58 +4,60 @@
 			<ButtonCreateSession/>
 		</div>
 
-		<BaseTable>
-			<thead>
-				<tr>
-					<th>{{ $t('session') }}</th>
-					<th v-if="media === 'desktop'">{{ $t('puzzle') }}</th>
-					<th class="align-right">{{ $t('solves') }}</th>
-					<th class="align-right">{{ $t('edit') }}</th>
-				</tr>
-			</thead>
+		<div class="table-wrapper">
+			<BaseTable :has-side-padding="true">
+				<thead>
+					<tr>
+						<th>{{ $t('session') }}</th>
+						<th v-if="media === 'desktop'">{{ $t('puzzle') }}</th>
+						<th class="align-right">{{ $t('solves') }}</th>
+						<th class="align-right">{{ $t('edit') }}</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<tr
-					v-for="sessionId in sessionsToShow"
-					:key="sessionId"
-					:class="{'selected': isCurrentSession(sessionId)}"
-				>
-					<td>
-						<div class="session">
-							<BaseIcon
-								class="radio"
-								:icon="isCurrentSession(sessionId) ? 'radioChecked' : 'radio'"
-								:name="$t('selectSession')"
-								@click="updateCurrentSession(sessionId)"
-							/>
+				<tbody>
+					<tr
+						v-for="sessionId in sessionsToShow"
+						:key="sessionId"
+						:class="{'selected': isCurrentSession(sessionId)}"
+					>
+						<td>
+							<div class="session">
+								<BaseIcon
+									class="radio"
+									:icon="isCurrentSession(sessionId) ? 'radioChecked' : 'radio'"
+									:name="$t('selectSession')"
+									@click="updateCurrentSession(sessionId)"
+								/>
 
-							<div>
-								<div>{{ getName(sessionId) }}</div>
+								<div>
+									<div>{{ getName(sessionId) }}</div>
 
-								<div class="puzzle-type" v-if="media === 'mobile'">
-									{{ getPuzzleType(sessionId) }}
+									<div class="puzzle-type" v-if="media === 'mobile'">
+										{{ getPuzzleType(sessionId) }}
+									</div>
 								</div>
 							</div>
-						</div>
-					</td>
+						</td>
 
-					<td v-if="media === 'desktop'">
-						{{ getPuzzleType(sessionId) }}
-					</td>
+						<td v-if="media === 'desktop'">
+							{{ getPuzzleType(sessionId) }}
+						</td>
 
-					<td class="align-right">
-						{{ getSolvesCount(sessionId) }}
-					</td>
+						<td class="align-right">
+							{{ getSolvesCount(sessionId) }}
+						</td>
 
-					<td>
-						<div class="actions">
-							<IconRenameSession :session-id="sessionId"/>
-							<IconDeleteSession :session-id="sessionId"/>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</BaseTable>
+						<td>
+							<div class="actions">
+								<IconRenameSession :session-id="sessionId"/>
+								<IconDeleteSession :session-id="sessionId"/>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</BaseTable>
+		</div>
 
 		<ButtonLoadMore
 			:pages-visible="pagesVisible"
@@ -142,6 +144,10 @@ export default {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 1.5rem;
+}
+
+.table-wrapper {
+	padding: 1.5rem 0;
 }
 
 .session {

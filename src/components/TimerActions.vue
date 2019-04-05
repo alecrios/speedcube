@@ -16,6 +16,8 @@
 		/>
 
 		<IconFullscreen/>
+
+		<IconTimerHelp/>
 	</div>
 </template>
 
@@ -24,6 +26,7 @@ import IconChangeSolveStatus from '@/components/IconChangeSolveStatus.vue';
 import IconDeleteSolve from '@/components/IconDeleteSolve.vue';
 import IconTimerSettings from '@/components/IconTimerSettings.vue';
 import IconFullscreen from '@/components/IconFullscreen.vue';
+import IconTimerHelp from '@/components/IconTimerHelp.vue';
 
 import inert from '@/mixins/inert';
 
@@ -35,6 +38,7 @@ export default {
 		IconDeleteSolve,
 		IconTimerSettings,
 		IconFullscreen,
+		IconTimerHelp,
 	},
 	props: ['timer-status', 'solve-id'],
 	methods: {

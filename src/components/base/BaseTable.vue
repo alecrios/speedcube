@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div :class="['container', {'has-side-padding': hasSidePadding}]">
 		<table>
 			<slot></slot>
 		</table>
@@ -9,12 +9,12 @@
 <script>
 export default {
 	name: 'BaseTable',
+	props: ['has-side-padding'],
 };
 </script>
 
 <style scoped>
 .container {
-	padding: 1.5rem 0;
 	max-width: 100%;
 	overflow-x: auto;
 }
@@ -46,11 +46,21 @@ td {
 
 th:first-child,
 td:first-child {
+	padding-left: 0;
+}
+
+.has-side-padding th:first-child,
+.has-side-padding td:first-child {
 	padding-left: 1.5rem;
 }
 
 th:last-child,
 td:last-child {
+	padding-right: 0;
+}
+
+.has-side-padding th:last-child,
+.has-side-padding td:last-child {
 	padding-right: 1.5rem;
 }
 

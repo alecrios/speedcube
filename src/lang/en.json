@@ -54,6 +54,14 @@
 	"enableInspection": "Enable inspection period",
 	"enableInspectionAudio": "Enable inspection audio cues",
 	"hideClockWhileSolving": "Hide clock while solving",
+	"help": "Help",
+	"ok": "OK",
+	"hotkey": "Hotkey",
+	"action": "Action",
+	"controlTimer": "Control Timer",
+	"markSolveOk": "Mark Solve OK",
+	"markSolvePlus2": "Mark Solve +2",
+	"markSolveDnf": "Mark Solve DNF",
 	"updateAvailable": "A new update is available.",
 	"reload": "Reload"
 }
