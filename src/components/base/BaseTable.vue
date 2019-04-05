@@ -27,7 +27,7 @@ tbody {
 	border-top: .125rem solid var(--color-slate-lighter);
 }
 
-tr.highlight {
+tr.selected {
 	background-color: var(--color-slate-lighter);
 }
 

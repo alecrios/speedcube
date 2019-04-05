@@ -7,10 +7,10 @@
 		<BaseTable>
 			<thead>
 				<tr>
-					<th>{{ $t('name') }}</th>
-					<th>{{ $t('puzzle') }}</th>
+					<th>{{ $t('session') }}</th>
+					<th v-if="media === 'desktop'">{{ $t('puzzle') }}</th>
 					<th class="align-right">{{ $t('solves') }}</th>
-					<th class="align-right">{{ $t('actions') }}</th>
+					<th class="align-right">{{ $t('edit') }}</th>
 				</tr>
 			</thead>
 
@@ -18,17 +18,32 @@
 				<tr
 					v-for="sessionId in sessionsToShow"
 					:key="sessionId"
-					:class="{'highlight': isCurrentSession(sessionId)}"
+					:class="{'selected': isCurrentSession(sessionId)}"
 				>
-					<td class="name">
-						{{ getName(sessionId) }}
+					<td>
+						<div class="session">
+							<BaseIcon
+								class="radio"
+								:icon="isCurrentSession(sessionId) ? 'radioChecked' : 'radio'"
+								:name="$t('selectSession')"
+								@click="updateCurrentSession(sessionId)"
+							/>
+
+							<div>
+								<div>{{ getName(sessionId) }}</div>
+
+								<div class="puzzle-type" v-if="media === 'mobile'">
+									{{ getPuzzleType(sessionId) }}
+								</div>
+							</div>
+						</div>
 					</td>
 
-					<td class="puzzle">
+					<td v-if="media === 'desktop'">
 						{{ getPuzzleType(sessionId) }}
 					</td>
 
-					<td class="solves align-right">
+					<td class="align-right">
 						{{ getSolvesCount(sessionId) }}
 					</td>
 
@@ -71,6 +86,7 @@ export default {
 	},
 	data() {
 		return {
+			media: 'mobile',
 			pageSize: 25,
 			pagesVisible: 1,
 		};
@@ -91,6 +107,9 @@ export default {
 		},
 	},
 	methods: {
+		updateCurrentSession(id) {
+			this.$store.commit('updateCurrentSession', id);
+		},
 		getName(id) {
 			return this.$_getSessionById(id).name;
 		},
@@ -104,6 +123,16 @@ export default {
 		isCurrentSession(id) {
 			return id === this.$store.state.currentSession;
 		},
+		updateMedia() {
+			this.media = window.innerWidth >= 512 ? 'desktop' : 'mobile';
+		},
+	},
+	created() {
+		this.updateMedia();
+		window.addEventListener('resize', this.updateMedia);
+	},
+	beforeDestroy() {
+		window.removeEventListener('resize', this.updateMedia);
 	},
 };
 </script>
@@ -113,6 +142,23 @@ export default {
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 1.5rem;
+}
+
+.session {
+	display: flex;
+	align-items: center;
+}
+
+.session .radio {
+	flex: none;
+	margin-right: .75rem;
+}
+
+.session .puzzle-type {
+	font-size: .75rem;
+	line-height: 1rem;
+	letter-spacing: .03125rem;
+	color: var(--color-smoke);
 }
 
 .actions {

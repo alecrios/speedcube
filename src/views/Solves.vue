@@ -15,7 +15,7 @@
 					<tr>
 						<th class="align-right">{{ $t('time') }}</th>
 						<th>{{ $t('scramble') }}</th>
-						<th class="align-right">{{ $t('actions') }}</th>
+						<th class="align-right">{{ $t('edit') }}</th>
 					</tr>
 				</thead>
 
