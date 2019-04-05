@@ -91,6 +91,7 @@ export default {
 		},
 	},
 	created() {
+		this.$store.commit('updateLegacyUserData');
 		this.handleServiceWorker();
 		this.initializeSession();
 		this.resetFullscreen();
