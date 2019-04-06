@@ -15,27 +15,27 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'timer',
+			name: 'Timer',
 			component: Timer,
 		},
 		{
 			path: '/sessions',
-			name: 'sessions',
+			name: 'Sessions',
 			component: Sessions,
 		},
 		{
 			path: '/solves',
-			name: 'solves',
+			name: 'Solves',
 			component: Solves,
 		},
 		{
 			path: '/stats',
-			name: 'stats',
+			name: 'Stats',
 			component: Stats,
 		},
 		{
 			path: '*',
-			name: 'not-found',
+			name: 'NotFound',
 			component: NotFound,
 		},
 	],

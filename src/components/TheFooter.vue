@@ -7,7 +7,8 @@
 					<a
 						href="https://alecrios.com"
 						target="_blank"
-						rel="noopener">Alec Rios</a>
+						rel="noopener"
+					>Alec Rios</a>
 				</span>
 
 				<span class="item">
@@ -34,13 +35,11 @@
 </template>
 
 <script>
-import BaseWrapper from '@/components/BaseWrapper.vue';
 import ModalLocale from '@/components/ModalLocale.vue';
 
 export default {
 	name: 'TheFooter',
 	components: {
-		BaseWrapper,
 		ModalLocale,
 	},
 	data() {

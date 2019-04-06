@@ -18,11 +18,8 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
-
 export default {
 	name: 'ModalDeleteSession',
-	mixins: [modalComponents],
 	props: ['session-id'],
 	data() {
 		return {

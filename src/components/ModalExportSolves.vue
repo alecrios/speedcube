@@ -16,6 +16,7 @@
 					:name="$t('fileName')"
 					:placeholder="sessionName"
 					v-model="fileName"
+					@submit="submit()"
 				/>
 			</div>
 
@@ -30,6 +31,7 @@
 					:name="$t('fileType')"
 					v-model="fileType"
 					:options="fileTypes"
+					@submit="submit()"
 				/>
 			</div>
 
@@ -44,6 +46,7 @@
 					:name="$t('exportType')"
 					v-model="exportType"
 					:options="exportTypes"
+					@submit="submit()"
 				/>
 			</div>
 		</div>
@@ -59,12 +62,10 @@
 import {saveAs} from 'file-saver';
 import filenamify from 'filenamify';
 
-import modalComponents from '@/mixins/modalComponents';
-import getScrambleTurnText from '@/mixins/getScrambleTurnText';
+import formatTime from '@/utils/formatTime';
 
 export default {
 	name: 'ModalExportSolves',
-	mixins: [modalComponents, getScrambleTurnText],
 	data() {
 		return {
 			fileName: this.$store.state.sessions[this.$store.state.currentSession].name,
@@ -100,17 +101,17 @@ export default {
 			let data;
 
 			if (this.exportType === 'timesAndScrambles') {
-				data = 'Time, Scramble\n';
+				data = '"Time", "Scramble"\n';
 				data += this.solves
 					.map((solve) => (
-						`${this.formatTime(solve)}, ${this.formatScramble(solve)}`
+						`"${this.formatTime(solve)}", "${solve.scramble}"`
 					))
 					.join('\n');
 			} else if (this.exportType === 'timesOnly') {
-				data = 'Time\n';
+				data = '"Time"\n';
 				data += this.solves
 					.map((solve) => (
-						`${this.formatTime(solve)}`
+						`"${this.formatTime(solve)}"`
 					))
 					.join('\n');
 			}
@@ -123,7 +124,7 @@ export default {
 			if (this.exportType === 'timesAndScrambles') {
 				data = JSON.stringify(this.solves.map((solve) => ({
 					time: this.formatTime(solve),
-					scramble: this.formatScramble(solve),
+					scramble: solve.scramble,
 				})));
 			} else if (this.exportType === 'timesOnly') {
 				data = JSON.stringify(this.solves.map((solve) => this.formatTime(solve)));
@@ -134,10 +135,7 @@ export default {
 	},
 	methods: {
 		formatTime(solve) {
-			return solve.dnf ? 'DNF' : this.$options.filters.formatTime(solve.time);
-		},
-		formatScramble(solve) {
-			return solve.scramble.map((turn) => this.$_getScrambleTurnText(turn)).join(' ');
+			return formatTime(solve);
 		},
 		exportSolves() {
 			const fileName = filenamify(this.fileName || this.sessionName, {replacement: '-'});

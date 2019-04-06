@@ -8,13 +8,16 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalDeleteSession v-if="showModal" @close="showModal = false" :session-id="sessionId"/>
+			<ModalDeleteSession
+				v-if="showModal"
+				@close="showModal = false"
+				:session-id="sessionId"
+			/>
 		</Portal>
 	</div>
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalDeleteSession from '@/components/ModalDeleteSession.vue';
 
 export default {
@@ -26,7 +29,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalDeleteSession,
 	},
 	methods: {

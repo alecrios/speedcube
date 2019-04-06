@@ -7,6 +7,7 @@
 			:aria-label="name"
 			:checked="value"
 			@change="$emit('input', $event.target.checked)"
+			@keydown.enter.prevent="$emit('submit')"
 		>
 
 		<label class="label" :for="id">{{ name }}</label>
@@ -33,7 +34,7 @@ export default {
 .label {
 	position: relative;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	font-size: 1rem;
 	line-height: 1.5rem;
 	color: var(--color-white);
@@ -49,6 +50,7 @@ export default {
 	border-radius: .25rem;
 	box-shadow: var(--box-shadow-small);
 	margin-right: .75rem;
+	flex: none;
 }
 
 .checkbox:active + .label::before {
@@ -61,7 +63,7 @@ export default {
 }
 
 .checkbox:checked + .label::after {
-	content: '\2715';
+	content: '\2713';
 	position: absolute;
 	top: 0;
 	left: 0;

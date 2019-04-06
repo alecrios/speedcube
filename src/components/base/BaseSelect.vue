@@ -5,6 +5,7 @@
 		:aria-label="name"
 		:value="value"
 		@input="$emit('input', $event.target.value)"
+		@keydown.enter.prevent="$emit('submit')"
 	>
 		<option
 			v-for="(option, index) in options"
@@ -40,7 +41,7 @@ export default {
 	padding-left: 1rem;
 	padding-right: 2.5rem;
 	border-radius: .25rem;
-	background-image: url('../assets/icon-select.svg');
+	background-image: url('../../assets/icon-select.svg');
 	background-repeat: no-repeat;
 	background-size: 1.5rem 1.5rem;
 	background-position: calc(100% - .5rem) 50%;

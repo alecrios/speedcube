@@ -10,7 +10,7 @@
 import EmptyContent from '@/components/EmptyContent.vue';
 
 export default {
-	name: 'not-found',
+	name: 'NotFound',
 	components: {
 		EmptyContent,
 	},

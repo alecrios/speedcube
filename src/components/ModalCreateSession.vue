@@ -16,20 +16,22 @@
 					:name="$t('sessionName')"
 					:placeholder="getDateString()"
 					v-model="name"
+					@submit="submit()"
 				/>
 			</div>
 
 			<div class="field">
 				<BaseLabel
-					field-id="cube-type"
-					:name="$t('cubeType')"
+					field-id="puzzle-type"
+					:name="$t('puzzleType')"
 				/>
 
 				<BaseSelect
-					id="cube-type"
-					:name="$t('cubeType')"
-					v-model="cubeSize"
-					:options="cubeSizes"
+					id="puzzle-type"
+					:name="$t('puzzleType')"
+					:options="puzzleTypes"
+					v-model="puzzleType"
+					@submit="submit()"
 				/>
 			</div>
 		</div>
@@ -44,17 +46,18 @@
 <script>
 import moment from 'moment';
 
-import modalComponents from '@/mixins/modalComponents';
 import addSession from '@/mixins/addSession';
-import cubeSizes from '@/mixins/cubeSizes';
+
+import puzzleTypes from '@/puzzleTypes';
 
 export default {
 	name: 'ModalCreateSession',
-	mixins: [modalComponents, addSession, cubeSizes],
+	mixins: [addSession],
 	data() {
 		return {
 			name: this.getDateString(),
-			cubeSize: '3',
+			puzzleTypes,
+			puzzleType: '3x3x3',
 		};
 	},
 	methods: {
@@ -64,7 +67,7 @@ export default {
 		submit() {
 			this.$_addSession({
 				name: this.name,
-				cubeSize: this.cubeSize,
+				puzzleType: this.puzzleType,
 			});
 
 			this.$emit('close');

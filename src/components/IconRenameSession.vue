@@ -7,13 +7,16 @@
 		/>
 
 		<Portal to="modals" v-if="showModal">
-			<ModalRenameSession v-if="showModal" @close="showModal = false" :session-id="sessionId"/>
+			<ModalRenameSession
+				v-if="showModal"
+				@close="showModal = false"
+				:session-id="sessionId"
+			/>
 		</Portal>
 	</div>
 </template>
 
 <script>
-import BaseIcon from '@/components/BaseIcon.vue';
 import ModalRenameSession from '@/components/ModalRenameSession.vue';
 
 export default {
@@ -25,7 +28,6 @@ export default {
 		};
 	},
 	components: {
-		BaseIcon,
 		ModalRenameSession,
 	},
 };

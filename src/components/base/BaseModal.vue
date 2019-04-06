@@ -11,12 +11,15 @@
 </template>
 
 <script>
-import BaseForm from '@/components/BaseForm.vue';
+import inert from '@/mixins/inert';
 
 export default {
 	name: 'BaseModal',
-	components: {
-		BaseForm,
+	mixins: [inert],
+	data() {
+		return {
+			previouslyFocusedElement: null,
+		};
 	},
 	methods: {
 		keydownHandler(event) {
@@ -26,15 +29,41 @@ export default {
 		},
 		focusFirstFocusableElement() {
 			const focusableElements = this.$refs.form.$el.querySelectorAll('button, input, select');
-			focusableElements[0].focus();
+
+			let elementToFocus = focusableElements[0];
+
+			// If the element is a radio button, focus the selected item in that group
+			if (elementToFocus.matches('input[type="radio"]')) {
+				const radioGroupName = elementToFocus.getAttribute('name');
+				elementToFocus = this.$refs.form.$el
+					.querySelector(`input[type="radio"][name="${radioGroupName}"]:checked`);
+			}
+
+			elementToFocus.focus();
 		},
 	},
 	mounted() {
-		document.addEventListener('keydown', this.keydownHandler);
+		// Add listening for the escape key
+		this.$refs.form.$el.addEventListener('keydown', this.keydownHandler);
+
+		// Grab a reference to the element that was focused before modal opened
+		this.previouslyFocusedElement = document.activeElement;
+
+		// Focus the first focusable element in the modal
 		this.focusFirstFocusableElement();
+
+		// Make the rest of the page inert to trap the user's focus
+		this.$_togglePageInert(true);
 	},
 	beforeDestroy() {
-		document.removeEventListener('keydown', this.keydownHandler);
+		// Remove listening for the escape key
+		this.$refs.form.$el.removeEventListener('keydown', this.keydownHandler);
+
+		// Make the rest of the page usable again
+		this.$_togglePageInert(false);
+
+		// Return focus to the element that was focused before the modal opened
+		this.previouslyFocusedElement.focus();
 	},
 };
 </script>

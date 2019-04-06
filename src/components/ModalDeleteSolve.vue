@@ -18,15 +18,13 @@
 </template>
 
 <script>
-import modalComponents from '@/mixins/modalComponents';
-
 export default {
 	name: 'ModalDeleteSolve',
-	mixins: [modalComponents],
 	props: ['solve-id'],
 	methods: {
 		submit() {
 			this.$store.commit('removeSolve', this.solveId);
+			this.$emit('deleted');
 			this.$emit('close');
 		},
 	},

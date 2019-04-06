@@ -1,5 +1,5 @@
 <template>
-	<div id="app" :data-version="version">
+	<div id="app" :data-version="$store.state.version">
 		<div class="head">
 			<TheHeader v-if="!isFullscreen"/>
 			<TheNav v-if="!isFullscreen"/>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import 'wicg-inert';
 import 'core-reset/core-reset.css';
 import 'focus-visible';
 
@@ -40,7 +41,6 @@ export default {
 	},
 	data() {
 		return {
-			version: process.env.VUE_APP_VERSION,
 			refreshing: false,
 			registration: null,
 			updateAvailable: false,
@@ -91,6 +91,7 @@ export default {
 		},
 	},
 	created() {
+		this.$store.commit('updateLegacyUserData');
 		this.handleServiceWorker();
 		this.initializeSession();
 		this.resetFullscreen();
