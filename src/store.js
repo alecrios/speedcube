@@ -106,7 +106,10 @@ export default new Vuex.Store({
 			}
 		},
 		updateLegacyUserData(state) {
-			// If the current session has the new 'puzzleType' property, return early
+			// New user with no legacy data
+			if (state.currentSession === null) return;
+
+			// Existing user with no legacy data
 			if (Object.keys(state.sessions[state.currentSession]).includes('puzzleType')) return;
 
 			// Convert the legacy 'cubeSize' property to 'puzzleType' property on all sessions
