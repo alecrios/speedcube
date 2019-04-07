@@ -23,6 +23,18 @@ import AudioCues from '@/lib/audioCues';
 
 const audioCues = new AudioCues();
 
+/**
+ * Timer Status Lifecycle
+ *
+ * idle
+ * ready-to-inspect (if inspection enabled)
+ * inspecting (if inspection enabled)
+ * pending
+ * ready
+ * solving
+ * complete
+ */
+
 export default {
 	name: 'TimerClock',
 	mixins: [inert],
@@ -105,6 +117,8 @@ export default {
 		},
 		stopInspectionTimer() {
 			clearInterval(this.inspectionTimerInterval);
+			this.inspectionTimerInterval = null;
+			this.inspectionTimeElapsed = 0;
 		},
 		startPreparation() {
 			this.$emit('timer-status-update', 'pending');
@@ -113,10 +127,12 @@ export default {
 		cancelPreparation() {
 			this.$emit('timer-status-update', this.enableInspection ? 'inspecting' : 'idle');
 			clearTimeout(this.preparationTimer);
+			this.preparationTimer = null;
 		},
 		finishPreparation() {
 			this.$emit('timer-status-update', 'ready');
 			clearTimeout(this.preparationTimer);
+			this.preparationTimer = null;
 		},
 		startTimer() {
 			this.startTime = Date.now();
@@ -126,15 +142,18 @@ export default {
 		updateTimer() {
 			this.currentTime = Date.now();
 		},
-		stopTimer() {
+		stopSolveTimer() {
 			clearInterval(this.timerInterval);
+			this.timerInterval = null;
+		},
+		finishSolve() {
+			this.stopSolveTimer();
 			this.$emit('timer-status-update', 'complete');
 			this.$emit('solve-completed', this.duration);
 		},
 		resetTimer() {
 			this.startTime = null;
 			this.currentTime = null;
-			this.inspectionTimeElapsed = null;
 		},
 		pressTimer() {
 			if (
@@ -146,7 +165,7 @@ export default {
 			}
 
 			if (this.timerStatus === 'solving') {
-				this.stopTimer();
+				this.finishSolve();
 				return;
 			}
 
@@ -168,6 +187,16 @@ export default {
 				}
 
 				this.startTimer();
+			}
+		},
+		cancel() {
+			if (this.timerStatus === 'inspecting') {
+				this.stopInspectionTimer();
+				this.$emit('timer-status-update', 'idle');
+			} else if (this.timerStatus === 'solving') {
+				this.stopSolveTimer();
+				this.resetTimer();
+				this.$emit('timer-status-update', 'idle');
 			}
 		},
 		leaveTimer(event) {
@@ -200,11 +229,15 @@ export default {
 			// Only continue if this is not inert
 			if (this.$_isInert(this.$refs.display)) return;
 
-			// Only continue if this is a non-repeated keydown of the space key
-			if (event.key !== ' ' || event.repeat) return;
+			// Only continue if this is a non-repeated keydown
+			if (event.repeat) return;
 
-			this.$refs.display.focus();
-			this.pressTimer();
+			if (event.key === ' ') {
+				this.$refs.display.focus();
+				this.pressTimer();
+			} else if (event.key === 'Escape') {
+				this.cancel();
+			}
 		},
 		keyupHandler(event) {
 			// Only continue if this is a keydown of the space key
@@ -242,7 +275,6 @@ export default {
 	user-select: none;
 }
 
-.display[data-status='loading'] {color: var(--color-cube-white)}
 .display[data-status='idle'] {color: var(--color-cube-white)}
 .display[data-status='ready-to-inspect'] {color: var(--color-cube-green)}
 .display[data-status='inspecting'] {color: var(--color-cube-yellow)}

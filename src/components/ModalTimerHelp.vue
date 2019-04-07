@@ -21,18 +21,13 @@
 						</tr>
 
 						<tr>
-							<td><kbd>1</kbd></td>
-							<td>{{ $t('markSolveOk') }}</td>
+							<td><kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd></td>
+							<td>OK / +2 / DNF</td>
 						</tr>
 
 						<tr>
-							<td><kbd>2</kbd></td>
-							<td>{{ $t('markSolvePlus2') }}</td>
-						</tr>
-
-						<tr>
-							<td><kbd>3</kbd></td>
-							<td>{{ $t('markSolveDnf') }}</td>
+							<td><kbd>Esc</kbd></td>
+							<td>{{ $t('cancelSolve') }}</td>
 						</tr>
 
 						<tr>
