@@ -62,6 +62,10 @@ export default {
 					title: this.$t('latest12'),
 					limit: 12,
 				},
+				{
+					title: this.$t('latest100'),
+					limit: 100,
+				},
 			];
 		},
 		times() {
