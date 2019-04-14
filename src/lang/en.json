@@ -47,6 +47,7 @@
 	"average": "Average",
 	"latest5": "Latest 5",
 	"latest12": "Latest 12",
+	"latest100": "Latest 100",
 	"language": "Language",
 	"changeLanguage": "Change Language",
 	"toggleFullscreen": "Toggle Fullscreen",
@@ -59,9 +60,7 @@
 	"hotkey": "Hotkey",
 	"action": "Action",
 	"controlTimer": "Control Timer",
-	"markSolveOk": "Mark Solve OK",
-	"markSolvePlus2": "Mark Solve +2",
-	"markSolveDnf": "Mark Solve DNF",
+	"cancelSolve": "Cancel Solve",
 	"updateAvailable": "A new update is available.",
 	"reload": "Reload"
 }

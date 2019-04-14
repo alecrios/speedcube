@@ -26,6 +26,7 @@ export default {
 			if (event.key !== 'Escape') return;
 
 			this.$emit('close');
+			event.stopPropagation();
 		},
 		focusFirstFocusableElement() {
 			const focusableElements = this.$refs.form.$el.querySelectorAll('button, input, select');

@@ -13,7 +13,7 @@
 	"createSession": "Crear Sesión",
 	"deleteSession": "Borrar Sesión",
 	"deleteSessionConfirmation": "¿Está seguro de que desea borrar de forma permanente esta sesión y todas sus resoluciónes?",
-	"deleteSolve": "Borrar Resoluciónes",
+	"deleteSolve": "Borrar Resolución",
 	"deleteSolveConfirmation": "¿Estás seguro de que deseas borrar esta resolución de forma permanente?",
 	"exportSolves": "Exportar Resoluciónes",
 	"export": "Exportar",
@@ -47,6 +47,7 @@
 	"average": "Promedio",
 	"latest5": "Últimos 5",
 	"latest12": "Últimos 12",
+	"latest100": "Últimos 100",
 	"language": "Idioma",
 	"changeLanguage": "Cambiar Idioma",
 	"toggleFullscreen": "Alternar Pantalla Completa",
@@ -59,9 +60,7 @@
 	"hotkey": "Tecla",
 	"action": "Acción",
 	"controlTimer": "Controlar Temporizador",
-	"markSolveOk": "Márcalo Bien",
-	"markSolvePlus2": "Márcalo +2",
-	"markSolveDnf": "Márcalo DNF",
+	"cancelSolve": "Cancelar Resolución",
 	"updateAvailable": "Una nueva actualización está disponible.",
 	"reload": "Actualizar"
 }
