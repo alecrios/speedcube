@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import NoSleep from 'nosleep.js';
+
 import inert from '@/mixins/inert';
 
 import formatTime from '@/utils/formatTime';
@@ -22,6 +24,8 @@ import formatTime from '@/utils/formatTime';
 import AudioCues from '@/lib/audioCues';
 
 const audioCues = new AudioCues();
+
+const noSleep = new NoSleep();
 
 /**
  * Timer Status Lifecycle
@@ -138,6 +142,7 @@ export default {
 			this.startTime = Date.now();
 			this.timerInterval = setInterval(this.updateTimer, 10);
 			this.$emit('timer-status-update', 'solving');
+			noSleep.enable();
 		},
 		updateTimer() {
 			this.currentTime = Date.now();
@@ -145,6 +150,7 @@ export default {
 		stopSolveTimer() {
 			clearInterval(this.timerInterval);
 			this.timerInterval = null;
+			noSleep.disable();
 		},
 		finishSolve() {
 			this.stopSolveTimer();
