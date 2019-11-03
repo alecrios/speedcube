@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="backdrop"
-		@click.self="$emit('close')"
+		@click.self="onOutsideClick"
 		@keydown.esc.stop="$emit('close')"
 	>
 		<div class="container">
@@ -37,6 +37,13 @@ export default {
 			}
 
 			elementToFocus.focus();
+		},
+		onOutsideClick() {
+			// This prevents the modal from closing when you mouseup over the backdrop while
+			// overshooting an input field during text selection.
+			if (document.activeElement.tagName !== 'BODY') return;
+
+			this.$emit('close');
 		},
 	},
 	mounted() {
