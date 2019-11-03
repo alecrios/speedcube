@@ -12,7 +12,7 @@
 
 		<TheUpdatePrompt v-if="updateAvailable" @reload="reload"/>
 
-		<PortalTarget name="modals"/>
+		<PortalTarget name="modals" :transition="modalTransition"/>
 	</div>
 </template>
 
@@ -49,6 +49,22 @@ export default {
 	computed: {
 		isFullscreen() {
 			return this.$store.state.settings.isFullscreen;
+		},
+		modalTransition() {
+			return {
+				functional: true,
+				render(h, context) {
+					return h(
+						'transition',
+						{
+							props: {
+								name: 'modal',
+							},
+						},
+						context.children,
+					);
+				},
+			};
 		},
 	},
 	methods: {
@@ -232,5 +248,28 @@ body {
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
 	box-shadow: none;
+}
+
+/* Modal Transition
+----------------------------- */
+
+.modal-enter-active,
+.modal-leave-active {
+	transition: opacity 250ms ease;
+}
+
+.modal-enter-active > *,
+.modal-leave-active > * {
+	transition: transform 250ms ease;
+}
+
+.modal-enter,
+.modal-leave-to {
+	opacity: 0;
+}
+
+.modal-enter > * ,
+.modal-leave-to > * {
+	transform: translateY(-6rem);
 }
 </style>

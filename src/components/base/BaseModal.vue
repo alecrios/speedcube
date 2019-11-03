@@ -1,13 +1,15 @@
 <template>
-	<transition name="modal">
-		<div class="backdrop" @click.self="$emit('close')">
-			<div class="container">
-				<BaseForm ref="form">
-					<slot></slot>
-				</BaseForm>
-			</div>
+	<div
+		class="backdrop"
+		@click.self="$emit('close')"
+		@keydown.esc.stop="$emit('close')"
+	>
+		<div class="container">
+			<BaseForm ref="form">
+				<slot></slot>
+			</BaseForm>
 		</div>
-	</transition>
+	</div>
 </template>
 
 <script>
@@ -22,12 +24,6 @@ export default {
 		};
 	},
 	methods: {
-		keydownHandler(event) {
-			if (event.key !== 'Escape') return;
-
-			this.$emit('close');
-			event.stopPropagation();
-		},
 		focusFirstFocusableElement() {
 			const focusableElements = this.$refs.form.$el.querySelectorAll('button, input, select');
 
@@ -44,9 +40,6 @@ export default {
 		},
 	},
 	mounted() {
-		// Add listening for the escape key
-		this.$refs.form.$el.addEventListener('keydown', this.keydownHandler);
-
 		// Grab a reference to the element that was focused before modal opened
 		this.previouslyFocusedElement = document.activeElement;
 
@@ -57,9 +50,6 @@ export default {
 		this.$_togglePageInert(true);
 	},
 	beforeDestroy() {
-		// Remove listening for the escape key
-		this.$refs.form.$el.removeEventListener('keydown', this.keydownHandler);
-
 		// Make the rest of the page usable again
 		this.$_togglePageInert(false);
 
@@ -83,7 +73,6 @@ export default {
 	padding: 1.5rem;
 	overflow-y: auto;
 	background-color: var(--color-backdrop);
-	transition: opacity 250ms ease;
 }
 
 .container {
@@ -94,16 +83,5 @@ export default {
 	border-bottom: .125rem solid var(--color-slate-darker);
 	border-radius: .25rem;
 	box-shadow: var(--box-shadow-large);
-	transition: transform 250ms ease;
-}
-
-.modal-enter,
-.modal-leave-active {
-	opacity: 0;
-}
-
-.modal-enter .container,
-.modal-leave-active .container {
-	transform: translateY(-1.5rem);
 }
 </style>
